@@ -1,0 +1,1614 @@
+{
+  "materials": [
+    {
+      "id": "M000",
+      "source": "Sample | violet mineral",
+      "color": [
+        0.30000001192092896,
+        0.10000000149011612,
+        0.41999998688697815,
+        1.0
+      ],
+      "metallic": 0.4000000059604645,
+      "roughness": 0.2199999988079071,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M001",
+      "source": "Unified | reference tank alloy",
+      "color": [
+        0.28999999165534973,
+        0.3199999928474426,
+        0.3499999940395355,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.23000000417232513,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M002",
+      "source": "V4 | optical glass",
+      "color": [
+        0.800000011920929,
+        0.9100000262260437,
+        0.949999988079071,
+        0.18
+      ],
+      "metallic": 0.0,
+      "roughness": 0.04500000178813934,
+      "alpha": 0.18,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": true,
+      "note": ""
+    },
+    {
+      "id": "M003",
+      "source": "Unified | fine instrument enamel",
+      "color": [
+        0.04600000008940697,
+        0.0560000017285347,
+        0.06400000303983688,
+        1.0
+      ],
+      "metallic": 0.05000000074505806,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M004",
+      "source": "V4 Lab01 | thin cyan accents",
+      "color": [
+        0.02500000037252903,
+        0.47999998927116394,
+        0.6800000071525574,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.11999999731779099,
+        0.3199999928474426,
+        0.38999998569488525,
+        1.0
+      ],
+      "emissionPower": 2.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M005",
+      "source": "Sample | organic amber",
+      "color": [
+        0.4000000059604645,
+        0.23999999463558197,
+        0.054999999701976776,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M006",
+      "source": "Sample | anomalous alloy",
+      "color": [
+        0.18000000715255737,
+        0.33000001311302185,
+        0.4000000059604645,
+        1.0
+      ],
+      "metallic": 0.8500000238418579,
+      "roughness": 0.20000000298023224,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M007",
+      "source": "Sample | red crystal",
+      "color": [
+        0.38999998569488525,
+        0.05000000074505806,
+        0.04500000178813934,
+        1.0
+      ],
+      "metallic": 0.3499999940395355,
+      "roughness": 0.18000000715255737,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M008",
+      "source": "Sample | unknown turquoise",
+      "color": [
+        0.02500000037252903,
+        0.3499999940395355,
+        0.28999999165534973,
+        1.0
+      ],
+      "metallic": 0.3499999940395355,
+      "roughness": 0.20999999344348907,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M009",
+      "source": "Unified | soft gasket",
+      "color": [
+        0.00800000037997961,
+        0.009999999776482582,
+        0.012000000104308128,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.6600000262260437,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M010",
+      "source": "Terminal | specimen workstation LCD",
+      "color": [
+        1,
+        1,
+        1,
+        1.0
+      ],
+      "metallic": 0.05000000074505806,
+      "roughness": 0.2800000011920929,
+      "alpha": 1.0,
+      "emission": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "emissionPower": 1.100000023841858,
+      "texture": "T000.png",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M011",
+      "source": "Unified | workstation composite",
+      "color": [
+        0.36000001430511475,
+        0.38499999046325684,
+        0.38999998569488525,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.36000001430511475,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M012",
+      "source": "V9 | flat scan interface",
+      "color": [
+        1,
+        1,
+        1,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.20000000298023224,
+      "alpha": 1.0,
+      "emission": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "emissionPower": 1.100000023841858,
+      "texture": "T001.png",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M013",
+      "source": "V9 | Lab01 optical edge",
+      "color": [
+        0.07000000029802322,
+        0.3799999952316284,
+        0.5,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.07000000029802322,
+        0.3799999952316284,
+        0.5,
+        1.0
+      ],
+      "emissionPower": 1.5,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M014",
+      "source": "Unified | black cover glass",
+      "color": [
+        0.004000000189989805,
+        0.008999999612569809,
+        0.014000000432133675,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.23000000417232513,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M015",
+      "source": "V9 | optical black",
+      "color": [
+        0.004999999888241291,
+        0.00800000037997961,
+        0.012000000104308128,
+        1.0
+      ],
+      "metallic": 0.05000000074505806,
+      "roughness": 0.23999999463558197,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M016",
+      "source": "V9 | Lab01 amber",
+      "color": [
+        0.699999988079071,
+        0.23000000417232513,
+        0.029999999329447746,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.699999988079071,
+        0.23000000417232513,
+        0.029999999329447746,
+        1.0
+      ],
+      "emissionPower": 1.2999999523162842,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M017",
+      "source": "Precision | brushed uncoated alloy",
+      "color": [
+        0.3799999952316284,
+        0.4000000059604645,
+        0.41999998688697815,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.25,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M018",
+      "source": "V4 Lab02 | thin cyan accents",
+      "color": [
+        0.02500000037252903,
+        0.47999998927116394,
+        0.6800000071525574,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.11999999731779099,
+        0.3199999928474426,
+        0.38999998569488525,
+        1.0
+      ],
+      "emissionPower": 2.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M019",
+      "source": "V7 | powder coat",
+      "color": [
+        0.09000000357627869,
+        0.10300000011920929,
+        0.10999999940395355,
+        1.0
+      ],
+      "metallic": 0.11999999731779099,
+      "roughness": 0.4300000071525574,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M020",
+      "source": "Precision | EPDM seal",
+      "color": [
+        0.00800000037997961,
+        0.009999999776482582,
+        0.012000000104308128,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.7200000286102295,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M021",
+      "source": "Precision | graphite powder coat",
+      "color": [
+        0.03500000014901161,
+        0.041999999433755875,
+        0.04600000008940697,
+        1.0
+      ],
+      "metallic": 0.019999999552965164,
+      "roughness": 0.4300000071525574,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M022",
+      "source": "Terminal | signal workstation LCD",
+      "color": [
+        1,
+        1,
+        1,
+        1.0
+      ],
+      "metallic": 0.05000000074505806,
+      "roughness": 0.2800000011920929,
+      "alpha": 1.0,
+      "emission": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "emissionPower": 1.100000023841858,
+      "texture": "T000.png",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M023",
+      "source": "Control | cyan strips",
+      "color": [
+        0.05999999865889549,
+        0.6499999761581421,
+        1.0,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "roughness": 0.25,
+      "alpha": 1.0,
+      "emission": [
+        0.11999999731779099,
+        0.3199999928474426,
+        0.38999998569488525,
+        1.0
+      ],
+      "emissionPower": 3.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M024",
+      "source": "V3 | smoked blue safety glass",
+      "color": [
+        0.3799999952316284,
+        0.5299999713897705,
+        0.6000000238418579,
+        0.18
+      ],
+      "metallic": 0.0,
+      "roughness": 0.04500000178813934,
+      "alpha": 0.18,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": true,
+      "note": ""
+    },
+    {
+      "id": "M025",
+      "source": "Lab01 | cyan strips",
+      "color": [
+        0.05999999865889549,
+        0.6499999761581421,
+        1.0,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "roughness": 0.25,
+      "alpha": 1.0,
+      "emission": [
+        0.11999999731779099,
+        0.3199999928474426,
+        0.38999998569488525,
+        1.0
+      ],
+      "emissionPower": 3.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M026",
+      "source": "Lab02 | cyan strips",
+      "color": [
+        0.05999999865889549,
+        0.6499999761581421,
+        1.0,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "roughness": 0.25,
+      "alpha": 1.0,
+      "emission": [
+        0.11999999731779099,
+        0.3199999928474426,
+        0.38999998569488525,
+        1.0
+      ],
+      "emissionPower": 3.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M027",
+      "source": "PROP_Cyan",
+      "color": [
+        0.014999999664723873,
+        0.36000001430511475,
+        0.5199999809265137,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.014999999664723873,
+        0.36000001430511475,
+        0.5199999809265137,
+        1.0
+      ],
+      "emissionPower": 1.399999976158142,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M028",
+      "source": "PROP_SatinMetal",
+      "color": [
+        0.23999999463558197,
+        0.2800000011920929,
+        0.3100000023841858,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.2800000011920929,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M029",
+      "source": "PROP_Enamel",
+      "color": [
+        0.027000000700354576,
+        0.03700000047683716,
+        0.04600000008940697,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.3400000035762787,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M030",
+      "source": "PROP_Rubber",
+      "color": [
+        0.00800000037997961,
+        0.012000000104308128,
+        0.014000000432133675,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.6800000071525574,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M031",
+      "source": "PROP_Amber",
+      "color": [
+        0.699999988079071,
+        0.23999999463558197,
+        0.029999999329447746,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.699999988079071,
+        0.23999999463558197,
+        0.029999999329447746,
+        1.0
+      ],
+      "emissionPower": 1.2000000476837158,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M032",
+      "source": "PROP_ScannerLCD",
+      "color": [
+        1,
+        1,
+        1,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.2800000011920929,
+      "alpha": 1.0,
+      "emission": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "emissionPower": 0.699999988079071,
+      "texture": "T000.png",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M033",
+      "source": "V5 Control | standby amber",
+      "color": [
+        0.800000011920929,
+        0.27000001072883606,
+        0.02500000037252903,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.800000011920929,
+        0.27000001072883606,
+        0.02500000037252903,
+        1.0
+      ],
+      "emissionPower": 1.2000000476837158,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M034",
+      "source": "V5 Control | cyan LED",
+      "color": [
+        0.02500000037252903,
+        0.47999998927116394,
+        0.6800000071525574,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.11999999731779099,
+        0.3199999928474426,
+        0.38999998569488525,
+        1.0
+      ],
+      "emissionPower": 1.7000000476837158,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M035",
+      "source": "V5 Lab01 | standby amber",
+      "color": [
+        0.800000011920929,
+        0.27000001072883606,
+        0.02500000037252903,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.800000011920929,
+        0.27000001072883606,
+        0.02500000037252903,
+        1.0
+      ],
+      "emissionPower": 1.2000000476837158,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M036",
+      "source": "V5 Lab01 | cyan LED",
+      "color": [
+        0.02500000037252903,
+        0.47999998927116394,
+        0.6800000071525574,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.11999999731779099,
+        0.3199999928474426,
+        0.38999998569488525,
+        1.0
+      ],
+      "emissionPower": 1.7000000476837158,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M037",
+      "source": "V5 Lab02 | standby amber",
+      "color": [
+        0.800000011920929,
+        0.27000001072883606,
+        0.02500000037252903,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.800000011920929,
+        0.27000001072883606,
+        0.02500000037252903,
+        1.0
+      ],
+      "emissionPower": 1.2000000476837158,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M038",
+      "source": "V4 | charcoal enamel",
+      "color": [
+        0.027000000700354576,
+        0.03799999877810478,
+        0.04699999839067459,
+        1.0
+      ],
+      "metallic": 0.44999998807907104,
+      "roughness": 0.36000001430511475,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M039",
+      "source": "V4 | satin aluminum",
+      "color": [
+        0.23999999463558197,
+        0.28999999165534973,
+        0.3199999928474426,
+        1.0
+      ],
+      "metallic": 0.800000011920929,
+      "roughness": 0.2800000011920929,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M040",
+      "source": "V5 Lab02 | cyan LED",
+      "color": [
+        0.02500000037252903,
+        0.47999998927116394,
+        0.6800000071525574,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.11999999731779099,
+        0.3199999928474426,
+        0.38999998569488525,
+        1.0
+      ],
+      "emissionPower": 1.7000000476837158,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M041",
+      "source": "V6 Control | vent status",
+      "color": [
+        0.699999988079071,
+        0.23999999463558197,
+        0.02500000037252903,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.699999988079071,
+        0.23999999463558197,
+        0.02500000037252903,
+        1.0
+      ],
+      "emissionPower": 1.100000023841858,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M042",
+      "source": "V6 Lab01 | vent status",
+      "color": [
+        0.699999988079071,
+        0.23999999463558197,
+        0.02500000037252903,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.699999988079071,
+        0.23999999463558197,
+        0.02500000037252903,
+        1.0
+      ],
+      "emissionPower": 1.100000023841858,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M043",
+      "source": "V6 Lab02 | vent status",
+      "color": [
+        0.699999988079071,
+        0.23999999463558197,
+        0.02500000037252903,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.699999988079071,
+        0.23999999463558197,
+        0.02500000037252903,
+        1.0
+      ],
+      "emissionPower": 1.100000023841858,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M044",
+      "source": "Terminal | corridor workstation LCD",
+      "color": [
+        1,
+        1,
+        1,
+        1.0
+      ],
+      "metallic": 0.05000000074505806,
+      "roughness": 0.2800000011920929,
+      "alpha": 1.0,
+      "emission": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "emissionPower": 1.100000023841858,
+      "texture": "T002.png",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M045",
+      "source": "CCTV 1 | packed room image",
+      "color": [
+        1,
+        1,
+        1,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.3199999928474426,
+      "alpha": 1.0,
+      "emission": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "emissionPower": 1.0,
+      "texture": "T003.png",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M046",
+      "source": "Control | screen pixels",
+      "color": [
+        0.05999999865889549,
+        0.4300000071525574,
+        0.6899999976158142,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "roughness": 0.25,
+      "alpha": 1.0,
+      "emission": [
+        0.05999999865889549,
+        0.4300000071525574,
+        0.6899999976158142,
+        1.0
+      ],
+      "emissionPower": 1.7000000476837158,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M047",
+      "source": "CCTV 2 | packed room image",
+      "color": [
+        1,
+        1,
+        1,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.3199999928474426,
+      "alpha": 1.0,
+      "emission": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "emissionPower": 1.0,
+      "texture": "T004.png",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M048",
+      "source": "CCTV 3 | packed room image",
+      "color": [
+        1,
+        1,
+        1,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.3199999928474426,
+      "alpha": 1.0,
+      "emission": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "emissionPower": 1.0,
+      "texture": "T005.png",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M049",
+      "source": "Control | amber indicator",
+      "color": [
+        0.949999988079071,
+        0.33000001311302185,
+        0.04500000178813934,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "roughness": 0.25,
+      "alpha": 1.0,
+      "emission": [
+        0.949999988079071,
+        0.33000001311302185,
+        0.04500000178813934,
+        1.0
+      ],
+      "emissionPower": 2.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M050",
+      "source": "Control | ceiling diffuser",
+      "color": [
+        0.6200000047683716,
+        0.7900000214576721,
+        0.8999999761581421,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "roughness": 0.25,
+      "alpha": 1.0,
+      "emission": [
+        0.6200000047683716,
+        0.7900000214576721,
+        0.8999999761581421,
+        1.0
+      ],
+      "emissionPower": 4.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M051",
+      "source": "Safety | muted amber",
+      "color": [
+        0.6499999761581421,
+        0.33000001311302185,
+        0.07000000029802322,
+        1.0
+      ],
+      "metallic": 0.550000011920929,
+      "roughness": 0.3400000035762787,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M052",
+      "source": "V4 Lab01 | neutral diffusers",
+      "color": [
+        0.8399999737739563,
+        0.9200000166893005,
+        1.0,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.8399999737739563,
+        0.9200000166893005,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 3.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M053",
+      "source": "V7 | connector brass",
+      "color": [
+        0.38999998569488525,
+        0.23000000417232513,
+        0.08500000089406967,
+        1.0
+      ],
+      "metallic": 0.7799999713897705,
+      "roughness": 0.2800000011920929,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M054",
+      "source": "V4 Lab02 | amber status",
+      "color": [
+        0.800000011920929,
+        0.27000001072883606,
+        0.02500000037252903,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.800000011920929,
+        0.27000001072883606,
+        0.02500000037252903,
+        1.0
+      ],
+      "emissionPower": 1.7000000476837158,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M055",
+      "source": "Plant | eucalyptus",
+      "color": [
+        0.04500000178813934,
+        0.12999999523162842,
+        0.0949999988079071,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.699999988079071,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M056",
+      "source": "PROP_Contacts",
+      "color": [
+        0.5,
+        0.2800000011920929,
+        0.07999999821186066,
+        1.0
+      ],
+      "metallic": 1.0,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M057",
+      "source": "PROP_LogLCD",
+      "color": [
+        1,
+        1,
+        1,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.2800000011920929,
+      "alpha": 1.0,
+      "emission": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "emissionPower": 0.699999988079071,
+      "texture": "T006.png",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M058",
+      "source": "PROP_ClearGlass",
+      "color": [
+        0.75,
+        0.8999999761581421,
+        0.9399999976158142,
+        0.18
+      ],
+      "metallic": 0.0,
+      "roughness": 0.07999999821186066,
+      "alpha": 0.18,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": true,
+      "note": ""
+    },
+    {
+      "id": "M059",
+      "source": "PROP_AnomalyOil",
+      "color": [
+        0.004000000189989805,
+        0.004999999888241291,
+        0.004999999888241291,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.11999999731779099,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M060",
+      "source": "PROP_Ghost",
+      "color": [
+        0.02500000037252903,
+        0.05999999865889549,
+        0.07500000298023224,
+        0.18
+      ],
+      "metallic": 0.0,
+      "roughness": 0.36000001430511475,
+      "alpha": 0.18,
+      "emission": [
+        0.03500000014901161,
+        0.11999999731779099,
+        0.1599999964237213,
+        1.0
+      ],
+      "emissionPower": 0.6000000238418579,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M061",
+      "source": "PROP_PhotographicPaper",
+      "color": [
+        0.7200000286102295,
+        0.699999988079071,
+        0.6399999856948853,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.41999998688697815,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M062",
+      "source": "PROP_PhotoPrint",
+      "color": [
+        1,
+        1,
+        1,
+        1.0
+      ],
+      "metallic": 0.0,
+      "roughness": 0.2800000011920929,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "T007.png",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M063",
+      "source": "Floor | titanium",
+      "color": [
+        0.06499999761581421,
+        0.08500000089406967,
+        0.10499999672174454,
+        1.0
+      ],
+      "metallic": 0.6499999761581421,
+      "roughness": 0.4000000059604645,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M064",
+      "source": "Corridor | cyan strips",
+      "color": [
+        0.05999999865889549,
+        0.6499999761581421,
+        1.0,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "roughness": 0.25,
+      "alpha": 1.0,
+      "emission": [
+        0.11999999731779099,
+        0.3199999928474426,
+        0.38999998569488525,
+        1.0
+      ],
+      "emissionPower": 3.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M065",
+      "source": "V4 | brushed floor",
+      "color": [
+        0.05999999865889549,
+        0.07100000232458115,
+        0.07900000363588333,
+        1.0
+      ],
+      "metallic": 0.5,
+      "roughness": 0.36000001430511475,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M066",
+      "source": "Corridor | ceiling diffuser",
+      "color": [
+        0.6200000047683716,
+        0.7900000214576721,
+        0.8999999761581421,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "roughness": 0.25,
+      "alpha": 1.0,
+      "emission": [
+        0.6200000047683716,
+        0.7900000214576721,
+        0.8999999761581421,
+        1.0
+      ],
+      "emissionPower": 4.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M067",
+      "source": "V4 Lab02 | neutral diffusers",
+      "color": [
+        0.8399999737739563,
+        0.9200000166893005,
+        1.0,
+        1.0
+      ],
+      "metallic": 0.10000000149011612,
+      "roughness": 0.30000001192092896,
+      "alpha": 1.0,
+      "emission": [
+        0.8399999737739563,
+        0.9200000166893005,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 3.0,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    },
+    {
+      "id": "M068",
+      "source": "V4 | safety ochre",
+      "color": [
+        0.5799999833106995,
+        0.2800000011920929,
+        0.03799999877810478,
+        1.0
+      ],
+      "metallic": 0.25,
+      "roughness": 0.41999998688697815,
+      "alpha": 1.0,
+      "emission": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "emissionPower": 0.0,
+      "texture": "",
+      "glass": false,
+      "note": "Procedural detail represented by scalar material values; no procedural bake."
+    },
+    {
+      "id": "M069",
+      "source": "Corridor | screen pixels",
+      "color": [
+        0.05999999865889549,
+        0.4300000071525574,
+        0.6899999976158142,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "roughness": 0.25,
+      "alpha": 1.0,
+      "emission": [
+        0.05999999865889549,
+        0.4300000071525574,
+        0.6899999976158142,
+        1.0
+      ],
+      "emissionPower": 1.7000000476837158,
+      "texture": "",
+      "glass": false,
+      "note": ""
+    }
+  ]
+}

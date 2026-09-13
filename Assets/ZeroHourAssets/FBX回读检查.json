@@ -1,0 +1,1152 @@
+{
+  "method": "Blender FBX reimport; dimensions, triangles, mesh counts, root translation and material slots",
+  "unityTested": false,
+  "allPassed": true,
+  "missingTextures": [],
+  "assets": [
+    {
+      "file": "ZH_ENV_SAMPLE_1_removable_sealed_vial.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 8,
+      "triangles": 4056,
+      "dimensions": [
+        0.3199999928474426,
+        0.3200000822544098,
+        0.6399999856948853
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_SAMPLE_2_removable_sealed_vial.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 9,
+      "triangles": 3300,
+      "dimensions": [
+        0.3199999928474426,
+        0.3200000822544098,
+        0.6399999856948853
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_SAMPLE_3_removable_sealed_vial.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 6,
+      "triangles": 3248,
+      "dimensions": [
+        0.3199999928474426,
+        0.3200000822544098,
+        0.6399999856948853
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_SAMPLE_4_removable_sealed_vial.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 8,
+      "triangles": 4056,
+      "dimensions": [
+        0.3199999928474426,
+        0.3200000822544098,
+        0.6399999856948853
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_SAMPLE_5_removable_sealed_vial.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 6,
+      "triangles": 3568,
+      "dimensions": [
+        0.3199999928474426,
+        0.3200000822544098,
+        0.6399999856948853
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_LEFT_ANALYSIS_WORKSTATION.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 70,
+      "triangles": 13332,
+      "dimensions": [
+        1.6474568247795105,
+        0.4400000125169754,
+        0.7955445051193237
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_SCAN_TABLE.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 27,
+      "triangles": 8744,
+      "dimensions": [
+        1.75,
+        1.5100000500679016,
+        0.9560002386569977
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_DISPOSAL_UNIT.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 16,
+      "triangles": 4228,
+      "dimensions": [
+        0.8399999737739563,
+        0.7600001692771912,
+        1.2358728721737862
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_SIGNAL_ISOLATION_CHAMBER.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 37,
+      "triangles": 28656,
+      "dimensions": [
+        2.0,
+        2.0,
+        2.963550455868244
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_SIGNAL_DIAGNOSTICS.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 8,
+      "triangles": 1652,
+      "dimensions": [
+        1.6299999952316284,
+        0.5799999833106995,
+        2.230000142008066
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_CONTROL_DOOR_CONTROL.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 26,
+      "triangles": 4536,
+      "dimensions": [
+        2.200000047683716,
+        0.47000017762184143,
+        2.8050000911953052
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_LAB_01_DOOR_CONTROL.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 26,
+      "triangles": 4536,
+      "dimensions": [
+        2.200000047683716,
+        0.46999993920326233,
+        2.8050000911953052
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_LAB_02_DOOR_CONTROL.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 26,
+      "triangles": 4536,
+      "dimensions": [
+        2.200000047683716,
+        0.46999993920326233,
+        2.8050000911953052
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_MAINTENANCE_STATION.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 126,
+      "triangles": 28280,
+      "dimensions": [
+        2.119999885559082,
+        0.7799999713897705,
+        2.7550001367926598
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V5_FIELD_EQUIPMENT_CASE.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 15,
+      "triangles": 2356,
+      "dimensions": [
+        1.128000020980835,
+        0.635000079870224,
+        0.6725000664591789
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V5_DATA_CARTRIDGE_1.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 5,
+      "triangles": 764,
+      "dimensions": [
+        0.27000001072883606,
+        0.26000000536441803,
+        0.12200001138262451
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V5_DATA_CARTRIDGE_2.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 5,
+      "triangles": 764,
+      "dimensions": [
+        0.27000001072883606,
+        0.26000000536441803,
+        0.12200001138262451
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V5_DOCKED_TABLET.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 3,
+      "triangles": 564,
+      "dimensions": [
+        0.3100000023841858,
+        0.23000001162290573,
+        0.23275817755376593
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V5_SAMPLE_TRANSPORT_CASE.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 15,
+      "triangles": 2356,
+      "dimensions": [
+        0.7279999852180481,
+        0.5250002145767212,
+        0.642500028014183
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V5_FOUR_SAMPLE_CARTRIDGES.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 20,
+      "triangles": 3136,
+      "dimensions": [
+        0.5899999737739563,
+        0.30450010299682617,
+        0.22550006524244282
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V5_CLOSED_DIAGNOSTIC_MODULE.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 6,
+      "triangles": 424,
+      "dimensions": [
+        0.36000001430511475,
+        0.28800007700920105,
+        0.12100001097737412
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V5_OPEN_MAINTENANCE_CASE.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 22,
+      "triangles": 6748,
+      "dimensions": [
+        0.7000002264976501,
+        0.5730002522468567,
+        0.46999993441534826
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V5_SPARE_POWER_CELL.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 8,
+      "triangles": 3320,
+      "dimensions": [
+        0.21199999749660492,
+        0.2164999395608902,
+        0.38150005279396026
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V6_Control_AIR_OUTLET.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 17,
+      "triangles": 3340,
+      "dimensions": [
+        0.9300000369548798,
+        0.17874019965529442,
+        0.67249995470047
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V6_Lab01_AIR_OUTLET.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 17,
+      "triangles": 3340,
+      "dimensions": [
+        0.9300000667572021,
+        0.17874033004045486,
+        0.67249995470047
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V6_Lab02_AIR_OUTLET.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 17,
+      "triangles": 3340,
+      "dimensions": [
+        0.9300000369548798,
+        0.17874019965529442,
+        0.67249995470047
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V9_FLUSH_TERMINAL.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 6,
+      "triangles": 1772,
+      "dimensions": [
+        1.024999976158142,
+        0.11100010946393013,
+        0.7532000541687012
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V9_FLUSH_TERMINAL_001.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 6,
+      "triangles": 1772,
+      "dimensions": [
+        1.024999976158142,
+        0.11100011318922043,
+        0.7532000541687012
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V9_FLUSH_TERMINAL_002.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 6,
+      "triangles": 1772,
+      "dimensions": [
+        1.024999976158142,
+        0.11100010946393013,
+        0.7532000541687012
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_V9_FLUSH_TERMINAL_003.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 6,
+      "triangles": 1772,
+      "dimensions": [
+        1.024999976158142,
+        0.11100011318922043,
+        0.7532000541687012
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Specimen_Computer.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 64,
+      "triangles": 12204,
+      "dimensions": [
+        0.4393806904554367,
+        0.802000105381012,
+        0.70400011818856
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Signal_Wall_Monitor.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 3,
+      "triangles": 712,
+      "dimensions": [
+        0.13400045782327652,
+        1.6300001740455627,
+        0.8500002758315048
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Control_CCTV_Monitor_01.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 19,
+      "triangles": 916,
+      "dimensions": [
+        0.19350018352270126,
+        1.3200002312660217,
+        1.4500001444221162
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Control_CCTV_Monitor_02.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 19,
+      "triangles": 916,
+      "dimensions": [
+        0.19350018352270126,
+        1.3200002312660217,
+        1.4500001444221162
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Control_CCTV_Monitor_03.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 19,
+      "triangles": 916,
+      "dimensions": [
+        0.19350066035985947,
+        1.3200002312660217,
+        1.4500001444221162
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Control_Console_01.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 35,
+      "triangles": 3204,
+      "dimensions": [
+        1.182500422000885,
+        1.560000240802765,
+        1.4600001332561803
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Control_Console_02.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 34,
+      "triangles": 3080,
+      "dimensions": [
+        1.0550000667572021,
+        1.340000331401825,
+        1.460000118355019
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Control_Console_03.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 35,
+      "triangles": 3204,
+      "dimensions": [
+        1.182500183582306,
+        1.5600003004074097,
+        1.460000103453858
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Return_Console_01.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 10,
+      "triangles": 1352,
+      "dimensions": [
+        1.395000159740448,
+        0.3900004178285599,
+        1.0100000185172497
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Return_Console_02.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 10,
+      "triangles": 1352,
+      "dimensions": [
+        1.395000159740448,
+        0.3900004178285599,
+        1.0100000185172497
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Control_Keyboard.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 37,
+      "triangles": 620,
+      "dimensions": [
+        0.23000019788742065,
+        0.6400000751018524,
+        0.04650013705634137
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Operator_Chair.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 18,
+      "triangles": 3512,
+      "dimensions": [
+        0.8108453750610352,
+        0.8900000154972076,
+        1.364486051723361
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Power_Gas_Panel.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 22,
+      "triangles": 8180,
+      "dimensions": [
+        1.5,
+        0.4852304607629776,
+        2.505000120143142
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Specimen_Archive.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 184,
+      "triangles": 26936,
+      "dimensions": [
+        5.340000152587891,
+        0.8650002479553223,
+        1.7900000066562178
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Specimen_Analysis_Bench.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 18,
+      "triangles": 5432,
+      "dimensions": [
+        6.06000018119812,
+        5.315000295639038,
+        0.9675008281870987
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Specimen_Wall_Shelf.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 2,
+      "triangles": 376,
+      "dimensions": [
+        0.38999998569488525,
+        2.799999952316284,
+        0.08650051340629261
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Small_Supply_Case_1.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 1,
+      "triangles": 188,
+      "dimensions": [
+        0.25,
+        0.20000004023313522,
+        0.22000003000113644
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Small_Supply_Case_2.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 1,
+      "triangles": 188,
+      "dimensions": [
+        0.25,
+        0.20000004023313522,
+        0.22000003000113644
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Small_Supply_Case_3.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 1,
+      "triangles": 188,
+      "dimensions": [
+        0.25,
+        0.20000004023313522,
+        0.22000003000113644
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Pressure_Vessel_01.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 10,
+      "triangles": 4232,
+      "dimensions": [
+        0.37599998712539673,
+        0.37600021064281464,
+        1.850000051538375
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Pressure_Vessel_02.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 14,
+      "triangles": 4760,
+      "dimensions": [
+        0.37599998712539673,
+        1.8199997544288635,
+        1.9699998178881675
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Signal_Service_Box_01.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 25,
+      "triangles": 1756,
+      "dimensions": [
+        0.9249999523162842,
+        0.3545495718717575,
+        1.8400000184774399
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Signal_Service_Box_02.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 23,
+      "triangles": 1732,
+      "dimensions": [
+        0.9750001430511475,
+        0.3545495718717575,
+        1.4050000756978989
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Signal_Equipment_Cabinet.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 8,
+      "triangles": 1824,
+      "dimensions": [
+        0.8600000143051147,
+        0.6990002989768982,
+        1.0500000077093183
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Storage_Locker_01.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 6,
+      "triangles": 1240,
+      "dimensions": [
+        0.7725003361701965,
+        0.7100003659725189,
+        2.2800000292266134
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Storage_Locker_02.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 6,
+      "triangles": 1240,
+      "dimensions": [
+        0.7725003361701965,
+        0.7100003361701965,
+        2.2800000292266134
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Server_Cabinet.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 57,
+      "triangles": 2204,
+      "dimensions": [
+        0.8369998931884766,
+        0.840000331401825,
+        2.1400001733308613
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Shift_Cabinet.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 8,
+      "triangles": 1504,
+      "dimensions": [
+        3.200000047683716,
+        0.8234999775886536,
+        0.9400001158719071
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Existing_Clipboard.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 6,
+      "triangles": 424,
+      "dimensions": [
+        0.3199999928474426,
+        0.4300000071525574,
+        0.03450002764442317
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Existing_Mug.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 3,
+      "triangles": 1400,
+      "dimensions": [
+        0.22300003468990326,
+        0.14600003510713577,
+        0.21500005272239164
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Existing_Radio.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 2,
+      "triangles": 440,
+      "dimensions": [
+        0.17000000178813934,
+        0.20000003278255463,
+        0.460000032087299
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Existing_Planter_01.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 19,
+      "triangles": 3856,
+      "dimensions": [
+        0.8631225824356079,
+        0.6349805593490601,
+        1.208457977732273
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_ENV_Existing_Planter_02.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 19,
+      "triangles": 3856,
+      "dimensions": [
+        0.8631225824356079,
+        0.634980320930481,
+        1.208457977732273
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_TOOL_AnomalyScanner.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 15,
+      "triangles": 4472,
+      "dimensions": [
+        0.2427324429154396,
+        0.07856754213571548,
+        0.489599978891885
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_TOOL_PulseEmitter.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 16,
+      "triangles": 4540,
+      "dimensions": [
+        0.37281636893749237,
+        0.11365430429577827,
+        0.29082957503851503
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_TOOL_ElectronicLogbook.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 12,
+      "triangles": 2180,
+      "dimensions": [
+        0.22700004279613495,
+        0.15700000524520874,
+        0.017500002402812243
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_SampleJar_Intact.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 10,
+      "triangles": 5688,
+      "dimensions": [
+        0.12800000607967377,
+        0.12800000607967377,
+        0.2455000039190054
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_SampleJar_Broken.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 5,
+      "triangles": 2660,
+      "dimensions": [
+        0.12600000202655792,
+        0.12600000947713852,
+        0.21250002644956112
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_SampleJar_DetachedCap.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 2,
+      "triangles": 1148,
+      "dimensions": [
+        0.12800000607967377,
+        0.12800001353025436,
+        0.03100001923351048
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_GlassShard_01.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 1,
+      "triangles": 188,
+      "dimensions": [
+        0.03412214294075966,
+        0.04081268422305584,
+        0.00250000653470539
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_GlassShard_02.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 1,
+      "triangles": 188,
+      "dimensions": [
+        0.038518158718943596,
+        0.04082440957427025,
+        0.002500006535511412
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_GlassShard_03.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 1,
+      "triangles": 188,
+      "dimensions": [
+        0.04291611537337303,
+        0.040835244581103325,
+        0.002500006536388266
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_GlassShard_04.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 1,
+      "triangles": 188,
+      "dimensions": [
+        0.047315794974565506,
+        0.04084520414471626,
+        0.0025000065372808855
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_GlassShard_05.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 1,
+      "triangles": 188,
+      "dimensions": [
+        0.05171702429652214,
+        0.04085434973239899,
+        0.0025000065381612924
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_SpecimenTransportCase.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 9,
+      "triangles": 2288,
+      "dimensions": [
+        0.30000001192092896,
+        0.2200000062584877,
+        0.18100001197308302
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_SampleVial.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 4,
+      "triangles": 1592,
+      "dimensions": [
+        0.041999999433755875,
+        0.04200000315904617,
+        0.12250001006759703
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_VialRack.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 6,
+      "triangles": 1780,
+      "dimensions": [
+        0.16965201497077942,
+        0.07965199649333954,
+        0.07850001656166317
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_DataCartridge.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 8,
+      "triangles": 1920,
+      "dimensions": [
+        0.11299994587898254,
+        0.03200000338256359,
+        0.015000003390014172
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_LAB_InstrumentTray.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 2,
+      "triangles": 956,
+      "dimensions": [
+        0.23195387423038483,
+        0.15195388346910477,
+        0.026000025305246588
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_UTILITY_CableCoupler.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 10,
+      "triangles": 3480,
+      "dimensions": [
+        0.03799999877810478,
+        0.03800000064074993,
+        0.06450000682276769
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_UTILITY_ConnectorCable.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 21,
+      "triangles": 9500,
+      "dimensions": [
+        0.1979190930724144,
+        0.2159319445490837,
+        0.06620588526129723
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_UTILITY_VentCover.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 8,
+      "triangles": 1332,
+      "dimensions": [
+        0.20000000298023224,
+        0.14000000059604645,
+        0.017237912277466627
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_UTILITY_JunctionBox.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 5,
+      "triangles": 1140,
+      "dimensions": [
+        0.09799999743700027,
+        0.09650005400180817,
+        0.0505000120004544
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_UTILITY_ConnectorOrganizer.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 34,
+      "triangles": 11772,
+      "dimensions": [
+        0.20195388793945312,
+        0.12195388600230217,
+        0.07150001262433925
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_ANOMALY_BlackSeepage.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 8,
+      "triangles": 2688,
+      "dimensions": [
+        0.29066942632198334,
+        0.36406657099723816,
+        0.014000026741996408
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_ANOMALY_GhostSilhouette.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 1,
+      "triangles": 6286,
+      "dimensions": [
+        0.5962211191654205,
+        0.21874888241291046,
+        1.6943343505263329
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_PROP_ANOMALY_AnomalyPhotograph.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 2,
+      "triangles": 2904,
+      "dimensions": [
+        0.18000000715255737,
+        0.13199999928474426,
+        0.005000021816877087
+      ],
+      "roots": 1
+    },
+    {
+      "file": "ZH_SCENE_Station_Complete.fbx",
+      "passed": true,
+      "errors": [],
+      "meshes": 2190,
+      "triangles": 397152,
+      "dimensions": [
+        16.69200325012207,
+        17.172000408172607,
+        3.590002804994583
+      ],
+      "roots": 76
+    }
+  ]
+}

@@ -1,0 +1,1591 @@
+{
+  "assets": [
+    {
+      "file": "ZH_ENV_SAMPLE_1_removable_sealed_vial.fbx",
+      "source": "SAMPLE_1 | removable sealed vial",
+      "meshCount": 8,
+      "triangles": 4056,
+      "sizeMeters": [
+        0.3199999928474426,
+        0.3199999928474426,
+        0.6399999260902405
+      ],
+      "localMin": [
+        -0.1599999964237213,
+        -0.1599999964237213,
+        -0.31999996304512024
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_SAMPLE_2_removable_sealed_vial.fbx",
+      "source": "SAMPLE_2 | removable sealed vial",
+      "meshCount": 9,
+      "triangles": 3300,
+      "sizeMeters": [
+        0.3199999928474426,
+        0.3199999928474426,
+        0.6399999260902405
+      ],
+      "localMin": [
+        -0.1599999964237213,
+        -0.1599999964237213,
+        -0.31999996304512024
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_SAMPLE_3_removable_sealed_vial.fbx",
+      "source": "SAMPLE_3 | removable sealed vial",
+      "meshCount": 6,
+      "triangles": 3248,
+      "sizeMeters": [
+        0.3199999928474426,
+        0.3199999928474426,
+        0.6399999260902405
+      ],
+      "localMin": [
+        -0.1599999964237213,
+        -0.1599999964237213,
+        -0.31999996304512024
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_SAMPLE_4_removable_sealed_vial.fbx",
+      "source": "SAMPLE_4 | removable sealed vial",
+      "meshCount": 8,
+      "triangles": 4056,
+      "sizeMeters": [
+        0.3199999928474426,
+        0.3199999928474426,
+        0.6399999260902405
+      ],
+      "localMin": [
+        -0.1599999964237213,
+        -0.1599999964237213,
+        -0.31999996304512024
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_SAMPLE_5_removable_sealed_vial.fbx",
+      "source": "SAMPLE_5 | removable sealed vial",
+      "meshCount": 6,
+      "triangles": 3568,
+      "sizeMeters": [
+        0.3199999928474426,
+        0.3199999928474426,
+        0.6399999260902405
+      ],
+      "localMin": [
+        -0.1599999964237213,
+        -0.1599999964237213,
+        -0.31999996304512024
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_LEFT_ANALYSIS_WORKSTATION.fbx",
+      "source": "LEFT ANALYSIS WORKSTATION",
+      "meshCount": 70,
+      "triangles": 13332,
+      "sizeMeters": [
+        1.6474568843841553,
+        0.4399999976158142,
+        0.7955445051193237
+      ],
+      "localMin": [
+        -1.0464571714401245,
+        -0.24499979615211487,
+        1.002500057220459
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_SCAN_TABLE.fbx",
+      "source": "SCAN_TABLE",
+      "meshCount": 27,
+      "triangles": 8744,
+      "sizeMeters": [
+        1.75,
+        1.5099999904632568,
+        0.956000030040741
+      ],
+      "localMin": [
+        -0.875,
+        -0.7549999952316284,
+        0.06499999761581421
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_DISPOSAL_UNIT.fbx",
+      "source": "DISPOSAL_UNIT",
+      "meshCount": 16,
+      "triangles": 4228,
+      "sizeMeters": [
+        0.8399999737739563,
+        0.7599999904632568,
+        1.2358728647232056
+      ],
+      "localMin": [
+        -0.419999897480011,
+        -0.37999990582466125,
+        0.05999999865889549
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_SIGNAL_ISOLATION_CHAMBER.fbx",
+      "source": "SIGNAL_ISOLATION_CHAMBER",
+      "meshCount": 37,
+      "triangles": 28656,
+      "sizeMeters": [
+        2.0,
+        2.0,
+        2.963550090789795
+      ],
+      "localMin": [
+        -1.0,
+        -1.0,
+        0.03999999910593033
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_SIGNAL_DIAGNOSTICS.fbx",
+      "source": "SIGNAL_DIAGNOSTICS",
+      "meshCount": 8,
+      "triangles": 1652,
+      "sizeMeters": [
+        1.6299999952316284,
+        0.5799999833106995,
+        2.2300000190734863
+      ],
+      "localMin": [
+        -0.815000057220459,
+        -0.2900000214576721,
+        0.04499998688697815
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_CONTROL_DOOR_CONTROL.fbx",
+      "source": "CONTROL | DOOR_CONTROL",
+      "meshCount": 26,
+      "triangles": 4536,
+      "sizeMeters": [
+        2.200000047683716,
+        0.47000017762184143,
+        2.805000066757202
+      ],
+      "localMin": [
+        -1.100000023841858,
+        -0.23500008881092072,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_LAB_01_DOOR_CONTROL.fbx",
+      "source": "LAB 01 | DOOR_CONTROL",
+      "meshCount": 26,
+      "triangles": 4536,
+      "sizeMeters": [
+        2.200000047683716,
+        0.46999993920326233,
+        2.805000066757202
+      ],
+      "localMin": [
+        -1.0999999046325684,
+        -0.23499999940395355,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_LAB_02_DOOR_CONTROL.fbx",
+      "source": "LAB 02 | DOOR_CONTROL",
+      "meshCount": 26,
+      "triangles": 4536,
+      "sizeMeters": [
+        2.200000047683716,
+        0.46999993920326233,
+        2.805000066757202
+      ],
+      "localMin": [
+        -1.1000001430511475,
+        -0.23499999940395355,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_MAINTENANCE_STATION.fbx",
+      "source": "MAINTENANCE_STATION",
+      "meshCount": 126,
+      "triangles": 28280,
+      "sizeMeters": [
+        2.119999885559082,
+        0.7799999713897705,
+        2.755000114440918
+      ],
+      "localMin": [
+        -1.059999942779541,
+        -0.39000004529953003,
+        0.03999999165534973
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V5_FIELD_EQUIPMENT_CASE.fbx",
+      "source": "V5 | FIELD EQUIPMENT CASE",
+      "meshCount": 15,
+      "triangles": 2356,
+      "sizeMeters": [
+        1.128000020980835,
+        0.6350000500679016,
+        0.6725000143051147
+      ],
+      "localMin": [
+        -0.5640000104904175,
+        -0.3450000286102295,
+        -0.03149999678134918
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V5_DATA_CARTRIDGE_1.fbx",
+      "source": "V5 | DATA CARTRIDGE 1",
+      "meshCount": 5,
+      "triangles": 764,
+      "sizeMeters": [
+        0.27000001072883606,
+        0.25999999046325684,
+        0.12199997901916504
+      ],
+      "localMin": [
+        -0.13500000536441803,
+        -0.12999999523162842,
+        -0.0024999789893627167
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V5_DATA_CARTRIDGE_2.fbx",
+      "source": "V5 | DATA CARTRIDGE 2",
+      "meshCount": 5,
+      "triangles": 764,
+      "sizeMeters": [
+        0.27000001072883606,
+        0.25999999046325684,
+        0.12199997901916504
+      ],
+      "localMin": [
+        -0.13500000536441803,
+        -0.12999999523162842,
+        -0.0024999789893627167
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V5_DOCKED_TABLET.fbx",
+      "source": "V5 | DOCKED TABLET",
+      "meshCount": 3,
+      "triangles": 564,
+      "sizeMeters": [
+        0.3100000023841858,
+        0.23000000417232513,
+        0.23275816440582275
+      ],
+      "localMin": [
+        -0.15499994158744812,
+        -0.11500007659196854,
+        -2.421438694000244E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V5_SAMPLE_TRANSPORT_CASE.fbx",
+      "source": "V5 | SAMPLE TRANSPORT CASE",
+      "meshCount": 15,
+      "triangles": 2356,
+      "sizeMeters": [
+        0.7279999852180481,
+        0.5250001549720764,
+        0.6424999833106995
+      ],
+      "localMin": [
+        -0.364000141620636,
+        -0.2900000214576721,
+        -0.03149999678134918
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V5_FOUR_SAMPLE_CARTRIDGES.fbx",
+      "source": "V5 | FOUR SAMPLE CARTRIDGES",
+      "meshCount": 20,
+      "triangles": 3136,
+      "sizeMeters": [
+        0.5899999737739563,
+        0.30450010299682617,
+        0.22550004720687866
+      ],
+      "localMin": [
+        -0.2949996590614319,
+        -0.15699990093708038,
+        -2.421438694000244E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V5_CLOSED_DIAGNOSTIC_MODULE.fbx",
+      "source": "V5 | CLOSED DIAGNOSTIC MODULE",
+      "meshCount": 6,
+      "triangles": 424,
+      "sizeMeters": [
+        0.36000001430511475,
+        0.28800004720687866,
+        0.12099997699260712
+      ],
+      "localMin": [
+        -0.1799996793270111,
+        -0.14799994230270386,
+        1.862645149230957E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V5_OPEN_MAINTENANCE_CASE.fbx",
+      "source": "V5 | OPEN MAINTENANCE CASE",
+      "meshCount": 22,
+      "triangles": 6748,
+      "sizeMeters": [
+        0.7000002264976501,
+        0.5730001926422119,
+        0.46999990940093994
+      ],
+      "localMin": [
+        -0.3500001132488251,
+        -0.294999897480011,
+        4.470348358154297E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V5_SPARE_POWER_CELL.fbx",
+      "source": "V5 | SPARE POWER CELL",
+      "meshCount": 8,
+      "triangles": 3320,
+      "sizeMeters": [
+        0.21199999749660492,
+        0.2164999544620514,
+        0.3815000057220459
+      ],
+      "localMin": [
+        -0.10599999874830246,
+        -0.11049994826316833,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V6_Control_AIR_OUTLET.fbx",
+      "source": "V6 | Control AIR OUTLET",
+      "meshCount": 17,
+      "triangles": 3340,
+      "sizeMeters": [
+        0.9300000667572021,
+        0.17874014377593994,
+        0.67249995470047
+      ],
+      "localMin": [
+        -0.39500001072883606,
+        -0.1267402470111847,
+        -0.30250000953674316
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V6_Lab01_AIR_OUTLET.fbx",
+      "source": "V6 | Lab01 AIR OUTLET",
+      "meshCount": 17,
+      "triangles": 3340,
+      "sizeMeters": [
+        0.9300000667572021,
+        0.1787402629852295,
+        0.67249995470047
+      ],
+      "localMin": [
+        -0.3949999213218689,
+        -0.12674029171466827,
+        -0.30250000953674316
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V6_Lab02_AIR_OUTLET.fbx",
+      "source": "V6 | Lab02 AIR OUTLET",
+      "meshCount": 17,
+      "triangles": 3340,
+      "sizeMeters": [
+        0.9300000667572021,
+        0.17874014377593994,
+        0.67249995470047
+      ],
+      "localMin": [
+        -0.39500001072883606,
+        -0.1267404854297638,
+        -0.30250000953674316
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V9_FLUSH_TERMINAL.fbx",
+      "source": "V9 | FLUSH TERMINAL",
+      "meshCount": 6,
+      "triangles": 1772,
+      "sizeMeters": [
+        1.024999976158142,
+        0.11100000143051147,
+        0.7532000541687012
+      ],
+      "localMin": [
+        -0.5125001072883606,
+        -0.03599996119737625,
+        -0.3857000470161438
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V9_FLUSH_TERMINAL_001.fbx",
+      "source": "V9 | FLUSH TERMINAL.001",
+      "meshCount": 6,
+      "triangles": 1772,
+      "sizeMeters": [
+        1.024999976158142,
+        0.11100000143051147,
+        0.7532000541687012
+      ],
+      "localMin": [
+        -0.5125001072883606,
+        -0.03599998727440834,
+        -0.3857000470161438
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V9_FLUSH_TERMINAL_002.fbx",
+      "source": "V9 | FLUSH TERMINAL.002",
+      "meshCount": 6,
+      "triangles": 1772,
+      "sizeMeters": [
+        1.024999976158142,
+        0.11100000143051147,
+        0.7532000541687012
+      ],
+      "localMin": [
+        -0.5124998688697815,
+        -0.03599996119737625,
+        -0.3857000470161438
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_V9_FLUSH_TERMINAL_003.fbx",
+      "source": "V9 | FLUSH TERMINAL.003",
+      "meshCount": 6,
+      "triangles": 1772,
+      "sizeMeters": [
+        1.024999976158142,
+        0.11100000143051147,
+        0.7532000541687012
+      ],
+      "localMin": [
+        -0.5124998688697815,
+        -0.03599998727440834,
+        -0.3857000470161438
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Specimen_Computer.fbx",
+      "source": "ASSET_Specimen_Computer",
+      "meshCount": 64,
+      "triangles": 12204,
+      "sizeMeters": [
+        0.4393806457519531,
+        0.8019999861717224,
+        0.7039999961853027
+      ],
+      "localMin": [
+        -0.1943807303905487,
+        -0.4010000228881836,
+        -0.005499984137713909
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Signal_Wall_Monitor.fbx",
+      "source": "ASSET_Signal_Wall_Monitor",
+      "meshCount": 3,
+      "triangles": 712,
+      "sizeMeters": [
+        0.1340002715587616,
+        1.630000114440918,
+        0.8500000238418579
+      ],
+      "localMin": [
+        -0.06700017303228378,
+        -0.8150002360343933,
+        5.960464477539063E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Control_CCTV_Monitor_01.fbx",
+      "source": "ASSET_Control_CCTV_Monitor_01",
+      "meshCount": 19,
+      "triangles": 916,
+      "sizeMeters": [
+        0.19350019097328186,
+        1.3200000524520874,
+        1.4500000476837158
+      ],
+      "localMin": [
+        -0.09675019979476929,
+        -0.6600000262260437,
+        2.980232238769531E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Control_CCTV_Monitor_02.fbx",
+      "source": "ASSET_Control_CCTV_Monitor_02",
+      "meshCount": 19,
+      "triangles": 916,
+      "sizeMeters": [
+        0.19350019097328186,
+        1.3200000524520874,
+        1.4500000476837158
+      ],
+      "localMin": [
+        -0.09675019979476929,
+        -0.6600000262260437,
+        2.980232238769531E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Control_CCTV_Monitor_03.fbx",
+      "source": "ASSET_Control_CCTV_Monitor_03",
+      "meshCount": 19,
+      "triangles": 916,
+      "sizeMeters": [
+        0.19350066781044006,
+        1.3200000524520874,
+        1.4500000476837158
+      ],
+      "localMin": [
+        -0.09675019979476929,
+        -0.6600000262260437,
+        2.980232238769531E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Control_Console_01.fbx",
+      "source": "ASSET_Control_Console_01",
+      "meshCount": 35,
+      "triangles": 3204,
+      "sizeMeters": [
+        1.1825003623962402,
+        1.5600003004074097,
+        1.4600000381469727
+      ],
+      "localMin": [
+        -0.5912501215934753,
+        -0.7800002098083496,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Control_Console_02.fbx",
+      "source": "ASSET_Control_Console_02",
+      "meshCount": 34,
+      "triangles": 3080,
+      "sizeMeters": [
+        1.0550000667572021,
+        1.3400003910064697,
+        1.4600000381469727
+      ],
+      "localMin": [
+        -0.527500331401825,
+        -0.6700001955032349,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Control_Console_03.fbx",
+      "source": "ASSET_Control_Console_03",
+      "meshCount": 35,
+      "triangles": 3204,
+      "sizeMeters": [
+        1.1825001239776611,
+        1.5600003004074097,
+        1.4600000381469727
+      ],
+      "localMin": [
+        -0.5912501215934753,
+        -0.7800002098083496,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Return_Console_01.fbx",
+      "source": "ASSET_Return_Console_01",
+      "meshCount": 10,
+      "triangles": 1352,
+      "sizeMeters": [
+        1.3950002193450928,
+        0.3900004029273987,
+        1.0099999904632568
+      ],
+      "localMin": [
+        -0.6760000586509705,
+        -0.19500020146369934,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Return_Console_02.fbx",
+      "source": "ASSET_Return_Console_02",
+      "meshCount": 10,
+      "triangles": 1352,
+      "sizeMeters": [
+        1.3950002193450928,
+        0.3900004029273987,
+        1.0099999904632568
+      ],
+      "localMin": [
+        -0.6760000586509705,
+        -0.19500020146369934,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Control_Keyboard.fbx",
+      "source": "ASSET_Control_Keyboard",
+      "meshCount": 37,
+      "triangles": 620,
+      "sizeMeters": [
+        0.23000019788742065,
+        0.6400001049041748,
+        0.046500056982040405
+      ],
+      "localMin": [
+        -0.11500009894371033,
+        -0.3200000524520874,
+        -2.7939677238464355E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Operator_Chair.fbx",
+      "source": "ASSET_Operator_Chair",
+      "meshCount": 18,
+      "triangles": 3512,
+      "sizeMeters": [
+        0.8108453750610352,
+        0.8900001049041748,
+        1.3644859790802002
+      ],
+      "localMin": [
+        -0.4054226875305176,
+        -0.4250001013278961,
+        -0.030387163162231445
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Power_Gas_Panel.fbx",
+      "source": "ASSET_Power_Gas_Panel",
+      "meshCount": 22,
+      "triangles": 8180,
+      "sizeMeters": [
+        1.5,
+        0.48523029685020447,
+        2.505000114440918
+      ],
+      "localMin": [
+        -0.75,
+        -0.24261534214019775,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Specimen_Archive.fbx",
+      "source": "ASSET_Specimen_Archive",
+      "meshCount": 184,
+      "triangles": 26936,
+      "sizeMeters": [
+        5.340000152587891,
+        0.8650000691413879,
+        1.7899999618530273
+      ],
+      "localMin": [
+        -2.6700000762939453,
+        -0.43249979615211487,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Specimen_Analysis_Bench.fbx",
+      "source": "ASSET_Specimen_Analysis_Bench",
+      "meshCount": 18,
+      "triangles": 5432,
+      "sizeMeters": [
+        6.060000419616699,
+        5.315000534057617,
+        0.9674999713897705
+      ],
+      "localMin": [
+        -3.0300002098083496,
+        -2.6574997901916504,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Specimen_Wall_Shelf.fbx",
+      "source": "ASSET_Specimen_Wall_Shelf",
+      "meshCount": 2,
+      "triangles": 376,
+      "sizeMeters": [
+        0.38999998569488525,
+        2.799999952316284,
+        0.08650007843971252
+      ],
+      "localMin": [
+        -0.19499999284744263,
+        -1.399999976158142,
+        6.332993507385254E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Small_Supply_Case_1.fbx",
+      "source": "ASSET_Small_Supply_Case_1",
+      "meshCount": 1,
+      "triangles": 188,
+      "sizeMeters": [
+        0.25,
+        0.20000000298023224,
+        0.2199999988079071
+      ],
+      "localMin": [
+        -0.125,
+        -0.10000000149011612,
+        1.4901161193847656E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Small_Supply_Case_2.fbx",
+      "source": "ASSET_Small_Supply_Case_2",
+      "meshCount": 1,
+      "triangles": 188,
+      "sizeMeters": [
+        0.25,
+        0.20000000298023224,
+        0.2199999988079071
+      ],
+      "localMin": [
+        -0.125,
+        -0.10000000149011612,
+        1.4901161193847656E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Small_Supply_Case_3.fbx",
+      "source": "ASSET_Small_Supply_Case_3",
+      "meshCount": 1,
+      "triangles": 188,
+      "sizeMeters": [
+        0.25,
+        0.20000000298023224,
+        0.2199999988079071
+      ],
+      "localMin": [
+        -0.125,
+        -0.10000000149011612,
+        1.4901161193847656E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Pressure_Vessel_01.fbx",
+      "source": "ASSET_Pressure_Vessel_01",
+      "meshCount": 10,
+      "triangles": 4232,
+      "sizeMeters": [
+        0.37599998712539673,
+        0.37599998712539673,
+        1.8499999046325684
+      ],
+      "localMin": [
+        -0.18799999356269836,
+        -0.18799999356269836,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Pressure_Vessel_02.fbx",
+      "source": "ASSET_Pressure_Vessel_02",
+      "meshCount": 14,
+      "triangles": 4760,
+      "sizeMeters": [
+        0.37599998712539673,
+        1.8199996948242188,
+        1.96999990940094
+      ],
+      "localMin": [
+        -0.18799999356269836,
+        -0.875,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Signal_Service_Box_01.fbx",
+      "source": "ASSET_Signal_Service_Box_01",
+      "meshCount": 25,
+      "triangles": 1756,
+      "sizeMeters": [
+        0.9249999523162842,
+        0.3545495569705963,
+        1.8399999141693115
+      ],
+      "localMin": [
+        -0.559999942779541,
+        -0.17879962921142578,
+        -0.2199999988079071
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Signal_Service_Box_02.fbx",
+      "source": "ASSET_Signal_Service_Box_02",
+      "meshCount": 23,
+      "triangles": 1732,
+      "sizeMeters": [
+        0.9750001430511475,
+        0.3545495569705963,
+        1.40500009059906
+      ],
+      "localMin": [
+        -0.36500000953674316,
+        -0.17879962921142578,
+        -0.2199999988079071
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Signal_Equipment_Cabinet.fbx",
+      "source": "ASSET_Signal_Equipment_Cabinet",
+      "meshCount": 8,
+      "triangles": 1824,
+      "sizeMeters": [
+        0.8600000143051147,
+        0.6990001797676086,
+        1.0499999523162842
+      ],
+      "localMin": [
+        -0.4300000071525574,
+        -0.3495001494884491,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Storage_Locker_01.fbx",
+      "source": "ASSET_Storage_Locker_01",
+      "meshCount": 6,
+      "triangles": 1240,
+      "sizeMeters": [
+        0.7725003361701965,
+        0.7099999785423279,
+        2.2799999713897705
+      ],
+      "localMin": [
+        -0.3862501084804535,
+        -0.35499998927116394,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Storage_Locker_02.fbx",
+      "source": "ASSET_Storage_Locker_02",
+      "meshCount": 6,
+      "triangles": 1240,
+      "sizeMeters": [
+        0.7725003361701965,
+        0.7099999785423279,
+        2.2799999713897705
+      ],
+      "localMin": [
+        -0.3862501084804535,
+        -0.35499998927116394,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Server_Cabinet.fbx",
+      "source": "ASSET_Server_Cabinet",
+      "meshCount": 57,
+      "triangles": 2204,
+      "sizeMeters": [
+        0.8369998931884766,
+        0.8399999737739563,
+        2.140000104904175
+      ],
+      "localMin": [
+        -0.4272501468658447,
+        -0.41999998688697815,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Shift_Cabinet.fbx",
+      "source": "ASSET_Shift_Cabinet",
+      "meshCount": 8,
+      "triangles": 1504,
+      "sizeMeters": [
+        3.200000047683716,
+        0.8235000371932983,
+        0.9399999976158142
+      ],
+      "localMin": [
+        -1.600000023841858,
+        -0.41174986958503723,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Existing_Clipboard.fbx",
+      "source": "ASSET_Existing_Clipboard",
+      "meshCount": 6,
+      "triangles": 424,
+      "sizeMeters": [
+        0.3199999928474426,
+        0.4300000071525574,
+        0.034499965608119965
+      ],
+      "localMin": [
+        -0.1599999964237213,
+        -0.2150000035762787,
+        -1.210719347000122E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Existing_Mug.fbx",
+      "source": "ASSET_Existing_Mug",
+      "meshCount": 3,
+      "triangles": 1400,
+      "sizeMeters": [
+        0.22300003468990326,
+        0.1459999978542328,
+        0.2150000035762787
+      ],
+      "localMin": [
+        -0.11150006949901581,
+        -0.0729999989271164,
+        2.2351741790771484E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Existing_Radio.fbx",
+      "source": "ASSET_Existing_Radio",
+      "meshCount": 2,
+      "triangles": 440,
+      "sizeMeters": [
+        0.17000000178813934,
+        0.20000000298023224,
+        0.46000000834465027
+      ],
+      "localMin": [
+        -0.08500000089406967,
+        -0.10000000149011612,
+        2.2351741790771484E-08
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Existing_Planter_01.fbx",
+      "source": "ASSET_Existing_Planter_01",
+      "meshCount": 19,
+      "triangles": 3856,
+      "sizeMeters": [
+        0.8631225824356079,
+        0.6349806785583496,
+        1.2084579467773438
+      ],
+      "localMin": [
+        -0.4315613806247711,
+        -0.3174903392791748,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_ENV_Existing_Planter_02.fbx",
+      "source": "ASSET_Existing_Planter_02",
+      "meshCount": 19,
+      "triangles": 3856,
+      "sizeMeters": [
+        0.8631225824356079,
+        0.6349804401397705,
+        1.2084579467773438
+      ],
+      "localMin": [
+        -0.4315613806247711,
+        -0.3174903392791748,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_TOOL_AnomalyScanner.fbx",
+      "source": "PROP_AnomalyScanner",
+      "meshCount": 15,
+      "triangles": 4472,
+      "sizeMeters": [
+        0.242732435464859,
+        0.07856756448745728,
+        0.48959997296333313
+      ],
+      "localMin": [
+        -0.13191081583499908,
+        -0.042178377509117126,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_TOOL_PulseEmitter.fbx",
+      "source": "PROP_PulseEmitter",
+      "meshCount": 16,
+      "triangles": 4540,
+      "sizeMeters": [
+        0.37281638383865356,
+        0.11365428566932678,
+        0.2908295691013336
+      ],
+      "localMin": [
+        -0.22585146129131317,
+        -0.05682714283466339,
+        0.0005916648078709841
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_TOOL_ElectronicLogbook.fbx",
+      "source": "PROP_ElectronicLogbook",
+      "meshCount": 12,
+      "triangles": 2180,
+      "sizeMeters": [
+        0.22700004279613495,
+        0.15700000524520874,
+        0.017499998211860657
+      ],
+      "localMin": [
+        -0.11350002139806747,
+        -0.07850000262260437,
+        -0.0015000002458691597
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_SampleJar_Intact.fbx",
+      "source": "PROP_SampleJar_Intact",
+      "meshCount": 10,
+      "triangles": 5688,
+      "sizeMeters": [
+        0.12800000607967377,
+        0.12800000607967377,
+        0.24549999833106995
+      ],
+      "localMin": [
+        -0.06400000303983688,
+        -0.06400000303983688,
+        0.0015000002458691597
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_SampleJar_Broken.fbx",
+      "source": "PROP_SampleJar_Broken",
+      "meshCount": 5,
+      "triangles": 2660,
+      "sizeMeters": [
+        0.12600000202655792,
+        0.12600000202655792,
+        0.21250000596046448
+      ],
+      "localMin": [
+        -0.06300000101327896,
+        -0.06300000101327896,
+        0.0015000002458691597
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_SampleJar_DetachedCap.fbx",
+      "source": "PROP_SampleJar_DetachedCap",
+      "meshCount": 2,
+      "triangles": 1148,
+      "sizeMeters": [
+        0.12800000607967377,
+        0.12800000607967377,
+        0.03099999949336052
+      ],
+      "localMin": [
+        -0.06400000303983688,
+        -0.06400000303983688,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_GlassShard_01.fbx",
+      "source": "PROP_GlassShard_01",
+      "meshCount": 1,
+      "triangles": 188,
+      "sizeMeters": [
+        0.03412214294075966,
+        0.04081268608570099,
+        0.0024999999441206455
+      ],
+      "localMin": [
+        -0.015311768278479576,
+        -0.018938319757580757,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_GlassShard_02.fbx",
+      "source": "PROP_GlassShard_02",
+      "meshCount": 1,
+      "triangles": 188,
+      "sizeMeters": [
+        0.038518160581588745,
+        0.04082440957427025,
+        0.0024999999441206455
+      ],
+      "localMin": [
+        -0.01728680729866028,
+        -0.01894509792327881,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_GlassShard_03.fbx",
+      "source": "PROP_GlassShard_03",
+      "meshCount": 1,
+      "triangles": 188,
+      "sizeMeters": [
+        0.04291611537337303,
+        0.040835246443748474,
+        0.0024999999441206455
+      ],
+      "localMin": [
+        -0.0192624032497406,
+        -0.018950551748275757,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_GlassShard_04.fbx",
+      "source": "PROP_GlassShard_04",
+      "meshCount": 1,
+      "triangles": 188,
+      "sizeMeters": [
+        0.047315794974565506,
+        0.04084520414471626,
+        0.0024999999441206455
+      ],
+      "localMin": [
+        -0.02123851329088211,
+        -0.018955031409859657,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_GlassShard_05.fbx",
+      "source": "PROP_GlassShard_05",
+      "meshCount": 1,
+      "triangles": 188,
+      "sizeMeters": [
+        0.05171702429652214,
+        0.04085434973239899,
+        0.0024999999441206455
+      ],
+      "localMin": [
+        -0.023215115070343018,
+        -0.018958773463964462,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_SpecimenTransportCase.fbx",
+      "source": "PROP_SpecimenTransportCase",
+      "meshCount": 9,
+      "triangles": 2288,
+      "sizeMeters": [
+        0.30000001192092896,
+        0.2199999988079071,
+        0.1809999942779541
+      ],
+      "localMin": [
+        -0.15000000596046448,
+        -0.11499999463558197,
+        0.00800000037997961
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_SampleVial.fbx",
+      "source": "PROP_SampleVial",
+      "meshCount": 4,
+      "triangles": 1592,
+      "sizeMeters": [
+        0.041999999433755875,
+        0.041999999433755875,
+        0.12250000983476639
+      ],
+      "localMin": [
+        -0.020999999716877937,
+        -0.020999999716877937,
+        0.0019999993965029716
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_VialRack.fbx",
+      "source": "PROP_VialRack",
+      "meshCount": 6,
+      "triangles": 1780,
+      "sizeMeters": [
+        0.16965201497077942,
+        0.07965198904275894,
+        0.07850000262260437
+      ],
+      "localMin": [
+        -0.08482600748538971,
+        -0.03982599452137947,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_DataCartridge.fbx",
+      "source": "PROP_DataCartridge",
+      "meshCount": 8,
+      "triangles": 1920,
+      "sizeMeters": [
+        0.11299994587898254,
+        0.03200000151991844,
+        0.014999999664723873
+      ],
+      "localMin": [
+        -0.04749999940395355,
+        -0.01600000075995922,
+        0.002500000409781933
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_LAB_InstrumentTray.fbx",
+      "source": "PROP_InstrumentTray",
+      "meshCount": 2,
+      "triangles": 956,
+      "sizeMeters": [
+        0.23195387423038483,
+        0.15195387601852417,
+        0.026000000536441803
+      ],
+      "localMin": [
+        -0.11597693711519241,
+        -0.07597693800926208,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_UTILITY_CableCoupler.fbx",
+      "source": "PROP_CableCoupler",
+      "meshCount": 10,
+      "triangles": 3480,
+      "sizeMeters": [
+        0.03799999877810478,
+        0.03799999877810478,
+        0.06450000405311584
+      ],
+      "localMin": [
+        -0.01899999938905239,
+        -0.01899999938905239,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_UTILITY_ConnectorCable.fbx",
+      "source": "PROP_ConnectorCable",
+      "meshCount": 21,
+      "triangles": 9500,
+      "sizeMeters": [
+        0.197919100522995,
+        0.2159319370985031,
+        0.06620586663484573
+      ],
+      "localMin": [
+        -0.0939190536737442,
+        -0.0949319377541542,
+        0.003294137306511402
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_UTILITY_VentCover.fbx",
+      "source": "PROP_VentCover",
+      "meshCount": 8,
+      "triangles": 1332,
+      "sizeMeters": [
+        0.20000000298023224,
+        0.14000000059604645,
+        0.017237896099686623
+      ],
+      "localMin": [
+        -0.10000000149011612,
+        -0.07000000029802322,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_UTILITY_JunctionBox.fbx",
+      "source": "PROP_JunctionBox",
+      "meshCount": 5,
+      "triangles": 1140,
+      "sizeMeters": [
+        0.09799999743700027,
+        0.09650005400180817,
+        0.05049999803304672
+      ],
+      "localMin": [
+        -0.04899999871850014,
+        -0.055000051856040955,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_UTILITY_ConnectorOrganizer.fbx",
+      "source": "PROP_ConnectorOrganizer",
+      "meshCount": 34,
+      "triangles": 11772,
+      "sizeMeters": [
+        0.20195388793945312,
+        0.12195388227701187,
+        0.07150000333786011
+      ],
+      "localMin": [
+        -0.10097694396972656,
+        -0.060976941138505936,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": ""
+    },
+    {
+      "file": "ZH_PROP_ANOMALY_BlackSeepage.fbx",
+      "source": "PROP_BlackSeepage",
+      "meshCount": 8,
+      "triangles": 2688,
+      "sizeMeters": [
+        0.29066944122314453,
+        0.36406657099723816,
+        0.014000000432133675
+      ],
+      "localMin": [
+        -0.14886288344860077,
+        -0.16497713327407837,
+        -0.003000000026077032
+      ],
+      "rootCount": 1,
+      "note": "wall attachment local +Z normal; shrink/dissolve and upward flow in Unity"
+    },
+    {
+      "file": "ZH_PROP_ANOMALY_GhostSilhouette.fbx",
+      "source": "PROP_GhostSilhouette",
+      "meshCount": 1,
+      "triangles": 6286,
+      "sizeMeters": [
+        0.5962210893630981,
+        0.21874859929084778,
+        1.6943343877792358
+      ],
+      "localMin": [
+        -0.2980271577835083,
+        -0.12844109535217285,
+        0.04123573750257492
+      ],
+      "rootCount": 1,
+      "note": "static unrigged silhouette; movement can translate root; smoke and dissolve not implemented"
+    },
+    {
+      "file": "ZH_PROP_ANOMALY_AnomalyPhotograph.fbx",
+      "source": "PROP_AnomalyPhotograph",
+      "meshCount": 2,
+      "triangles": 2904,
+      "sizeMeters": [
+        0.18000000715255737,
+        0.13199999928474426,
+        0.005000000353902578
+      ],
+      "localMin": [
+        -0.09000000357627869,
+        -0.06599999964237213,
+        0.0
+      ],
+      "rootCount": 1,
+      "note": "local +Z normal; pickup paper root; photo image packed"
+    },
+    {
+      "file": "ZH_SCENE_Station_Complete.fbx",
+      "source": "Scene",
+      "meshCount": 2190,
+      "triangles": 397152,
+      "sizeMeters": [
+        16.69200325012207,
+        17.172000885009766,
+        3.5899999141693115
+      ],
+      "localMin": [
+        -8.346001625061035,
+        -3.7860002517700195,
+        -0.30000001192092896
+      ],
+      "rootCount": 76,
+      "note": "Entire station with original layout; mesh-only, no Blender lights/drivers"
+    }
+  ],
+  "units": "meters; FBX Y-up",
+  "bakedModifiers": true,
+  "unityValidated": false
+}

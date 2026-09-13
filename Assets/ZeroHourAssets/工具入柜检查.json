@@ -1,0 +1,34 @@
+[
+  {
+    "tool": "PICKUP_SCANNER",
+    "linearScaleVsPrevious": 0.48,
+    "oldSizeMeters": [
+      0.5056926161050797,
+      0.16368243843317032,
+      1.0199999809265137
+    ],
+    "newSizeMeters": [
+      0.2427324429154396,
+      0.07856756821274757,
+      0.48959997296333313
+    ],
+    "fitsBay": true,
+    "note": "Source geometry and docked copy match; fixed mounts separate. No gameplay collision test."
+  },
+  {
+    "tool": "PICKUP_PULSE",
+    "linearScaleVsPrevious": 0.48,
+    "oldSizeMeters": [
+      0.7767007648944855,
+      0.23677976429462433,
+      0.6058949715225026
+    ],
+    "newSizeMeters": [
+      0.37281636893749237,
+      0.11365428566932678,
+      0.29082956979982555
+    ],
+    "fitsBay": true,
+    "note": "Source geometry and docked copy match; fixed mounts separate. No gameplay collision test."
+  }
+]

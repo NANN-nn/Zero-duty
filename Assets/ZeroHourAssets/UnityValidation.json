@@ -1,0 +1,1069 @@
+{
+    "unityVersion": "6000.4.10f1",
+    "pipeline": "URP",
+    "allPassed": false,
+    "assets": [
+        {
+            "file": "ZH_ENV_SAMPLE_1_removable_sealed_vial.fbx",
+            "renderers": 8,
+            "triangles": 3630,
+            "dimensions": [
+                0.3199999928474426,
+                0.6399998664855957,
+                0.320000022649765
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=8, expectedTriangles=4056"
+        },
+        {
+            "file": "ZH_ENV_SAMPLE_2_removable_sealed_vial.fbx",
+            "renderers": 9,
+            "triangles": 3300,
+            "dimensions": [
+                0.3199999928474426,
+                0.6399998664855957,
+                0.320000022649765
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_SAMPLE_3_removable_sealed_vial.fbx",
+            "renderers": 6,
+            "triangles": 3248,
+            "dimensions": [
+                0.3199999928474426,
+                0.6399999856948853,
+                0.320000022649765
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_SAMPLE_4_removable_sealed_vial.fbx",
+            "renderers": 8,
+            "triangles": 3630,
+            "dimensions": [
+                0.3199999928474426,
+                0.6399998664855957,
+                0.320000022649765
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=8, expectedTriangles=4056"
+        },
+        {
+            "file": "ZH_ENV_SAMPLE_5_removable_sealed_vial.fbx",
+            "renderers": 6,
+            "triangles": 3364,
+            "dimensions": [
+                0.3199999928474426,
+                0.6399998664855957,
+                0.320000022649765
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=6, expectedTriangles=3568"
+        },
+        {
+            "file": "ZH_ENV_LEFT_ANALYSIS_WORKSTATION.fbx",
+            "renderers": 70,
+            "triangles": 13332,
+            "dimensions": [
+                1.6474567651748658,
+                0.7955443859100342,
+                0.4399999976158142
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_SCAN_TABLE.fbx",
+            "renderers": 27,
+            "triangles": 8280,
+            "dimensions": [
+                1.75,
+                0.9560000896453857,
+                1.5099998712539673
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=27, expectedTriangles=8744"
+        },
+        {
+            "file": "ZH_ENV_DISPOSAL_UNIT.fbx",
+            "renderers": 16,
+            "triangles": 4228,
+            "dimensions": [
+                0.8399999737739563,
+                1.235872745513916,
+                0.7600000500679016
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_SIGNAL_ISOLATION_CHAMBER.fbx",
+            "renderers": 37,
+            "triangles": 28544,
+            "dimensions": [
+                2.0,
+                2.963550090789795,
+                1.9999998807907105
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=37, expectedTriangles=28656"
+        },
+        {
+            "file": "ZH_ENV_SIGNAL_DIAGNOSTICS.fbx",
+            "renderers": 8,
+            "triangles": 1652,
+            "dimensions": [
+                1.6299997568130494,
+                2.229999542236328,
+                0.5799999237060547
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_CONTROL_DOOR_CONTROL.fbx",
+            "renderers": 26,
+            "triangles": 4536,
+            "dimensions": [
+                2.200000047683716,
+                2.804999828338623,
+                0.47000014781951907
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_LAB_01_DOOR_CONTROL.fbx",
+            "renderers": 26,
+            "triangles": 4536,
+            "dimensions": [
+                2.200000047683716,
+                2.804999828338623,
+                0.46999990940093996
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_LAB_02_DOOR_CONTROL.fbx",
+            "renderers": 26,
+            "triangles": 4536,
+            "dimensions": [
+                2.200000047683716,
+                2.804999828338623,
+                0.46999990940093996
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_MAINTENANCE_STATION.fbx",
+            "renderers": 126,
+            "triangles": 27676,
+            "dimensions": [
+                2.119999885559082,
+                2.754999876022339,
+                0.7799999117851257
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=126, expectedTriangles=28280"
+        },
+        {
+            "file": "ZH_ENV_V5_FIELD_EQUIPMENT_CASE.fbx",
+            "renderers": 15,
+            "triangles": 2356,
+            "dimensions": [
+                1.128000020980835,
+                0.6725000143051148,
+                0.6349999904632568
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V5_DATA_CARTRIDGE_1.fbx",
+            "renderers": 5,
+            "triangles": 764,
+            "dimensions": [
+                0.27000001072883608,
+                0.12199999392032623,
+                0.25999996066093447
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V5_DATA_CARTRIDGE_2.fbx",
+            "renderers": 5,
+            "triangles": 764,
+            "dimensions": [
+                0.27000001072883608,
+                0.12199999392032623,
+                0.25999996066093447
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V5_DOCKED_TABLET.fbx",
+            "renderers": 3,
+            "triangles": 564,
+            "dimensions": [
+                0.3100000023841858,
+                0.23275813460350038,
+                0.22999998927116395
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V5_SAMPLE_TRANSPORT_CASE.fbx",
+            "renderers": 15,
+            "triangles": 2356,
+            "dimensions": [
+                0.7279999852180481,
+                0.6424999237060547,
+                0.5250000953674316
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V5_FOUR_SAMPLE_CARTRIDGES.fbx",
+            "renderers": 20,
+            "triangles": 3136,
+            "dimensions": [
+                0.5899999737739563,
+                0.22550004720687867,
+                0.3045000731945038
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V5_CLOSED_DIAGNOSTIC_MODULE.fbx",
+            "renderers": 6,
+            "triangles": 424,
+            "dimensions": [
+                0.36000001430511477,
+                0.12099999189376831,
+                0.28800004720687868
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V5_OPEN_MAINTENANCE_CASE.fbx",
+            "renderers": 22,
+            "triangles": 6748,
+            "dimensions": [
+                0.7000002264976502,
+                0.46999990940093996,
+                0.5730001330375671
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V5_SPARE_POWER_CELL.fbx",
+            "renderers": 8,
+            "triangles": 3320,
+            "dimensions": [
+                0.21199999749660493,
+                0.3815000057220459,
+                0.216499924659729
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V6_Control_AIR_OUTLET.fbx",
+            "renderers": 17,
+            "triangles": 3340,
+            "dimensions": [
+                0.9300000071525574,
+                0.6724998950958252,
+                0.17874017357826234
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V6_Lab01_AIR_OUTLET.fbx",
+            "renderers": 17,
+            "triangles": 3340,
+            "dimensions": [
+                0.9300000667572022,
+                0.6724998950958252,
+                0.17874032258987428
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V6_Lab02_AIR_OUTLET.fbx",
+            "renderers": 17,
+            "triangles": 3340,
+            "dimensions": [
+                0.9300000071525574,
+                0.6724998950958252,
+                0.17874017357826234
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V9_FLUSH_TERMINAL.fbx",
+            "renderers": 6,
+            "triangles": 1772,
+            "dimensions": [
+                1.024999976158142,
+                0.7531999945640564,
+                0.11100006848573685
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V9_FLUSH_TERMINAL_001.fbx",
+            "renderers": 6,
+            "triangles": 1772,
+            "dimensions": [
+                1.024999976158142,
+                0.7531999945640564,
+                0.11100007593631745
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V9_FLUSH_TERMINAL_002.fbx",
+            "renderers": 6,
+            "triangles": 1772,
+            "dimensions": [
+                1.024999976158142,
+                0.7531999945640564,
+                0.11100006848573685
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_V9_FLUSH_TERMINAL_003.fbx",
+            "renderers": 6,
+            "triangles": 1772,
+            "dimensions": [
+                1.024999976158142,
+                0.7531999945640564,
+                0.11100007593631745
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Specimen_Computer.fbx",
+            "renderers": 64,
+            "triangles": 12204,
+            "dimensions": [
+                0.4393806755542755,
+                0.7039999961853027,
+                0.8019999861717224
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Signal_Wall_Monitor.fbx",
+            "renderers": 3,
+            "triangles": 712,
+            "dimensions": [
+                0.1340005248785019,
+                0.8500001430511475,
+                1.6299998760223389
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Control_CCTV_Monitor_01.fbx",
+            "renderers": 19,
+            "triangles": 916,
+            "dimensions": [
+                0.19350022077560426,
+                1.4500000476837159,
+                1.3200000524520875
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Control_CCTV_Monitor_02.fbx",
+            "renderers": 19,
+            "triangles": 916,
+            "dimensions": [
+                0.19350022077560426,
+                1.4500000476837159,
+                1.3200000524520875
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Control_CCTV_Monitor_03.fbx",
+            "renderers": 19,
+            "triangles": 916,
+            "dimensions": [
+                0.19350069761276246,
+                1.4500000476837159,
+                1.3200000524520875
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Control_Console_01.fbx",
+            "renderers": 35,
+            "triangles": 3204,
+            "dimensions": [
+                1.1825003623962403,
+                1.4600000381469727,
+                1.5600001811981202
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Control_Console_02.fbx",
+            "renderers": 34,
+            "triangles": 3080,
+            "dimensions": [
+                1.0550000667572022,
+                1.4600000381469727,
+                1.3400002717971802
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Control_Console_03.fbx",
+            "renderers": 35,
+            "triangles": 3204,
+            "dimensions": [
+                1.1825001239776612,
+                1.4600000381469727,
+                1.5600001811981202
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Return_Console_01.fbx",
+            "renderers": 10,
+            "triangles": 1352,
+            "dimensions": [
+                1.3950001001358033,
+                1.0099999904632569,
+                0.3900004029273987
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Return_Console_02.fbx",
+            "renderers": 10,
+            "triangles": 1352,
+            "dimensions": [
+                1.3950001001358033,
+                1.0099999904632569,
+                0.3900004029273987
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Control_Keyboard.fbx",
+            "renderers": 37,
+            "triangles": 620,
+            "dimensions": [
+                0.23000021278858186,
+                0.046500153839588168,
+                0.6399999856948853
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Operator_Chair.fbx",
+            "renderers": 18,
+            "triangles": 3512,
+            "dimensions": [
+                0.8108453750610352,
+                1.364485740661621,
+                0.8899999260902405
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Power_Gas_Panel.fbx",
+            "renderers": 22,
+            "triangles": 8180,
+            "dimensions": [
+                1.5,
+                2.5049996376037599,
+                0.48523035645484927
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Specimen_Archive.fbx",
+            "renderers": 184,
+            "triangles": 25880,
+            "dimensions": [
+                5.340000152587891,
+                1.7899999618530274,
+                0.8650001287460327
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=184, expectedTriangles=26936"
+        },
+        {
+            "file": "ZH_ENV_Specimen_Analysis_Bench.fbx",
+            "renderers": 18,
+            "triangles": 5432,
+            "dimensions": [
+                6.060000419616699,
+                0.9675005078315735,
+                5.314999580383301
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Specimen_Wall_Shelf.fbx",
+            "renderers": 2,
+            "triangles": 376,
+            "dimensions": [
+                0.38999998569488528,
+                0.0865003913640976,
+                2.799999713897705
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Small_Supply_Case_1.fbx",
+            "renderers": 1,
+            "triangles": 188,
+            "dimensions": [
+                0.25,
+                0.2200000137090683,
+                0.20000001788139344
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Small_Supply_Case_2.fbx",
+            "renderers": 1,
+            "triangles": 188,
+            "dimensions": [
+                0.25,
+                0.2200000137090683,
+                0.20000001788139344
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Small_Supply_Case_3.fbx",
+            "renderers": 1,
+            "triangles": 188,
+            "dimensions": [
+                0.25,
+                0.2200000137090683,
+                0.20000001788139344
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Pressure_Vessel_01.fbx",
+            "renderers": 10,
+            "triangles": 4232,
+            "dimensions": [
+                0.37599998712539675,
+                1.8499997854232789,
+                0.3760001063346863
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Pressure_Vessel_02.fbx",
+            "renderers": 14,
+            "triangles": 4760,
+            "dimensions": [
+                0.37599998712539675,
+                1.9699995517730713,
+                1.81999933719635
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Signal_Service_Box_01.fbx",
+            "renderers": 25,
+            "triangles": 1756,
+            "dimensions": [
+                0.9249999523162842,
+                1.8399996757507325,
+                0.35454967617988589
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Signal_Service_Box_02.fbx",
+            "renderers": 23,
+            "triangles": 1732,
+            "dimensions": [
+                0.9750001430511475,
+                1.4049999713897706,
+                0.35454967617988589
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Signal_Equipment_Cabinet.fbx",
+            "renderers": 8,
+            "triangles": 1824,
+            "dimensions": [
+                0.8600000143051148,
+                1.0499999523162842,
+                0.6990002393722534
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Storage_Locker_01.fbx",
+            "renderers": 6,
+            "triangles": 1240,
+            "dimensions": [
+                0.7725003361701965,
+                2.2799997329711916,
+                0.710000216960907
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Storage_Locker_02.fbx",
+            "renderers": 6,
+            "triangles": 1240,
+            "dimensions": [
+                0.7725003361701965,
+                2.2799997329711916,
+                0.710000216960907
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Server_Cabinet.fbx",
+            "renderers": 57,
+            "triangles": 2204,
+            "dimensions": [
+                0.8369998931884766,
+                2.1399998664855959,
+                0.8400001525878906
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Shift_Cabinet.fbx",
+            "renderers": 8,
+            "triangles": 1504,
+            "dimensions": [
+                3.200000047683716,
+                0.940000057220459,
+                0.8234999179840088
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Existing_Clipboard.fbx",
+            "renderers": 6,
+            "triangles": 424,
+            "dimensions": [
+                0.3199999928474426,
+                0.034500010311603549,
+                0.429999977350235
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Existing_Mug.fbx",
+            "renderers": 3,
+            "triangles": 1400,
+            "dimensions": [
+                0.22300003468990327,
+                0.2149999588727951,
+                0.14600001275539399
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Existing_Radio.fbx",
+            "renderers": 2,
+            "triangles": 440,
+            "dimensions": [
+                0.17000000178813935,
+                0.4599999785423279,
+                0.20000001788139344
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Existing_Planter_01.fbx",
+            "renderers": 19,
+            "triangles": 3856,
+            "dimensions": [
+                0.8631225824356079,
+                1.2084577083587647,
+                0.6349806189537048
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_ENV_Existing_Planter_02.fbx",
+            "renderers": 19,
+            "triangles": 3856,
+            "dimensions": [
+                0.8631225824356079,
+                1.2084577083587647,
+                0.6349803805351257
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_TOOL_AnomalyScanner.fbx",
+            "renderers": 15,
+            "triangles": 4168,
+            "dimensions": [
+                0.242732435464859,
+                0.48959994316101076,
+                0.07856753468513489
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=15, expectedTriangles=4472"
+        },
+        {
+            "file": "ZH_PROP_TOOL_PulseEmitter.fbx",
+            "renderers": 16,
+            "triangles": 4432,
+            "dimensions": [
+                0.3728163540363312,
+                0.290829598903656,
+                0.11365429311990738
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=16, expectedTriangles=4540"
+        },
+        {
+            "file": "ZH_PROP_TOOL_ElectronicLogbook.fbx",
+            "renderers": 12,
+            "triangles": 2084,
+            "dimensions": [
+                0.22700005769729615,
+                0.017500000074505807,
+                0.15699999034404756
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=12, expectedTriangles=2180"
+        },
+        {
+            "file": "ZH_PROP_LAB_SampleJar_Intact.fbx",
+            "renderers": 10,
+            "triangles": 5496,
+            "dimensions": [
+                0.12800000607967378,
+                0.24549999833106996,
+                0.12799999117851258
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=10, expectedTriangles=5688"
+        },
+        {
+            "file": "ZH_PROP_LAB_SampleJar_Broken.fbx",
+            "renderers": 5,
+            "triangles": 2660,
+            "dimensions": [
+                0.12600000202655793,
+                0.21250000596046449,
+                0.12599998712539674
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_LAB_SampleJar_DetachedCap.fbx",
+            "renderers": 2,
+            "triangles": 1148,
+            "dimensions": [
+                0.12800000607967378,
+                0.031000010669231416,
+                0.12799999117851258
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_LAB_GlassShard_01.fbx",
+            "renderers": 1,
+            "triangles": 188,
+            "dimensions": [
+                0.03412214294075966,
+                0.0025000046007335188,
+                0.04081268236041069
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_LAB_GlassShard_02.fbx",
+            "renderers": 1,
+            "triangles": 188,
+            "dimensions": [
+                0.038518160581588748,
+                0.0025000046007335188,
+                0.04082440584897995
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_LAB_GlassShard_03.fbx",
+            "renderers": 1,
+            "triangles": 188,
+            "dimensions": [
+                0.04291611537337303,
+                0.0025000046007335188,
+                0.040835242718458179
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_LAB_GlassShard_04.fbx",
+            "renderers": 1,
+            "triangles": 188,
+            "dimensions": [
+                0.047315794974565509,
+                0.0025000046007335188,
+                0.040845200419425967
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_LAB_GlassShard_05.fbx",
+            "renderers": 1,
+            "triangles": 188,
+            "dimensions": [
+                0.05171702429652214,
+                0.0025000046007335188,
+                0.04085434600710869
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_LAB_SpecimenTransportCase.fbx",
+            "renderers": 9,
+            "triangles": 2288,
+            "dimensions": [
+                0.30000001192092898,
+                0.1809999942779541,
+                0.2199999839067459
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_LAB_SampleVial.fbx",
+            "renderers": 4,
+            "triangles": 1592,
+            "dimensions": [
+                0.041999999433755878,
+                0.12250000238418579,
+                0.041999999433755878
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_LAB_VialRack.fbx",
+            "renderers": 6,
+            "triangles": 1780,
+            "dimensions": [
+                0.16965201497077943,
+                0.07850000262260437,
+                0.07965198904275894
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_LAB_DataCartridge.fbx",
+            "renderers": 8,
+            "triangles": 1920,
+            "dimensions": [
+                0.11299994587898255,
+                0.014999998733401299,
+                0.03199999779462814
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_LAB_InstrumentTray.fbx",
+            "renderers": 2,
+            "triangles": 956,
+            "dimensions": [
+                0.23195387423038484,
+                0.026000015437602998,
+                0.15195386111736298
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_UTILITY_CableCoupler.fbx",
+            "renderers": 10,
+            "triangles": 3124,
+            "dimensions": [
+                0.03799999877810478,
+                0.06450000405311585,
+                0.037999995052814487
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=10, expectedTriangles=3480"
+        },
+        {
+            "file": "ZH_PROP_UTILITY_ConnectorCable.fbx",
+            "renderers": 21,
+            "triangles": 8788,
+            "dimensions": [
+                0.197919100522995,
+                0.06620587408542633,
+                0.21593192219734193
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=21, expectedTriangles=9500"
+        },
+        {
+            "file": "ZH_PROP_UTILITY_VentCover.fbx",
+            "renderers": 8,
+            "triangles": 1332,
+            "dimensions": [
+                0.20000000298023225,
+                0.01723790541291237,
+                0.13999998569488526
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_UTILITY_JunctionBox.fbx",
+            "renderers": 5,
+            "triangles": 1140,
+            "dimensions": [
+                0.09799999743700028,
+                0.05050000548362732,
+                0.09650004655122757
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_UTILITY_ConnectorOrganizer.fbx",
+            "renderers": 34,
+            "triangles": 10704,
+            "dimensions": [
+                0.20195388793945313,
+                0.0715000107884407,
+                0.12195387482643128
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=34, expectedTriangles=11772"
+        },
+        {
+            "file": "ZH_PROP_ANOMALY_BlackSeepage.fbx",
+            "renderers": 8,
+            "triangles": 2576,
+            "dimensions": [
+                0.29066944122314455,
+                0.014000019058585167,
+                0.36406654119491579
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=8, expectedTriangles=2688"
+        },
+        {
+            "file": "ZH_PROP_ANOMALY_GhostSilhouette.fbx",
+            "renderers": 1,
+            "triangles": 6286,
+            "dimensions": [
+                0.5962210893630981,
+                1.6943342685699463,
+                0.2187487930059433
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_PROP_ANOMALY_AnomalyPhotograph.fbx",
+            "renderers": 2,
+            "triangles": 2904,
+            "dimensions": [
+                0.18000000715255738,
+                0.0050000157207250599,
+                0.13199998438358308
+            ],
+            "pass": true,
+            "problem": ""
+        },
+        {
+            "file": "ZH_SCENE_Station_Complete.fbx",
+            "renderers": 2190,
+            "triangles": 394916,
+            "dimensions": [
+                16.69200325012207,
+                3.5900020599365236,
+                17.171998977661134
+            ],
+            "pass": false,
+            "problem": "dimensions=True, groupMove=True, missingMaterials=0, expectedMeshes=2190, expectedTriangles=397152"
+        }
+    ],
+    "limitations": [
+        "Blender procedural detail is approximated, not fully texture-baked.",
+        "Glass uses alpha blending rather than Cycles refraction.",
+        "Ghost is a static unrigged mesh; smoke/dissolve/gameplay are not implemented.",
+        "Station FBX does not carry Blender lighting drivers; lighting is rebuilt separately in Unity."
+    ]
+}
