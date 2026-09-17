@@ -23,7 +23,14 @@ Shader "ZeroDuty/DoubleSidedLit"
             #pragma vertex Vert
             #pragma fragment Frag
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-            #pragma multi_compile_fragment _ _SHADOWS_SOFT
+            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
+            #pragma multi_compile_fragment _ _LIGHT_COOKIES
+            #pragma multi_compile_fragment _ _REFLECTION_PROBE_BLENDING
+            #pragma multi_compile_fragment _ _REFLECTION_PROBE_BOX_PROJECTION
+            #pragma multi_compile_fragment _ _REFLECTION_PROBE_ATLAS
+            #pragma multi_compile _ _CLUSTER_LIGHT_LOOP
             #pragma multi_compile_fog
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
@@ -53,6 +60,7 @@ Shader "ZeroDuty/DoubleSidedLit"
                 half3 normalWS : TEXCOORD1;
                 float2 uv : TEXCOORD2;
                 half fogFactor : TEXCOORD3;
+                half3 vertexLighting : TEXCOORD4;
             };
 
             Varyings Vert(Attributes input)
@@ -64,6 +72,7 @@ Shader "ZeroDuty/DoubleSidedLit"
                 output.normalWS = TransformObjectToWorldNormal(input.normalOS);
                 output.uv = TRANSFORM_TEX(input.uv, _BaseMap);
                 output.fogFactor = ComputeFogFactor(positionInputs.positionCS.z);
+                output.vertexLighting = VertexLighting(positionInputs.positionWS, output.normalWS);
                 return output;
             }
 
@@ -89,6 +98,7 @@ Shader "ZeroDuty/DoubleSidedLit"
                 lightingInput.viewDirectionWS = SafeNormalize(GetWorldSpaceViewDir(input.positionWS));
                 lightingInput.shadowCoord = TransformWorldToShadowCoord(input.positionWS);
                 lightingInput.fogCoord = input.fogFactor;
+                lightingInput.vertexLighting = input.vertexLighting;
                 lightingInput.bakedGI = SampleSH(normalWS);
                 lightingInput.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(input.positionCS);
                 lightingInput.shadowMask = half4(1, 1, 1, 1);
