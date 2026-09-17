@@ -18,9 +18,9 @@ public class MonitorViewManager : MonoBehaviour
     [SerializeField] private CinemachineCamera playerCamera;
     [SerializeField] private CinemachineCamera seatedCamera;
     [SerializeField] private int seatedPriority = 100;
-    [Header("固定视点：位置 + 旋转；不要放在 seatedCamera 下面")]
+    [Header("固定视点：位置 + X/Z 旋转；世界 Y 固定 90°")]
     [SerializeField] private Transform overviewPose;
-    [Tooltip("固定顺序：左、中、右。摆在屏幕前，朝向对应屏幕。")]
+    [Tooltip("固定顺序：左、中、右。摆在屏幕前；视点的 Y 旋转会被忽略，统一朝世界 Y=90°。")]
     [SerializeField] private Transform[] focusPoses = new Transform[3];
     [SerializeField, Range(1f, 179f)] private float overviewFieldOfView = 60f;
     [SerializeField, Range(1f, 179f)] private float focusFieldOfView = 40f;
@@ -41,7 +41,9 @@ public class MonitorViewManager : MonoBehaviour
     private Quaternion savedCameraRotation;
     private float savedFieldOfView;
     private Vector3 viewPosition;
-    private Quaternion viewRotation;
+    private const float SeatedYaw = 90f;
+    private float viewPitch;
+    private float viewRoll;
     private float swayTime;
     private int entryFrame;
 
@@ -72,8 +74,9 @@ public class MonitorViewManager : MonoBehaviour
         savedCameraRotation = seatedCamera.transform.rotation;
         savedFieldOfView = seatedCamera.Lens.FieldOfView;
         viewPosition = overviewPose.position;
-        viewRotation = overviewPose.rotation;
-        seatedCamera.transform.SetPositionAndRotation(viewPosition, viewRotation);
+        viewPitch = overviewPose.eulerAngles.x;
+        viewRoll = overviewPose.eulerAngles.z;
+        seatedCamera.transform.SetPositionAndRotation(viewPosition, Quaternion.Euler(viewPitch, SeatedYaw, viewRoll));
         seatedCamera.Lens.FieldOfView = overviewFieldOfView;
         seatedCamera.Priority = Mathf.Max(seatedPriority, playerCamera.Priority.Value + 1);
         seatedCamera.enabled = true;
@@ -133,7 +136,10 @@ public class MonitorViewManager : MonoBehaviour
         Transform pose = IsFocused ? focusPoses[FocusedIndex] : overviewPose;
         float t = 1f - Mathf.Exp(-viewSmoothing * Time.deltaTime);
         viewPosition = Vector3.Lerp(viewPosition, pose.position, t);
-        viewRotation = Quaternion.Slerp(viewRotation, pose.rotation, t);
+        // Smooth pitch/roll independently so changing poses never changes the fixed world yaw.
+        viewPitch = Mathf.LerpAngle(viewPitch, pose.eulerAngles.x, t);
+        viewRoll = Mathf.LerpAngle(viewRoll, pose.eulerAngles.z, t);
+        Quaternion viewRotation = Quaternion.Euler(viewPitch, SeatedYaw, viewRoll);
         seatedCamera.Lens.FieldOfView = Mathf.Lerp(seatedCamera.Lens.FieldOfView,
             IsFocused ? focusFieldOfView : overviewFieldOfView, t);
         swayTime += Time.deltaTime * swayFrequency * Mathf.PI * 2f;
@@ -143,7 +149,7 @@ public class MonitorViewManager : MonoBehaviour
         Vector3 angles = new Vector3(Mathf.Sin(swayTime * 1.13f) * swayDegrees.x,
             Mathf.Sin(swayTime) * swayDegrees.y, Mathf.Sin(swayTime * 0.73f) * swayDegrees.z) * amount;
         seatedCamera.transform.SetPositionAndRotation(viewPosition + viewRotation * offset,
-            viewRotation * Quaternion.Euler(angles));
+            Quaternion.Euler(viewPitch + angles.x, SeatedYaw + angles.y, viewRoll + angles.z));
     }
 
     public void EndSession()

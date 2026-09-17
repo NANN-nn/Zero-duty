@@ -9,8 +9,6 @@ public class playerController : MonoBehaviour
     [SerializeField, Min(0f)] private float walkSpeed = 2.5f;
     [SerializeField, Min(0f)] private float sprintSpeed = 5f;
     [SerializeField, Min(0.01f)] private float gravity = 20f;
-    [Tooltip("默认使用人物自身；只取水平朝向。")]
-    [SerializeField] private Transform movementOrientation;
     public bool InputEnabled { get; set; } = true;
     public bool IsMoving { get; private set; }
     public bool IsSprinting { get; private set; }
@@ -22,7 +20,6 @@ public class playerController : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
-        if (movementOrientation == null) movementOrientation = transform;
     }
 
     private void Update()
@@ -40,7 +37,8 @@ public class playerController : MonoBehaviour
             sprint = keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed;
         }
         input = Vector2.ClampMagnitude(input, 1f);
-        Vector3 forward = Vector3.ProjectOnPlane(movementOrientation.forward, Vector3.up).normalized;
+        // Always move relative to the character, independently of camera pitch or shake.
+        Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
         if (forward.sqrMagnitude < 0.001f) forward = transform.forward;
         Vector3 right = Vector3.Cross(Vector3.up, forward).normalized;
         Vector3 velocity = (forward * input.y + right * input.x) * (sprint ? sprintSpeed : walkSpeed);

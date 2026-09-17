@@ -10,7 +10,6 @@ public class DoorManager : MonoBehaviour
     [SerializeField] private string openRightState = "OpenDoorR";
     [SerializeField] private string closeLeftState = "CloseDoorL";
     [SerializeField] private string closeRightState = "CloseDoorR";
-    [SerializeField, Min(0f)] private float blendSeconds = 0.1f;
     private readonly HashSet<Collider> occupants = new HashSet<Collider>();
     private bool isOpen;
     private bool ready;
@@ -64,15 +63,30 @@ public class DoorManager : MonoBehaviour
 
     private void PlayDoors(bool open, bool immediate)
     {
-        Play(DoorAnim_Left, open ? openLeftState : closeLeftState, immediate);
-        Play(DoorAnim_Right, open ? openRightState : closeRightState, immediate);
+        Play(DoorAnim_Left, open ? openLeftState : closeLeftState,
+            open ? closeLeftState : openLeftState, immediate);
+        Play(DoorAnim_Right, open ? openRightState : closeRightState,
+            open ? closeRightState : openRightState, immediate);
     }
 
-    private void Play(Animator animator, string state, bool immediate)
+    private void Play(Animator animator, string state, string oppositeState, bool immediate)
     {
-        int hash = Animator.StringToHash(state);
-        if (immediate || blendSeconds <= 0f) animator.Play(hash, 0, immediate ? 1f : 0f);
-        else animator.CrossFadeInFixedTime(hash, blendSeconds, 0, 0f);
+        float startProgress = immediate ? 1f : 0f;
+        if (!immediate)
+        {
+            AnimatorStateInfo current = animator.GetCurrentAnimatorStateInfo(0);
+            // Non-looping states can report normalizedTime > 1 after finishing.
+            float progress = Mathf.Clamp01(current.normalizedTime);
+            if (current.IsName(oppositeState))
+                startProgress = 1f - progress;
+            else if (current.IsName(state))
+                startProgress = progress;
+        }
+
+        // Open 20% -> Close 80%. Sample directly rather than blending two poses.
+        animator.Play(Animator.StringToHash(state), 0, startProgress);
+        // Commit the state now so another trigger in this frame reads the new progress.
+        animator.Update(0f);
     }
 
     private void OnDisable()

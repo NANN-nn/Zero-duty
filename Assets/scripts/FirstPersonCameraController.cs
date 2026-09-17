@@ -7,9 +7,8 @@ using UnityEngine.InputSystem;
 public class FirstPersonCameraController : MonoBehaviour
 {
     [Header("层级")]
+    [Tooltip("绑定人物根节点上的 playerController。鼠标左右直接旋转这个人物物体。")]
     [SerializeField] private playerController player;
-    [Tooltip("人物根节点，使身体与移动方向跟随鼠标。")]
-    [SerializeField] private Transform yawRoot;
     [SerializeField] private Transform vertical;
     [SerializeField] private Transform horizontal;
     [SerializeField] private Transform shake;
@@ -41,17 +40,17 @@ public class FirstPersonCameraController : MonoBehaviour
     private void Awake()
     {
         if (player == null) player = GetComponentInParent<playerController>();
-        if (yawRoot == null && player != null) yawRoot = player.transform;
         if (vertical == null) vertical = transform.Find("vertical");
         if (horizontal == null && vertical != null) horizontal = vertical.Find("horizontal");
         if (shake == null && horizontal != null) shake = horizontal.Find("shake");
-        ready = player != null && yawRoot != null && vertical != null && horizontal != null && shake != null
-            && yawRoot != vertical && vertical.IsChildOf(yawRoot)
+        ready = player != null && vertical != null && horizontal != null && shake != null
+            && transform != player.transform && transform.IsChildOf(player.transform)
+            && vertical != transform && vertical.IsChildOf(transform)
             && horizontal != vertical && horizontal.IsChildOf(vertical)
             && shake != horizontal && shake.IsChildOf(horizontal);
         if (!ready)
         {
-            Debug.LogError($"{name}: 请绑定 Player、人物 Yaw Root 和 vertical/horizontal/shake 层级。", this);
+            Debug.LogError($"{name}: 请绑定人物根节点上的 Player，并将 Camera_Player 放在人物下面，检查 vertical/horizontal/shake 层级。", this);
             enabled = false;
             return;
         }
@@ -79,7 +78,8 @@ public class FirstPersonCameraController : MonoBehaviour
         }
         // Mouse delta is displacement per frame, so no deltaTime multiplier.
         Vector2 delta = mouse.delta.ReadValue() * sensitivity;
-        yawRoot.Rotate(Vector3.up, delta.x, Space.World);
+        // Turn the character itself. Its child camera follows, and WASD uses this same transform.
+        player.transform.Rotate(Vector3.up, delta.x, Space.World);
         pitch = Mathf.Clamp(pitch + delta.y * (invertY ? 1f : -1f), minPitch, maxPitch);
         vertical.localRotation = verticalRest * Quaternion.Euler(pitch, 0f, 0f);
     }

@@ -31,7 +31,7 @@ Main Camera                    ← Unity Camera + CinemachineBrain + AudioListen
 
 1. 在人物根节点添加 `playerController`，Unity 会同时添加 `CharacterController`。
 2. 按人物尺寸设置 CharacterController 的 Height、Radius、Center；确保胶囊脚底接近地面，地面和墙壁有实体 Collider。人物根节点保持 Scale = (1,1,1)。
-3. `Movement Orientation` 可以留空，默认用人物根节点。默认 Walk Speed = 2.5、Sprint Speed = 5，单位米/秒，可自行调整。
+3. 移动方向固定使用挂载 `playerController` 的人物根节点朝向。默认 Walk Speed = 2.5、Sprint Speed = 5，单位米/秒，可自行调整。
 4. 人物不要同时用动态 Rigidbody 驱动，也不要保留重复的实体胶囊碰撞体；移动碰撞由 CharacterController 负责。
 5. WASD 沿人物水平朝向移动，斜向已限制速度。按住任意 Shift 疾跑，松开立即使用走路速度。没有跳跃功能。
 
@@ -41,8 +41,7 @@ Main Camera                    ← Unity Camera + CinemachineBrain + AudioListen
 
 | 字段 | 绑定/设置 |
 | --- | --- |
-| Player | 人物根节点上的 playerController |
-| Yaw Root | 人物根节点 Player，必须是 vertical 的祖先 |
+| Player | 人物根节点上的 playerController；鼠标左右直接旋转此物体，Camera_Player 必须放在其子层级中 |
 | Vertical | vertical 节点 |
 | Horizontal | horizontal 节点 |
 | Shake | shake 节点 |
@@ -56,7 +55,7 @@ Main Camera                    ← Unity Camera + CinemachineBrain + AudioListen
 
 名称与层级一致时可以自动查找三个子节点；有改名则手动拖引用。把相机高度放在 Camera_Player 的位置上，vertical/horizontal/shake 的初始局部旋转建议为 (0,0,0)。上下角度限制相对于 vertical 的初始旋转。
 
-水平鼠标旋转作用于人物根节点，没有角度限制，身体和移动方向一同转向。vertical 负责俯仰，shake 负责摇晃；horizontal 保留为层级中的中性节点。这样既保留指定结构，也避免在已经俯仰的父节点下继续转水平角造成倾斜。
+水平鼠标旋转直接作用于 Player 字段对应的人物根节点，没有角度限制。WASD 始终使用这个节点的水平朝向：人物右转 90 度后，W 就沿新的前方移动。相机作为人物子物体跟随转向；vertical 负责俯仰，shake 负责摇晃，horizontal 保留为中性节点。旧版的 Yaw Root 和 Movement Orientation 字段已移除，避免引用不同节点导致人物朝向与移动方向不一致。人物模型也应放在该人物根节点下面。
 
 摇晃只在有移动输入、实际发生水平位移且接地时播放。停止、顶墙、离地、坐下后平滑回到原位。默认锁定并隐藏鼠标；Unity 编辑器按 Esc 可能自行解锁鼠标，回到站立视角后点击 Game 窗口可重新锁定。
 
@@ -81,7 +80,8 @@ Main Camera                    ← Unity Camera + CinemachineBrain + AudioListen
 
 5. **本项目现有的两个门 Animator Controller 带有无条件、启用 Has Exit Time 的自动过渡。请删除 Open 与 Close 之间这些无条件过渡，以及任何会自动离开这四个状态的过渡。** 让脚本直接播放状态即可，不需要 Trigger/Bool 参数。否则会出现人物还在范围内，门已经自行关闭或循环开关的情况。
 6. 四个动画 Clip 关闭 **Loop Time**，两边 Animator 建议取消 **Apply Root Motion**。保留独立的门扇实体 Collider，使关闭的门能阻挡人物。
-7. Blend Seconds 默认 0.1 秒，可设 0 直接切换。启动时取关闭动画的最后一帧作为关门姿态；首次检测人物进入后播放开门动画。
+7. 开关门中途反向时，左右门分别读取自己当前动画的完成比例，并从反向动画的 `1 - 当前比例` 处直接播放。例如开门完成 20% 后离开，关门从 80% 处开始，只播放剩余 20%；关门完成 30% 后重新进入，开门从 70% 处开始。已完成的动画按 100% 处理，反向动画从 0% 开始。旧版 Blend Seconds 已移除，避免混合过渡影响对应姿态。启动时取关闭动画的最后一帧作为关门姿态；首次检测人物进入后播放开门动画。
+8. 为使反向切换的位置连续，Open 与 Close Clip 在互补比例处必须对应同一门姿态（包括运动曲线）。建议关门动画使用开门动画的时间反转版本；如果两段动画不是对应的反向曲线，比例映射正确时也可能出现位置跳变。
 
 只识别 Collider 自身或父节点上有 `playerController` 的对象。支持一个人物多个碰撞体；直到最后一个离开才关门。碰撞体被禁用或销毁也会清理占用记录。
 
@@ -127,7 +127,7 @@ Canvas                         ← Screen Space - Overlay
 
 SeatedCamera 的 Position Control、Rotation Control 设为 **None**，不配置跟随/瞄准输入控制器，也不要额外挂 Noise，避免叠加。GameObject 必须保持激活，组件 Enabled 可以由脚本管理：初始化自动关闭，坐下启用，起身关闭。
 
-四个 Pose 不能放在 SeatedCamera 下，否则相机移动会同时移动目标，引起漂移。Pose 的蓝色 Z 轴指向所看的屏幕。相机只平滑插值到作者摆好的 Pose，不做沿途避障，所以视点之间应避开桌面、椅子和显示器外壳。
+四个 Pose 不能放在 SeatedCamera 下，否则相机移动会同时移动目标，引起漂移。坐下后，SeatedCamera 的世界旋转 Y 始终为 90° 加呼吸产生的小幅偏移，总览、专注及切换过程均如此；Pose 的 Y 旋转会被忽略，只使用其位置和 X/Z 旋转。请将视点摆在屏幕前，使朝世界 +X（Y=90°）时能看到屏幕。这里固定的是世界旋转：若相机父物体有旋转，Inspector 显示的局部 Y 不一定为 90°，建议将 SeatedCamera 放在场景根层级。相机只平滑插值到作者摆好的 Pose，不做沿途避障，所以视点之间应避开桌面、椅子和显示器外壳。
 
 坐下采用移动玩家视角来模拟，人物实体保留在进入交互时的位置，锁定移动和鼠标转向；没有人物坐下骨骼动画或身体传送。起身后恢复原位置、原朝向和原输入状态。
 
