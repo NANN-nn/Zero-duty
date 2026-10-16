@@ -9,6 +9,8 @@ public class MonitorViewManager : MonoBehaviour
 {
     public enum ViewMode { Standing, Overview, Focused }
     public static MonitorViewManager ActiveSession { get; private set; }
+    private static int escapeHandledFrame = -1;
+    public static bool HandledEscapeThisFrame => escapeHandledFrame == Time.frameCount;
     public ViewMode Mode { get; private set; } = ViewMode.Standing;
     public bool IsSeated => Mode != ViewMode.Standing;
     public bool IsFocused => Mode == ViewMode.Focused;
@@ -18,12 +20,11 @@ public class MonitorViewManager : MonoBehaviour
     [SerializeField] private CinemachineCamera playerCamera;
     [SerializeField] private CinemachineCamera seatedCamera;
     [SerializeField] private int seatedPriority = 100;
-    [Header("固定视点：位置 + X/Z 旋转；世界 Y 固定 90°")]
+    [Header("固定坐姿视点")]
     [SerializeField] private Transform overviewPose;
-    [Tooltip("固定顺序：左、中、右。摆在屏幕前；视点的 Y 旋转会被忽略，统一朝世界 Y=90°。")]
-    [SerializeField] private Transform[] focusPoses = new Transform[3];
     [SerializeField, Range(1f, 179f)] private float overviewFieldOfView = 60f;
     [SerializeField, Range(1f, 179f)] private float focusFieldOfView = 40f;
+    [SerializeField, Range(0.5f, 4f)] private float screenViewingDistance = 1.6f;
     [SerializeField, Min(0.01f)] private float viewSmoothing = 8f;
     [Header("坐姿轻微头部晃动")]
     [SerializeField, Min(0f)] private float swayFrequency = 0.3f;
@@ -36,6 +37,8 @@ public class MonitorViewManager : MonoBehaviour
     private FirstPersonCameraController activeLook;
     private bool savedPlayerInput;
     private bool savedLookInput;
+    private CursorLockMode savedCursorLock;
+    private bool savedCursorVisible;
     private PrioritySettings savedPriority;
     private Vector3 savedCameraPosition;
     private Quaternion savedCameraRotation;
@@ -46,6 +49,11 @@ public class MonitorViewManager : MonoBehaviour
     private float viewRoll;
     private float swayTime;
     private int entryFrame;
+    private Renderer focusedScreen;
+    private PickupItem seatedHeldItem;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetEscapeState() => escapeHandledFrame = -1;
 
     private void Awake()
     {
@@ -59,16 +67,23 @@ public class MonitorViewManager : MonoBehaviour
         if (!isActiveAndEnabled || IsSeated || ActiveSession != null) return false;
         if (!IsConfigured() || player == null || look == null || !player.isActiveAndEnabled || !look.isActiveAndEnabled)
         {
-            Debug.LogError($"{name}: 监控引用不完整。请检查两台 CinemachineCamera、四个视点、三个监控 Camera 和人物控制脚本。", this);
+            Debug.LogError($"{name}: 监控引用不完整。请检查两台 CinemachineCamera、坐姿视点、三个监控 Camera 和人物控制脚本。", this);
             return false;
         }
         ActiveSession = this;
         activePlayer = player;
         activeLook = look;
+        PlayerInteractor interactor = player.GetComponentInChildren<PlayerInteractor>(true);
+        seatedHeldItem = interactor != null ? interactor.HeldItem : null;
+        if (seatedHeldItem != null) seatedHeldItem.SetViewHidden(true);
         savedPlayerInput = player.InputEnabled;
         savedLookInput = look.InputEnabled;
+        savedCursorLock = Cursor.lockState;
+        savedCursorVisible = Cursor.visible;
         player.InputEnabled = false;
         look.InputEnabled = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         savedPriority = seatedCamera.Priority;
         savedCameraPosition = seatedCamera.transform.position;
         savedCameraRotation = seatedCamera.transform.rotation;
@@ -92,11 +107,9 @@ public class MonitorViewManager : MonoBehaviour
     {
         if (playerCamera == null || seatedCamera == null || playerCamera == seatedCamera
             || !playerCamera.isActiveAndEnabled || !seatedCamera.gameObject.activeInHierarchy
-            || overviewPose == null || focusPoses == null || focusPoses.Length != 3
+            || overviewPose == null
             || cameraControl == null || !cameraControl.isActiveAndEnabled || !cameraControl.HasValidCameras) return false;
         if (overviewPose == seatedCamera.transform || overviewPose.IsChildOf(seatedCamera.transform)) return false;
-        foreach (Transform pose in focusPoses)
-            if (pose == null || pose == seatedCamera.transform || pose.IsChildOf(seatedCamera.transform)) return false;
         return true;
     }
 
@@ -115,12 +128,10 @@ public class MonitorViewManager : MonoBehaviour
             // Consume only one action per frame so Escape never skips the overview.
             if (keyboard.escapeKey.wasPressedThisFrame)
             {
-                if (IsFocused) { Mode = ViewMode.Overview; FocusedIndex = -1; }
+                escapeHandledFrame = Time.frameCount;
+                if (IsFocused) { Mode = ViewMode.Overview; FocusedIndex = -1; focusedScreen = null; }
                 else EndSession();
             }
-            else if (keyboard.zKey.wasPressedThisFrame) Focus(IsFocused ? (FocusedIndex + 2) % 3 : 0);
-            else if (keyboard.cKey.wasPressedThisFrame) Focus(IsFocused ? (FocusedIndex + 1) % 3 : 2);
-            else if (keyboard.xKey.wasPressedThisFrame) Focus(1);
         }
         if (IsSeated) UpdateView();
     }
@@ -131,15 +142,49 @@ public class MonitorViewManager : MonoBehaviour
         Mode = ViewMode.Focused;
     }
 
+    public void FocusScreen(int index, Renderer screen)
+    {
+        if (!IsSeated || screen == null || index < 0 || index >= 3) return;
+        focusedScreen = screen;
+        Focus(index);
+        ShiftAudioDirector.PlaySwitchCamera();
+    }
+
+    public void ReturnToOverview()
+    {
+        if (!IsSeated) return;
+        Mode = ViewMode.Overview;
+        FocusedIndex = -1;
+        focusedScreen = null;
+    }
+
     private void UpdateView()
     {
-        Transform pose = IsFocused ? focusPoses[FocusedIndex] : overviewPose;
-        float t = 1f - Mathf.Exp(-viewSmoothing * Time.deltaTime);
-        viewPosition = Vector3.Lerp(viewPosition, pose.position, t);
-        // Smooth pitch/roll independently so changing poses never changes the fixed world yaw.
-        viewPitch = Mathf.LerpAngle(viewPitch, pose.eulerAngles.x, t);
-        viewRoll = Mathf.LerpAngle(viewRoll, pose.eulerAngles.z, t);
-        Quaternion viewRotation = Quaternion.Euler(viewPitch, SeatedYaw, viewRoll);
+        // Give the move into a chosen feed a little more weight than the return.
+        float smoothing = IsFocused ? viewSmoothing * 0.7f : viewSmoothing;
+        float t = 1f - Mathf.Exp(-smoothing * Time.deltaTime);
+        Vector3 targetPosition = overviewPose.position;
+        Quaternion targetRotation = Quaternion.Euler(overviewPose.eulerAngles.x, SeatedYaw,
+            overviewPose.eulerAngles.z);
+        if (IsFocused && focusedScreen != null)
+        {
+            Vector3 screenCenter = focusedScreen.bounds.center;
+            Vector3 towardSeat = overviewPose.position - screenCenter;
+            towardSeat.y = 0f;
+            if (towardSeat.sqrMagnitude < 0.01f) towardSeat = Vector3.left;
+            // The imported monitor surface is a thin X/Z plane, so its local up is
+            // the screen normal. Face each side monitor head-on, toward the seat.
+            Vector3 screenNormal = focusedScreen.transform.up;
+            if (Mathf.Abs(Vector3.Dot(screenNormal.normalized, towardSeat.normalized)) < 0.2f)
+                screenNormal = towardSeat.normalized;
+            else if (Vector3.Dot(screenNormal, towardSeat) < 0f)
+                screenNormal = -screenNormal;
+            targetPosition = screenCenter + screenNormal.normalized * screenViewingDistance;
+            targetRotation = Quaternion.LookRotation(screenCenter - targetPosition, Vector3.up);
+        }
+        viewPosition = Vector3.Lerp(viewPosition, targetPosition, t);
+        Quaternion viewRotation = Quaternion.Slerp(seatedCamera.transform.rotation,
+            targetRotation, t);
         seatedCamera.Lens.FieldOfView = Mathf.Lerp(seatedCamera.Lens.FieldOfView,
             IsFocused ? focusFieldOfView : overviewFieldOfView, t);
         swayTime += Time.deltaTime * swayFrequency * Mathf.PI * 2f;
@@ -149,14 +194,17 @@ public class MonitorViewManager : MonoBehaviour
         Vector3 angles = new Vector3(Mathf.Sin(swayTime * 1.13f) * swayDegrees.x,
             Mathf.Sin(swayTime) * swayDegrees.y, Mathf.Sin(swayTime * 0.73f) * swayDegrees.z) * amount;
         seatedCamera.transform.SetPositionAndRotation(viewPosition + viewRotation * offset,
-            Quaternion.Euler(viewPitch + angles.x, SeatedYaw + angles.y, viewRoll + angles.z));
+            viewRotation * Quaternion.Euler(angles));
     }
 
     public void EndSession()
     {
         if (!IsSeated) return;
+        if (seatedHeldItem != null) seatedHeldItem.SetViewHidden(false);
+        seatedHeldItem = null;
         Mode = ViewMode.Standing;
         FocusedIndex = -1;
+        focusedScreen = null;
         if (seatedCamera != null)
         {
             seatedCamera.enabled = false;
@@ -166,6 +214,8 @@ public class MonitorViewManager : MonoBehaviour
         }
         if (activePlayer != null) activePlayer.InputEnabled = savedPlayerInput;
         if (activeLook != null) activeLook.InputEnabled = savedLookInput;
+        Cursor.lockState = savedCursorLock;
+        Cursor.visible = savedCursorVisible;
         activePlayer = null;
         activeLook = null;
         if (ActiveSession == this) ActiveSession = null;

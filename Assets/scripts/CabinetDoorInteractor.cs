@@ -15,6 +15,11 @@ public class CabinetDoorInteractor : MonoBehaviour
 
     private void Awake()
     {
+        if (FindFirstObjectByType<PlayerInteractor>() != null)
+        {
+            enabled = false;
+            return;
+        }
         if (interactionCamera == null)
             interactionCamera = GetComponentInChildren<Camera>(true);
 

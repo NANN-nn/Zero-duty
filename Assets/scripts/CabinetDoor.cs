@@ -2,7 +2,7 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Rigidbody))]
-public class CabinetDoor : MonoBehaviour
+public class CabinetDoor : MonoBehaviour, IPlayerInteractable
 {
     private enum RotationAxis
     {
@@ -22,12 +22,17 @@ public class CabinetDoor : MonoBehaviour
     [Header("开始状态")]
     [SerializeField] private bool startOpen = false;
 
+    [Header("柜内异常（只有对应的柜门需要填写）")]
+    [SerializeField] private ScannableAnomaly anomalyInside;
+
     private Quaternion closedRotation;
     private Quaternion openRotation;
     private Quaternion targetRotation;
     private bool isOpen;
+    private Renderer interactionPanel;
 
     public bool IsOpen => isOpen;
+    public string InteractionPrompt => isOpen ? "Close cabinet" : "Open cabinet";
 
     private void Awake()
     {
@@ -52,9 +57,6 @@ public class CabinetDoor : MonoBehaviour
     {
         // 柜门由多个网格组成。优先把碰撞体放在面积最大的玻璃门板上，
         // 这样射线可以稳定识别整扇门，也不需要手动给每个零件加碰撞体。
-        if (GetComponentInChildren<Collider>(true) != null)
-            return;
-
         MeshFilter target = null;
         float largestArea = 0f;
 
@@ -87,6 +89,11 @@ public class CabinetDoor : MonoBehaviour
             return;
         }
 
+        interactionPanel = target.GetComponent<Renderer>();
+
+        // 其他零件已有碰撞体，不代表玻璃本身能被准星射线击中。
+        if (target.GetComponent<BoxCollider>() != null) return;
+
         BoxCollider box = target.gameObject.AddComponent<BoxCollider>();
         Bounds meshBounds = target.sharedMesh.bounds;
         Vector3 colliderSize = meshBounds.size;
@@ -95,7 +102,7 @@ public class CabinetDoor : MonoBehaviour
         colliderSize.z = Mathf.Max(colliderSize.z, 0.02f);
         box.center = meshBounds.center;
         box.size = colliderSize;
-        box.isTrigger = false;
+        box.isTrigger = true;
     }
 
     private void FixedUpdate()
@@ -106,10 +113,36 @@ public class CabinetDoor : MonoBehaviour
             rotationSpeed * Time.fixedDeltaTime);
     }
 
+    private void Update()
+    {
+        if (isOpen && anomalyInside != null)
+            anomalyInside.RevealIfDetected();
+    }
+
     public void Toggle()
     {
         SetOpen(!isOpen, false);
+        ShiftAudioDirector.PlayCabinet(isOpen);
     }
+
+    public bool CanInteract(PlayerInteractor interactor) => enabled && interactor != null;
+
+    // Imported cabinet frames may have a solid collider just in front of the glass.
+    // Use the visible door panel as a precise fallback aiming surface.
+    public bool TryGetAimDistance(Ray ray, float maxDistance, out float distance)
+    {
+        distance = 0f;
+        if (!isActiveAndEnabled || interactionPanel == null || !interactionPanel.gameObject.activeInHierarchy)
+            return false;
+        Bounds bounds = interactionPanel.bounds;
+        foreach (Renderer part in GetComponentsInChildren<Renderer>(true))
+            if (part != null && part.enabled && part.gameObject.activeInHierarchy)
+                bounds.Encapsulate(part.bounds);
+        bounds.Expand(0.08f);
+        return bounds.IntersectRay(ray, out distance) && distance >= 0f && distance <= maxDistance;
+    }
+
+    public void Interact(PlayerInteractor interactor) => Toggle();
 
     public void SetOpen(bool open, bool immediate = false)
     {

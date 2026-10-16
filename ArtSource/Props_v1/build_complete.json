@@ -1,0 +1,62 @@
+[
+  {
+    "collection": "CAM_01_WallReference",
+    "objects": 19,
+    "vertices": 692
+  },
+  {
+    "collection": "CAM_02_WallReference",
+    "objects": 19,
+    "vertices": 692
+  },
+  {
+    "collection": "CAM_03_WallReference",
+    "objects": 19,
+    "vertices": 692
+  },
+  {
+    "collection": "ShiftLog_Open",
+    "objects": 43,
+    "vertices": 320
+  },
+  {
+    "collection": "ShiftLog_Closed",
+    "objects": 8,
+    "vertices": 40
+  },
+  {
+    "collection": "InspectionClipboard",
+    "objects": 28,
+    "vertices": 488
+  },
+  {
+    "collection": "StickyNotes_Stack",
+    "objects": 12,
+    "vertices": 84
+  },
+  {
+    "collection": "FoldedPersonalNote",
+    "objects": 7,
+    "vertices": 38
+  },
+  {
+    "collection": "CoffeeCan",
+    "objects": 9,
+    "vertices": 960
+  },
+  {
+    "collection": "RationPack",
+    "objects": 29,
+    "vertices": 208
+  },
+  {
+    "collection": "OatBiscuit",
+    "objects": 46,
+    "vertices": 632
+  },
+  {
+    "collection": "MaintenanceRobot_Mascot",
+    "objects": 34,
+    "vertices": 784
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "file": "Assets\\Resources\\Monitor\\Audio\\Music\\Player_01_QuietBreak_Piano.wav",
+    "seconds": 30.0,
+    "peak": 0.623293456605626,
+    "rms": 0.13
+  },
+  {
+    "file": "Assets\\Resources\\Monitor\\Audio\\Music\\Player_02_LittleWaltz_Pluck.wav",
+    "seconds": 30.0,
+    "peak": 0.6958850931541041,
+    "rms": 0.13000000000000003
+  },
+  {
+    "file": "Assets\\Resources\\Monitor\\Audio\\Music\\Player_03_LateCoffee_Rhodes.wav",
+    "seconds": 30.0,
+    "peak": 0.7700604297441985,
+    "rms": 0.13
+  },
+  {
+    "file": "Assets\\Resources\\Monitor\\Audio\\Enviroment\\SFX_GasLeak_Loop.wav",
+    "seconds": 8.0,
+    "peak": 0.6395570881035973,
+    "rms": 0.13000000000000003
+  }
+]

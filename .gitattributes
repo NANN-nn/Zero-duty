@@ -1,0 +1,2 @@
+# Keep the large original Blender ghost source outside normal Git objects.
+ArtSource/GhostSpirit/*.blend filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,4 @@
+Source: Assets/Resources/Scenes/first.unity (saved scene, normal-state preview)
+CAM_01: Monitor1; position=(9.20834, 2.94562, -2.63398); rotation=(7.95873, 236.34040, 5.66728); FOV=60; aspect=16:9
+CAM_02: Monitor2; position=(1.62334, 2.85862, -1.62498); rotation=(0.00000, 180.00000, 0.00000); FOV=60; aspect=16:9
+CAM_03: Monitor3; position=(-0.61866, 2.93662, -2.83998); rotation=(7.40000, 225.00000, 0.00000); FOV=90; aspect=16:9

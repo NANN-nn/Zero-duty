@@ -1,0 +1,228 @@
+{
+  "materials": [
+    {
+      "name": "ZD_Prop_00",
+      "label": "Biscuit | baked oat",
+      "color": [
+        0.47999998927116394,
+        0.2800000011920929,
+        0.10000000149011612,
+        1.0
+      ],
+      "metallic": 0.0,
+      "smoothness": 0.07999998331069946,
+      "emission": 0.0,
+      "photo": ""
+    },
+    {
+      "name": "ZD_Prop_01",
+      "label": "Biscuit | indent",
+      "color": [
+        0.15000000596046448,
+        0.07100000232458115,
+        0.02500000037252903,
+        1.0
+      ],
+      "metallic": 0.0,
+      "smoothness": 0.050000011920928955,
+      "emission": 0.0,
+      "photo": ""
+    },
+    {
+      "name": "ZD_Prop_02",
+      "label": "Book | navy fabric",
+      "color": [
+        0.03500000014901161,
+        0.06199999898672104,
+        0.0949999988079071,
+        1.0
+      ],
+      "metallic": 0.0,
+      "smoothness": 0.19999998807907104,
+      "emission": 0.0,
+      "photo": ""
+    },
+    {
+      "name": "ZD_Prop_03",
+      "label": "CAM_01 | actual Unity capture",
+      "color": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "metallic": 0.0,
+      "smoothness": 0.12000000476837158,
+      "emission": 0.0,
+      "photo": "CAM_01_Normal.png"
+    },
+    {
+      "name": "ZD_Prop_04",
+      "label": "CAM_02 | actual Unity capture",
+      "color": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "metallic": 0.0,
+      "smoothness": 0.12000000476837158,
+      "emission": 0.0,
+      "photo": "CAM_02_Normal.png"
+    },
+    {
+      "name": "ZD_Prop_05",
+      "label": "CAM_03 | actual Unity capture",
+      "color": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "metallic": 0.0,
+      "smoothness": 0.12000000476837158,
+      "emission": 0.0,
+      "photo": "CAM_03_Normal.png"
+    },
+    {
+      "name": "ZD_Prop_06",
+      "label": "Indicator | cyan",
+      "color": [
+        0.03500000014901161,
+        0.550000011920929,
+        0.7799999713897705,
+        1.0
+      ],
+      "metallic": 0.20000000298023224,
+      "smoothness": 0.75,
+      "emission": 2.0,
+      "photo": ""
+    },
+    {
+      "name": "ZD_Prop_07",
+      "label": "Ink | blue black",
+      "color": [
+        0.03999999910593033,
+        0.07000000029802322,
+        0.10000000149011612,
+        1.0
+      ],
+      "metallic": 0.0,
+      "smoothness": 0.19999998807907104,
+      "emission": 0.0,
+      "photo": ""
+    },
+    {
+      "name": "ZD_Prop_08",
+      "label": "Metal | brushed alloy",
+      "color": [
+        0.3700000047683716,
+        0.41999998688697815,
+        0.4699999988079071,
+        1.0
+      ],
+      "metallic": 0.8500000238418579,
+      "smoothness": 0.6800000071525574,
+      "emission": 0.0,
+      "photo": ""
+    },
+    {
+      "name": "ZD_Prop_09",
+      "label": "Paint | graphite navy",
+      "color": [
+        0.03799999877810478,
+        0.06300000101327896,
+        0.09000000357627869,
+        1.0
+      ],
+      "metallic": 0.550000011920929,
+      "smoothness": 0.5999999940395355,
+      "emission": 0.0,
+      "photo": ""
+    },
+    {
+      "name": "ZD_Prop_10",
+      "label": "Paper | muted yellow",
+      "color": [
+        0.7599999904632568,
+        0.6499999761581421,
+        0.3499999940395355,
+        1.0
+      ],
+      "metallic": 0.0,
+      "smoothness": 0.18000000715255737,
+      "emission": 0.0,
+      "photo": ""
+    },
+    {
+      "name": "ZD_Prop_11",
+      "label": "Paper | warm archival",
+      "color": [
+        0.7699999809265137,
+        0.7200000286102295,
+        0.5899999737739563,
+        1.0
+      ],
+      "metallic": 0.0,
+      "smoothness": 0.1499999761581421,
+      "emission": 0.0,
+      "photo": ""
+    },
+    {
+      "name": "ZD_Prop_12",
+      "label": "Print | warm white",
+      "color": [
+        0.7599999904632568,
+        0.8299999833106995,
+        0.8600000143051147,
+        1.0
+      ],
+      "metallic": 0.0,
+      "smoothness": 0.3999999761581421,
+      "emission": 0.0,
+      "photo": ""
+    },
+    {
+      "name": "ZD_Prop_13",
+      "label": "Ration | silver foil",
+      "color": [
+        0.3799999952316284,
+        0.4300000071525574,
+        0.47999998927116394,
+        1.0
+      ],
+      "metallic": 0.8199999928474426,
+      "smoothness": 0.6200000047683716,
+      "emission": 0.0,
+      "photo": ""
+    },
+    {
+      "name": "ZD_Prop_14",
+      "label": "Rubber | charcoal",
+      "color": [
+        0.013000000268220901,
+        0.017999999225139618,
+        0.024000000208616257,
+        1.0
+      ],
+      "metallic": 0.0,
+      "smoothness": 0.19999998807907104,
+      "emission": 0.0,
+      "photo": ""
+    }
+  ],
+  "models": [
+    "CAM_01_WallReference",
+    "CAM_02_WallReference",
+    "CAM_03_WallReference",
+    "ShiftLog_Open",
+    "ShiftLog_Closed",
+    "InspectionClipboard",
+    "StickyNotes_Stack",
+    "FoldedPersonalNote",
+    "CoffeeCan",
+    "RationPack",
+    "OatBiscuit",
+    "MaintenanceRobot_Mascot"
+  ]
+}

@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,8 +16,12 @@ public class FirstPersonCameraController : MonoBehaviour
     [Header("鼠标（度/像素）")]
     [SerializeField, Min(0f)] private float sensitivity = 0.12f;
     [SerializeField] private bool invertY;
-    [SerializeField, Range(-89f, 0f)] private float minPitch = -75f;
-    [SerializeField, Range(0f, 89f)] private float maxPitch = 75f;
+    // The first scene has a 180-degree yaw above and below "vertical".
+    // Together they reverse this local X rotation: negative here looks down.
+    // Keep the existing mouse direction, but allow looking almost at the feet.
+    private const float MinPitch = -89f;
+    private const float MaxPitch = 25f;
+    [SerializeField, Range(40f, 90f)] private float fieldOfView = 65f;
     [SerializeField] private bool lockCursor = true;
     [Header("走路摇晃")]
     [SerializeField, Min(0f)] private float walkFrequency = 1.7f;
@@ -54,6 +59,11 @@ public class FirstPersonCameraController : MonoBehaviour
             enabled = false;
             return;
         }
+
+        CinemachineCamera playerCamera = GetComponentInChildren<CinemachineCamera>(true);
+        if (playerCamera != null)
+            playerCamera.Lens.FieldOfView = fieldOfView;
+
         verticalRest = vertical.localRotation;
         shakeRestRotation = shake.localRotation;
         shakeRestPosition = shake.localPosition;
@@ -80,7 +90,7 @@ public class FirstPersonCameraController : MonoBehaviour
         Vector2 delta = mouse.delta.ReadValue() * sensitivity;
         // Turn the character itself. Its child camera follows, and WASD uses this same transform.
         player.transform.Rotate(Vector3.up, delta.x, Space.World);
-        pitch = Mathf.Clamp(pitch + delta.y * (invertY ? 1f : -1f), minPitch, maxPitch);
+        pitch = Mathf.Clamp(pitch + delta.y * (invertY ? 1f : -1f), MinPitch, MaxPitch);
         vertical.localRotation = verticalRest * Quaternion.Euler(pitch, 0f, 0f);
     }
 

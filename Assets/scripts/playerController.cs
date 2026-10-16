@@ -16,6 +16,7 @@ public class playerController : MonoBehaviour
     public bool IsGrounded => controller != null && controller.isGrounded;
     private CharacterController controller;
     private float verticalSpeed;
+    private float distanceSinceStep;
 
     private void Awake()
     {
@@ -26,7 +27,12 @@ public class playerController : MonoBehaviour
     {
         IsMoving = IsSprinting = false;
         PlanarSpeed = 0f;
-        if (!controller.enabled || !InputEnabled) { verticalSpeed = 0f; return; }
+        if (!controller.enabled || !InputEnabled)
+        {
+            verticalSpeed = 0f;
+            distanceSinceStep = 0f;
+            return;
+        }
         Keyboard keyboard = Keyboard.current;
         Vector2 input = Vector2.zero;
         bool sprint = false;
@@ -52,11 +58,23 @@ public class playerController : MonoBehaviour
             / Mathf.Max(Time.deltaTime, 0.0001f);
         IsMoving = input.sqrMagnitude > 0f && PlanarSpeed > 0.05f && controller.isGrounded;
         IsSprinting = IsMoving && sprint;
+        if (IsMoving)
+        {
+            distanceSinceStep += Vector3.ProjectOnPlane(transform.position - before, Vector3.up).magnitude;
+            float stride = IsSprinting ? 1.05f : 0.82f;
+            if (distanceSinceStep >= stride)
+            {
+                distanceSinceStep %= stride;
+                ShiftAudioDirector.PlayFootstep(IsSprinting);
+            }
+        }
+        else distanceSinceStep = 0f;
     }
 
     private void OnDisable()
     {
         IsMoving = IsSprinting = false;
         PlanarSpeed = verticalSpeed = 0f;
+        distanceSinceStep = 0f;
     }
 }

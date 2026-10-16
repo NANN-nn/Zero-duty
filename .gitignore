@@ -107,3 +107,9 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Local recovery scenes and Python build caches (keep source scripts/assets).
+/[Aa]ssets/_Recovery/
+__pycache__/
+*.py[cod]
+.pytest_cache/

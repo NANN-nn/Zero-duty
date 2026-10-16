@@ -1,0 +1,12 @@
+{
+  "removed": [
+    "CAM 01   /   NORMAL STATE",
+    "CAM 02   /   NORMAL STATE",
+    "CAM 03   /   NORMAL STATE"
+  ],
+  "exported": [
+    "CAM_01_WallReference",
+    "CAM_02_WallReference",
+    "CAM_03_WallReference"
+  ]
+}
