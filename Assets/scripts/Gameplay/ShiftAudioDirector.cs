@@ -14,6 +14,9 @@ public sealed class ShiftAudioDirector : MonoBehaviour
     private AudioSource monitorSwitch;
     private AudioSource alarm;
     private AudioSource tension;
+    private AudioSource finalFlicker;
+    private bool finalFlickerActive;
+    private bool finalFlickerPaused;
     private AudioClip foodChew;
     private AudioClip drinkSip;
     private AudioClip ghostHit;
@@ -55,6 +58,8 @@ public sealed class ShiftAudioDirector : MonoBehaviour
         monitorSwitch = MakeSource("Monitor Switch", 0.34f, false);
         monitorSwitch.pitch = 0.72f;
         alarm = MakeSource("Anomaly Warning", 0.52f, false);
+        finalFlicker = MakeSource("Final Monitor Breakdown", 0.70f, false);
+        finalFlicker.clip = Load("Interactive/SFX_FinalFlicker");
         machinery.clip = Load("Enviroment/ENV_MachineNoise");
         wind.clip = Load("Enviroment/ENV_Wind");
         interference.clip = Load("Enviroment/ENV_RadioNoise");
@@ -85,6 +90,7 @@ public sealed class ShiftAudioDirector : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        StopFinalFlicker();
         Unsubscribe();
         ending = false;
         pressure = pressureTarget = 0f;
@@ -108,6 +114,15 @@ public sealed class ShiftAudioDirector : MonoBehaviour
 
     private void Update()
     {
+        // Pause only this one-shot with the visual sequence. Ambient audio
+        // intentionally stays audible in the pause menu for volume adjustment.
+        if (finalFlickerActive && finalFlicker != null)
+        {
+            bool shouldPause = Time.timeScale <= 0f;
+            if (shouldPause && !finalFlickerPaused) finalFlicker.Pause();
+            else if (!shouldPause && finalFlickerPaused) finalFlicker.UnPause();
+            finalFlickerPaused = shouldPause;
+        }
         if (signals == null && GameplaySignals.Instance != null)
         {
             signals = GameplaySignals.Instance;
@@ -180,6 +195,7 @@ public sealed class ShiftAudioDirector : MonoBehaviour
 
     private void StopAll()
     {
+        StopFinalFlicker();
         music.Stop();
         machinery.Stop();
         wind.Stop();
@@ -193,6 +209,7 @@ public sealed class ShiftAudioDirector : MonoBehaviour
 
     private void StartGameplay()
     {
+        StopFinalFlicker();
         inMenu = false;
         ending = false;
         pressure = pressureTarget = 0f;
@@ -209,6 +226,7 @@ public sealed class ShiftAudioDirector : MonoBehaviour
 
     private void StartEnding(string musicName)
     {
+        StopFinalFlicker();
         ending = true;
         inMenu = false;
         machinery.Stop();
@@ -238,6 +256,26 @@ public sealed class ShiftAudioDirector : MonoBehaviour
             instance.pressureTarget = Mathf.Clamp01(amount);
     }
     public static void ClearPressure() => instance?.ResetPressure();
+
+    public static void StartFinalFlicker(float seconds)
+    {
+        if (instance == null || instance.inMenu || instance.ending) return;
+        AudioSource source = instance.finalFlicker;
+        if (source == null || source.clip == null) return;
+        StopFinalFlicker();
+        // Fit the authored four-second cue to the visual sequence duration.
+        source.pitch = Mathf.Clamp(source.clip.length / Mathf.Max(.1f, seconds), .1f, 3f);
+        source.Play();
+        instance.finalFlickerActive = true;
+    }
+
+    public static void StopFinalFlicker()
+    {
+        if (instance == null) return;
+        if (instance.finalFlicker != null) instance.finalFlicker.Stop();
+        instance.finalFlickerActive = false;
+        instance.finalFlickerPaused = false;
+    }
 
     private void ResetPressure()
     {

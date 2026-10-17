@@ -1,10 +1,9 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
-/// <summary>Replays the resolved anomalies on CCTV, then points the player to the exit reader.</summary>
+/// <summary>Replays the resolved anomalies on CCTV, then unlocks the exit reader.</summary>
 [DefaultExecutionOrder(-70)]
 [DisallowMultipleComponent]
 public class FinalMonitorEvent : MonoBehaviour
@@ -33,9 +32,7 @@ public class FinalMonitorEvent : MonoBehaviour
     private readonly GameObject[] finalFeeds = new GameObject[3];
     private readonly Material[] finalFeedMaterials = new Material[3];
     private readonly GameObject[] interference = new GameObject[3];
-    private readonly GameObject[] guidance = new GameObject[3];
     private Material interferenceMaterial;
-    private Material guidanceBackgroundMaterial;
     private Texture2D interferenceTexture;
     private Light[] sceneLights;
     private float[] originalIntensities;
@@ -96,6 +93,7 @@ public class FinalMonitorEvent : MonoBehaviour
 
     private IEnumerator PlaySequence()
     {
+        ShiftAudioDirector.StartFinalFlicker(flickerSeconds);
         float finishAt = Time.time + flickerSeconds;
         Coroutine[] screenFlashes = new Coroutine[interference.Length];
         for (int i = 0; i < screenFlashes.Length; i++)
@@ -108,8 +106,8 @@ public class FinalMonitorEvent : MonoBehaviour
 
         SetVisible(echoes, false);
         SetVisible(interference, false);
+        ShiftAudioDirector.StopFinalFlicker();
         BlackoutExceptGuideLights();
-        ShowGuidance();
         GameplaySignals.Instance?.Raise(readySignal);
     }
 
@@ -319,86 +317,6 @@ public class FinalMonitorEvent : MonoBehaviour
         }
     }
 
-    private void ShowGuidance()
-    {
-        Shader shader = Shader.Find("Universal Render Pipeline/Unlit");
-        if (shader == null) shader = Shader.Find("Unlit/Color");
-        if (shader != null)
-        {
-            guidanceBackgroundMaterial = new Material(shader) { name = "CCTV Final Message Background (Runtime)" };
-            Color darkBlue = new Color(0.008f, 0.019f, 0.035f);
-            guidanceBackgroundMaterial.color = darkBlue;
-            if (guidanceBackgroundMaterial.HasProperty("_BaseColor"))
-                guidanceBackgroundMaterial.SetColor("_BaseColor", darkBlue);
-            if (guidanceBackgroundMaterial.HasProperty("_Cull"))
-                guidanceBackgroundMaterial.SetFloat("_Cull", 0f);
-        }
-        string[] lines =
-        {
-            "PROCEED TO ELEVATOR\nUSE ACCESS READER",
-            "PROCEED TO ELEVATOR\nUSE ACCESS READER",
-            "PROCEED TO ELEVATOR\nUSE ACCESS READER"
-        };
-        for (int i = 0; i < guidance.Length && i < screens.Length; i++)
-        {
-            Renderer screen = screens[i];
-            MeshFilter filter = screen != null ? screen.GetComponent<MeshFilter>() : null;
-            if (filter == null || filter.sharedMesh == null) continue;
-            Bounds panel = filter.sharedMesh.bounds;
-            float side = ViewerSide(screen);
-            float upSign = Mathf.Sign(screen.transform.TransformDirection(Vector3.forward).y);
-            if (upSign == 0f) upSign = 1f;
-            Vector3 bannerCenter = panel.center
-                - Vector3.forward * upSign * (panel.size.z * 0.295f);
-            GameObject display = new GameObject($"CCTV {i + 1} Final Guidance");
-            display.transform.SetParent(screen.transform, false);
-            if (guidanceBackgroundMaterial != null)
-            {
-                GameObject background = GameObject.CreatePrimitive(PrimitiveType.Quad);
-                background.name = "Message Background";
-                Collider backgroundCollider = background.GetComponent<Collider>();
-                if (backgroundCollider != null)
-                {
-                    backgroundCollider.enabled = false;
-                    Destroy(backgroundCollider);
-                }
-                background.transform.SetParent(display.transform, false);
-                background.transform.localPosition = bannerCenter
-                    + Vector3.up * side * (panel.extents.y + 0.04f);
-                background.transform.localRotation = Quaternion.Euler(side > 0f ? -90f : 90f, 0f, 0f);
-                background.transform.localScale = new Vector3(panel.size.x * 0.98f,
-                    panel.size.z * 0.4f, 1f);
-                Renderer backgroundRenderer = background.GetComponent<Renderer>();
-                backgroundRenderer.sharedMaterial = guidanceBackgroundMaterial;
-                backgroundRenderer.shadowCastingMode = ShadowCastingMode.Off;
-                backgroundRenderer.receiveShadows = false;
-            }
-            GameObject labelObject = new GameObject("Message Text");
-            labelObject.transform.SetParent(display.transform, false);
-            labelObject.transform.localPosition = bannerCenter
-                + Vector3.up * side * (panel.extents.y + 0.06f);
-            // TMP's visible face is opposite its forward direction. Face the viewer,
-            // rather than reading the text through the back of the monitor mesh.
-            Vector3 towardViewer = playerViewCamera != null
-                ? playerViewCamera.transform.position - labelObject.transform.position
-                : screen.transform.TransformDirection(Vector3.up * side);
-            labelObject.transform.rotation = Quaternion.LookRotation(-towardViewer, Vector3.up);
-            TextMeshPro label = labelObject.AddComponent<TextMeshPro>();
-            label.font = StationTypography.UIAsset;
-            label.text = lines[i];
-            label.alignment = TextAlignmentOptions.Center;
-            label.color = new Color(0.65f, 0.9f, 1f);
-            label.fontSize = 0.15f;
-            label.enableAutoSizing = true;
-            label.fontSizeMin = 0.055f;
-            label.fontSizeMax = 0.15f;
-            label.textWrappingMode = TextWrappingModes.Normal;
-            label.rectTransform.sizeDelta = new Vector2(panel.size.x * 0.92f,
-                panel.size.z * 0.36f);
-            guidance[i] = display;
-        }
-    }
-
     private float ViewerSide(Renderer screen)
     {
         if (playerViewCamera == null) return 1f;
@@ -412,16 +330,19 @@ public class FinalMonitorEvent : MonoBehaviour
             if (obj != null && obj.activeSelf != visible) obj.SetActive(visible);
     }
 
+    private void OnDisable()
+    {
+        if (started) ShiftAudioDirector.StopFinalFlicker();
+    }
+
     private void OnDestroy()
     {
         foreach (GameObject obj in echoes) if (obj != null) Destroy(obj);
         foreach (GameObject obj in finalFeeds) if (obj != null) Destroy(obj);
         foreach (GameObject obj in interference) if (obj != null) Destroy(obj);
-        foreach (GameObject obj in guidance) if (obj != null) Destroy(obj);
         foreach (Material material in finalFeedMaterials)
             if (material != null) Destroy(material);
         if (interferenceMaterial != null) Destroy(interferenceMaterial);
-        if (guidanceBackgroundMaterial != null) Destroy(guidanceBackgroundMaterial);
         if (interferenceTexture != null) Destroy(interferenceTexture);
         if (!lightingCaptured) return;
         for (int i = 0; i < sceneLights.Length; i++)

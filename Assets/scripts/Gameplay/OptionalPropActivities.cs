@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class OptionalPropActivities : MonoBehaviour
 {
     private static OptionalPropActivities instance;
-    public static bool Busy => instance != null && instance.activeInteractor != null;
+    public static bool Busy => instance != null && instance.activeInteractor != null
+        || RobotDeskCollection.ShowcasePlaying;
     public static bool ReadingNote => instance != null && instance.currentNote != null;
     public static OptionalPropActivities Instance
     {
@@ -19,7 +20,9 @@ public class OptionalPropActivities : MonoBehaviour
         }
     }
     public int RobotsCollected { get; private set; }
-    public const int RobotGoal = 5;
+    public const int RobotGoal = RobotCollectionState.Goal;
+    private readonly RobotCollectionState robotCollection = new RobotCollectionState();
+    private RobotDeskCollection robotDisplay;
     private Text toast, noteTitle, noteBody, noteRightBody;
     private GameObject notePanel;
     private RawImage noteArtwork;
@@ -51,6 +54,7 @@ public class OptionalPropActivities : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        robotDisplay = gameObject.AddComponent<RobotDeskCollection>();
         font = StationTypography.UIFont;
         neatHandFont = Resources.Load<Font>("NoteFonts/PatrickHand/PatrickHand-Regular");
         quickHandFont = Resources.Load<Font>("NoteFonts/Kalam/Kalam-Regular");
@@ -203,8 +207,11 @@ public class OptionalPropActivities : MonoBehaviour
 
     public void Collect(OptionalPropInteraction robot)
     {
+        if (robot == null || robot.Kind != OptionalPropInteraction.PropKind.Robot
+            || !robotCollection.TryCollect(robot.GetInstanceID())) return;
         ShiftAudioDirector.PlayPickup();
-        RobotsCollected++;
+        RobotsCollected = robotCollection.Count;
+        robotDisplay.RecordCollected(RobotsCollected);
         toast.text = RobotsCollected >= RobotGoal ? "All 5 robots collected!" : $"Robots collected: {RobotsCollected} / {RobotGoal}";
         toast.enabled = true; toastUntil = Time.unscaledTime + (RobotsCollected >= RobotGoal ? 5f : 2.5f);
         foreach (var collider in robot.GetComponentsInChildren<Collider>()) collider.enabled = false;

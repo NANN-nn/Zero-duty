@@ -11,6 +11,10 @@ public class DisposalUnit : MonoBehaviour, IPlayerInteractable
     private void Awake()
     {
         activeUnit = this;
+        // The cue follows the held item rather than a one-off stage signal,
+        // so both corridor finds and revealed specimen jars get guidance.
+        if (GetComponent<DisposalDirectionCue>() == null)
+            gameObject.AddComponent<DisposalDirectionCue>();
         GameObject model = GameObject.Find("DISPOSAL_UNIT.001");
         if (model == null) return;
         visualRoot = model.transform;

@@ -10,7 +10,7 @@ public class SimpleCrosshair : MonoBehaviour
 
     private void OnGUI()
     {
-        if (MonitorViewManager.ActiveSession != null) return;
+        if (MonitorViewManager.ActiveSession != null || RobotDeskCollection.ShowcasePlaying) return;
         Color previous = GUI.color;
         GUI.color = color;
         float x = Screen.width * 0.5f;
