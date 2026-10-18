@@ -123,7 +123,7 @@ public sealed class CircuitRoutingUI : MonoBehaviour
             ShowContact(i, false);
         }
         replayButton.interactable = false;
-        routeMessage.text = string.Empty;
+        StationLocalization.Set(routeMessage, string.Empty);
     }
 
     public void EndRound()
@@ -160,12 +160,12 @@ public sealed class CircuitRoutingUI : MonoBehaviour
 
         if (!RouteConnected(turns))
         {
-            routeMessage.text = string.Empty;
+            StationLocalization.Set(routeMessage, string.Empty);
             return;
         }
         routeSolved = true;
         foreach (Button button in tileButtons) button.interactable = false;
-        routeMessage.text = string.Empty;
+        StationLocalization.Set(routeMessage, string.Empty);
         playback = StartCoroutine(PlaySignal(true));
     }
 
@@ -193,7 +193,7 @@ public sealed class CircuitRoutingUI : MonoBehaviour
             lamps[i].color = Dim(SignalColors[signalOrder[i]]);
             yield return new WaitForSeconds(0.12f);
         }
-        routeMessage.text = string.Empty;
+        StationLocalization.Set(routeMessage, string.Empty);
         replayButton.interactable = true;
         playback = null;
         if (firstCompletion)
@@ -217,7 +217,7 @@ public sealed class CircuitRoutingUI : MonoBehaviour
     public void ShowLeverMistake()
     {
         if (roundActive && routeSolved)
-            routeMessage.text = "Wrong order. Try again";
+            StationLocalization.Set(routeMessage, "Wrong order. Try again");
     }
 
     private static Color Dim(Color color)

@@ -96,10 +96,10 @@ public class FinalChoiceTerminal : MonoBehaviour, IPlayerInteractable
         if (activeLook != null) activeLook.InputEnabled = false;
         interactor.InputEnabled = false;
 
-        if (title != null) title.text = "FINAL PROTOCOL";
-        if (description != null) description.text = string.Empty;
+        if (title != null) StationLocalization.Set(title, "FINAL PROTOCOL");
+        if (description != null) StationLocalization.Set(description, string.Empty);
         thoughtStartedAt = Time.unscaledTime;
-        if (thoughtText != null) thoughtText.text = Thoughts[0];
+        if (thoughtText != null) StationLocalization.Set(thoughtText, Thoughts[0]);
         transferButton.gameObject.SetActive(true);
         lockdownButton.gameObject.SetActive(true);
         ShowScreen(true);
@@ -118,7 +118,7 @@ public class FinalChoiceTerminal : MonoBehaviour, IPlayerInteractable
                 elapsed -= ThoughtDurations[index];
                 index++;
             }
-            thoughtText.text = Thoughts[index];
+            StationLocalization.Set(thoughtText, Thoughts[index]);
         }
 #if UNITY_EDITOR
         if (!ChoiceMade && Keyboard.current != null
@@ -323,7 +323,7 @@ public class FinalChoiceTerminal : MonoBehaviour, IPlayerInteractable
         TMP_Text buttonText = NewText("Label", rect, Vector2.zero, Vector2.zero,
             27, TextAlignmentOptions.Center);
         Stretch((RectTransform)buttonText.transform);
-        buttonText.text = label.ToUpperInvariant();
+        StationLocalization.Set(buttonText, label.ToUpperInvariant());
         return button;
     }
 
@@ -336,7 +336,7 @@ public class FinalChoiceTerminal : MonoBehaviour, IPlayerInteractable
         rect.anchorMin = center - size * .5f;
         rect.anchorMax = center + size * .5f;
         rect.offsetMin = rect.offsetMax = Vector2.zero;
-        label.text = content;
+        StationLocalization.Set(label, content);
         label.enableAutoSizing = true;
         label.fontSizeMin = fontSize * .8f;
         label.fontSizeMax = fontSize;

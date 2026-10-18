@@ -80,7 +80,7 @@ public sealed class InteractionFocusFeedback : MonoBehaviour
             if (visible)
             {
                 hint.alpha = 1f;
-                if (hintText.text != message) SetHintLayout(message);
+                if (hintText.text != StationLocalization.T(message)) SetHintLayout(message);
             }
         }
         for (int i = 0; i < sources.Count; i++)
@@ -385,7 +385,7 @@ public sealed class InteractionFocusFeedback : MonoBehaviour
         hintText.characterSpacing = 0f;
         hintText.alignment = TextAlignmentOptions.Center;
         hintText.color = new Color(0.93f, 0.96f, 0.98f, 0.96f);
-        hintText.text = string.Empty;
+        StationLocalization.Set(hintText, string.Empty);
         hintText.raycastTarget = false;
         hintText.outlineWidth = 0.08f;
         hintText.outlineColor = new Color32(5, 12, 18, 210);
@@ -398,12 +398,12 @@ public sealed class InteractionFocusFeedback : MonoBehaviour
         bool showKey = message == "Press E" || message == "Press Q to drop";
         bool isDrop = message == "Press Q to drop";
         keycap.SetActive(showKey);
-        if (showKey) keycapText.text = isDrop ? "Q" : "E";
+        if (showKey) StationLocalization.Set(keycapText, isDrop ? "Q" : "E");
         hintPanel.sizeDelta = new Vector2(isDrop ? 410f : showKey ? 300f : 350f, 76f);
         keycapRect.anchoredPosition = new Vector2(isDrop ? -154f : -99f, 0f);
         hintTextRect.anchoredPosition = new Vector2(showKey ? (isDrop ? 37f : 31f) : 0f, 0f);
         hintTextRect.sizeDelta = new Vector2(showKey ? (isDrop ? 310f : 190f) : 330f, 62f);
-        hintText.text = message;
+        StationLocalization.Set(hintText, message);
     }
 
     private void OnDisable()

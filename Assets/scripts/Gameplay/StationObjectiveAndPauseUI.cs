@@ -97,7 +97,7 @@ public sealed class StationObjectiveAndPauseUI : MonoBehaviour
             || ReferencePictureView.ActiveView != null)
             ? "ESC — Close" : string.Empty;
         escapeHintText.enabled = message.Length > 0;
-        if (escapeHintText.text != message) escapeHintText.text = message;
+        if (escapeHintText.text != message) StationLocalization.Set(escapeHintText, message);
     }
 
     private bool CanPause()
@@ -197,7 +197,7 @@ public sealed class StationObjectiveAndPauseUI : MonoBehaviour
     private void ShowAction(string message)
     {
         if (actionText == null) return;
-        actionText.text = message;
+        StationLocalization.Set(actionText, message);
         actionShownAt = Time.time;
     }
 
@@ -428,12 +428,12 @@ public sealed class StationObjectiveAndPauseUI : MonoBehaviour
         slider.wholeNumbers = false;
         AudioListener.volume = PlayerPrefs.GetFloat("ZeroDuty.MasterVolume", AudioListener.volume);
         slider.SetValueWithoutNotify(AudioListener.volume);
-        volumeValueText.text = Mathf.RoundToInt(AudioListener.volume * 100f) + "%";
+        StationLocalization.Set(volumeValueText, Mathf.RoundToInt(AudioListener.volume * 100f) + "%");
         slider.onValueChanged.AddListener(value =>
         {
             AudioListener.volume = value;
             PlayerPrefs.SetFloat("ZeroDuty.MasterVolume", value);
-            volumeValueText.text = Mathf.RoundToInt(value * 100f) + "%";
+            StationLocalization.Set(volumeValueText, Mathf.RoundToInt(value * 100f) + "%");
         });
     }
 
@@ -470,7 +470,7 @@ public sealed class StationObjectiveAndPauseUI : MonoBehaviour
         go.transform.SetParent(parent, false);
         Text text = go.GetComponent<Text>();
         text.font = StationTypography.UIFont;
-        text.text = content;
+        StationLocalization.Set(text, content);
         text.fontSize = size;
         text.color = color;
         text.alignment = alignment;
@@ -487,7 +487,7 @@ public sealed class StationObjectiveAndPauseUI : MonoBehaviour
         Place(go.GetComponent<RectTransform>(), position, dimensions);
         TextMeshProUGUI text = go.GetComponent<TextMeshProUGUI>();
         text.font = StationTypography.UIAsset;
-        text.text = content;
+        StationLocalization.Set(text, content);
         text.fontSize = size;
         text.color = color;
         text.alignment = alignment;

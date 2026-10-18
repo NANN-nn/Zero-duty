@@ -84,7 +84,7 @@ public sealed class DisposalDirectionCue : MonoBehaviour
         captionRect.sizeDelta = new Vector2(150f, 32f);
         Text text = caption.GetComponent<Text>();
         text.font = StationTypography.UIFont;
-        text.text = "DISPOSAL";
+        StationLocalization.Set(text, "DISPOSAL");
         text.fontSize = 23;
         text.alignment = TextAnchor.MiddleCenter;
         text.color = new Color(.9f, .96f, 1f);

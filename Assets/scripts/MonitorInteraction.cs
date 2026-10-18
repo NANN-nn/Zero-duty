@@ -32,7 +32,7 @@ public class MonitorInteraction : MonoBehaviour, IPlayerInteractable
         if (chair != null) chairCollider = chair.GetComponent<Collider>();
         if (promptText != null)
         {
-            promptText.text = string.Empty;
+            StationLocalization.Set(promptText, string.Empty);
             promptText.alpha = 0f;
             promptText.enabled = false;
             promptText.raycastTarget = false;

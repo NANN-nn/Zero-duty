@@ -136,7 +136,7 @@ public sealed class StationWayfinding : MonoBehaviour
         Stretch(textObject.transform as RectTransform);
         TextMeshProUGUI text = textObject.GetComponent<TextMeshProUGUI>();
         text.font = StationTypography.UIAsset;
-        text.text = caption;
+        StationLocalization.Set(text, caption);
         text.fontSize = 31f;
         text.fontStyle = FontStyles.Bold;
         text.characterSpacing = 2.5f;

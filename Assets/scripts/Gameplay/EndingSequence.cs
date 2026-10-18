@@ -34,7 +34,7 @@ public class EndingSequence : MonoBehaviour
     {
         if (endingCanvas == null) yield break;
         endingCanvas.gameObject.SetActive(true);
-        if (endingText != null) endingText.text = message;
+        if (endingText != null) StationLocalization.Set(endingText, message);
         float time = 0f;
         while (time < fadeDuration)
         {

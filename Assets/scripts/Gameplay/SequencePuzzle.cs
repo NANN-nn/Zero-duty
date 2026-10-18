@@ -226,7 +226,7 @@ public class SequencePuzzle : MonoBehaviour, IPlayerInteractable
 
     private void UpdateStatus(string value)
     {
-        if (statusText != null) statusText.text = value;
+        if (statusText != null) StationLocalization.Set(statusText, value);
     }
 
     private void OnDisable()

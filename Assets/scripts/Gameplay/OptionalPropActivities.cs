@@ -102,7 +102,7 @@ public class OptionalPropActivities : MonoBehaviour
         closeButton.onClick.AddListener(CloseNote);
         Text chevron = MakeText("Chevron", closeObject.transform, 27, Color.white);
         chevron.alignment = TextAnchor.MiddleCenter;
-        chevron.text = "<  BACK";
+        StationLocalization.Set(chevron, "<  BACK");
         Place(chevron.rectTransform, Vector2.zero, new Vector2(150, 56));
         ConfigureNoteLayout(OptionalPropInteraction.NotePaperStyle.Record);
         notePanel.SetActive(false);
@@ -212,7 +212,7 @@ public class OptionalPropActivities : MonoBehaviour
         ShiftAudioDirector.PlayPickup();
         RobotsCollected = robotCollection.Count;
         robotDisplay.RecordCollected(RobotsCollected);
-        toast.text = RobotsCollected >= RobotGoal ? "All 5 robots collected!" : $"Robots collected: {RobotsCollected} / {RobotGoal}";
+        StationLocalization.Set(toast, RobotsCollected >= RobotGoal ? "All 5 robots collected!" : $"Robots collected: {RobotsCollected} / {RobotGoal}");
         toast.enabled = true; toastUntil = Time.unscaledTime + (RobotsCollected >= RobotGoal ? 5f : 2.5f);
         foreach (var collider in robot.GetComponentsInChildren<Collider>()) collider.enabled = false;
         StartCoroutine(CollectAnimation(robot));
@@ -253,13 +253,18 @@ public class OptionalPropActivities : MonoBehaviour
         LockPlayer(owner); currentNote = note; openedFrame = Time.frameCount;
         OptionalPropInteraction.NotePaperStyle style = note.NoteStyle;
         ConfigureNoteLayout(style);
-        noteTitle.text = note.NoteTitle;
+        StationLocalization.Set(noteTitle, note.NoteTitle);
         string[] bookPages = style == OptionalPropInteraction.NotePaperStyle.Book
             ? (note.NoteBody ?? string.Empty).Split('\f') : null;
-        noteBody.text = bookPages != null ? bookPages[0] : note.NoteBody;
-        noteRightBody.text = bookPages != null && bookPages.Length > 1 ? bookPages[1] : string.Empty;
+        StationLocalization.Set(noteBody, bookPages != null ? bookPages[0] : note.NoteBody);
+        StationLocalization.Set(noteRightBody, bookPages != null && bookPages.Length > 1 ? bookPages[1] : string.Empty);
         notePanel.SetActive(true);
         if (note.name == "ShiftLog_Open1") ConfigureHandbookPages();
+        else if (StationLocalization.IsChinese)
+        {
+            FitChineseNote(noteBody);
+            if (bookPages != null) FitChineseNote(noteRightBody);
+        }
         Cursor.lockState = CursorLockMode.None; Cursor.visible = true;
     }
 
@@ -273,16 +278,21 @@ public class OptionalPropActivities : MonoBehaviour
         Place(noteTitle.rectTransform, new Vector2(-330f, 398f), new Vector2(590f, 58f));
         Place(noteBody.rectTransform, new Vector2(-330f, -10f), new Vector2(590f, 750f));
         Place(noteRightBody.rectTransform, new Vector2(330f, -10f), new Vector2(590f, 750f));
+        if (StationLocalization.IsChinese)
+        {
+            Place(noteBody.rectTransform, new Vector2(-330f, 10f), new Vector2(590f, 690f));
+            Place(noteRightBody.rectTransform, new Vector2(330f, 10f), new Vector2(590f, 690f));
+        }
         Place(noteCloseRect, new Vector2(0f, -505f), new Vector2(150f, 56f));
-        noteTitle.text = "NIGHT SHIFT HANDBOOK";
+        StationLocalization.Set(noteTitle, "NIGHT SHIFT HANDBOOK");
         noteTitle.fontSize = 36;
         noteBody.supportRichText = noteRightBody.supportRichText = true;
         noteBody.alignment = noteRightBody.alignment = TextAnchor.MiddleCenter;
         noteBody.lineSpacing = noteRightBody.lineSpacing = 1.03f;
         noteRightBody.font = neatHandFont;
         noteRightBody.enabled = true;
-        noteBody.text = FormatHandbookPage(pages[0]);
-        noteRightBody.text = pages.Length > 1 ? FormatHandbookPage(pages[1]) : string.Empty;
+        StationLocalization.Set(noteBody, FormatHandbookPage(pages[0]));
+        StationLocalization.Set(noteRightBody, pages.Length > 1 ? FormatHandbookPage(pages[1]) : string.Empty);
         if (handbookRightTitle == null)
         {
             handbookRightTitle = MakeText("Handbook Right Page Title", notePanel.transform, 36,
@@ -292,7 +302,7 @@ public class OptionalPropActivities : MonoBehaviour
             handbookRightTitle.alignment = TextAnchor.MiddleCenter;
         }
         handbookRightTitle.gameObject.SetActive(true);
-        handbookRightTitle.text = "FOR THE NEXT SHIFT";
+        StationLocalization.Set(handbookRightTitle, "FOR THE NEXT SHIFT");
         Place(handbookRightTitle.rectTransform, new Vector2(330f, 398f), new Vector2(590f, 58f));
         Canvas.ForceUpdateCanvases();
         FitHandbookText(noteBody);
@@ -314,6 +324,17 @@ public class OptionalPropActivities : MonoBehaviour
         for (int size = 36; size >= 18; size--)
         {
             body.fontSize = size;
+            StationLocalization.ReflowChineseNote(body);
+            if (FitsHandbookPage(body)) break;
+        }
+    }
+
+    private void FitChineseNote(Text body)
+    {
+        for (int size = body.fontSize; size >= 24; size--)
+        {
+            body.fontSize = size;
+            StationLocalization.ReflowChineseNote(body);
             if (FitsHandbookPage(body)) break;
         }
     }

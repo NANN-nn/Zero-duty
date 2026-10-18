@@ -42,6 +42,7 @@ public sealed class ShiftStartMenu : MonoBehaviour
     private GameObject introductionPage;
     private TMP_FontAsset menuFont;
     private TextMeshProUGUI volumeValue;
+    private TextMeshProUGUI languageValue;
     private readonly List<RawImage> feeds = new List<RawImage>();
     private readonly List<RawImage> menuButtonArtwork = new List<RawImage>();
     private readonly List<TextMeshProUGUI> menuButtonLabels = new List<TextMeshProUGUI>();
@@ -356,7 +357,7 @@ public sealed class ShiftStartMenu : MonoBehaviour
         mainPage = NewPage("Main Page", root.transform);
         NewText("Game Title", mainPage.transform, "END OF SHIFT", 72,
             new Vector2(-640f, 282f), new Vector2(510f, 120f));
-        NewText("Tagline", mainPage.transform, "Everything looks normal", 27,
+        NewText("Tagline", mainPage.transform, "Just another quiet night", 27,
             new Vector2(-640f, 186f), new Vector2(430f, 44f));
         NewButton("Start Shift", mainPage.transform, "START", 34f, StartShift);
         NewButton("Settings", mainPage.transform, "SETTINGS", -73f,
@@ -364,18 +365,37 @@ public sealed class ShiftStartMenu : MonoBehaviour
         NewButton("Exit Game", mainPage.transform, "EXIT GAME", -179f, ExitGame);
 
         settingsPage = NewPage("Settings Page", root.transform);
+        // Hide the main menu's three painted button slots behind these controls.
+        Image settingsBacking = NewImage("Settings Controls Backplate", settingsPage.transform,
+            new Color(.012f, .029f, .038f, 1f));
+        Place(settingsBacking.rectTransform, new Vector2(-640f, -15f), new Vector2(438f, 510f));
         NewText("Settings Title", settingsPage.transform, "SETTINGS", 57,
             new Vector2(-640f, 273f), new Vector2(445f, 88f));
         NewText("Volume Label", settingsPage.transform, "MASTER VOLUME", 25,
-            new Vector2(-640f, 127f), new Vector2(420f, 40f));
+            new Vector2(-640f, 166f), new Vector2(420f, 40f));
         BuildVolumeSlider(settingsPage.transform);
         volumeValue = NewText("Volume Value", settingsPage.transform, "100%", 28,
-            new Vector2(-640f, -73f), new Vector2(380f, 65f));
-        volumeValue.text = Mathf.RoundToInt(PlayerPrefs.GetFloat(VolumeKey,
-            AudioListener.volume) * 100f) + "%";
-        NewButton("Back From Settings", settingsPage.transform, "BACK", -179f,
+            new Vector2(-640f, 30f), new Vector2(380f, 42f));
+        StationLocalization.Set(volumeValue, Mathf.RoundToInt(PlayerPrefs.GetFloat(VolumeKey,
+            AudioListener.volume) * 100f) + "%");
+        NewText("Language Label", settingsPage.transform, "LANGUAGE", 24,
+            new Vector2(-640f, -35f), new Vector2(420f, 40f));
+        Button languageButton = NewButton("Language Toggle", settingsPage.transform,
+            LanguageCaption(), -110f, ToggleLanguage);
+        languageValue = languageButton.GetComponentInChildren<TextMeshProUGUI>();
+        NewButton("Back From Settings", settingsPage.transform, "BACK", -220f,
             () => ShowPage(mainPage));
         BuildIntroduction(root.transform);
+    }
+
+    private static string LanguageCaption() => StationLocalization.IsChinese
+        ? "‹  简体中文  ›" : "‹  English  ›";
+
+    private void ToggleLanguage()
+    {
+        StationLocalization.SetLanguage(StationLocalization.IsChinese
+            ? StationLocalization.Language.English : StationLocalization.Language.Chinese);
+        StationLocalization.Set(languageValue, LanguageCaption());
     }
 
     private void BuildIntroduction(Transform parent)
@@ -482,7 +502,7 @@ public sealed class ShiftStartMenu : MonoBehaviour
         var holder = new GameObject("Master Volume Slider", typeof(RectTransform),
             typeof(Image), typeof(Slider));
         holder.transform.SetParent(parent, false);
-        Place(holder.GetComponent<RectTransform>(), new Vector2(-640f, 34f),
+        Place(holder.GetComponent<RectTransform>(), new Vector2(-640f, 93f),
             new Vector2(365f, 58f));
         Image hit = holder.GetComponent<Image>();
         hit.color = Color.clear;
@@ -511,7 +531,7 @@ public sealed class ShiftStartMenu : MonoBehaviour
             AudioListener.volume = value;
             PlayerPrefs.SetFloat(VolumeKey, value);
             if (volumeValue != null)
-                volumeValue.text = Mathf.RoundToInt(value * 100f) + "%";
+                StationLocalization.Set(volumeValue, Mathf.RoundToInt(value * 100f) + "%");
         });
     }
 
@@ -594,7 +614,7 @@ public sealed class ShiftStartMenu : MonoBehaviour
         Place(go.GetComponent<RectTransform>(), position, dimensions);
         var text = go.GetComponent<TextMeshProUGUI>();
         if (menuFont != null) text.font = menuFont;
-        text.text = content;
+        StationLocalization.Set(text, content);
         text.fontSize = size;
         text.enableAutoSizing = autoSize;
         if (autoSize) { text.fontSizeMin = 42; text.fontSizeMax = size; }

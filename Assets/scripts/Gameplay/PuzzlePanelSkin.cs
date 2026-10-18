@@ -32,8 +32,6 @@ public sealed class PuzzlePanelSkin : MonoBehaviour
     private RawImage[] gasLampCores;
     private RawImage gasShuttle;
     private Image gasButtonGraphic;
-    private TextMeshProUGUI gasStabilityLabel, gasStabilityTime;
-    private TextMeshProUGUI[] gasChannelLabels;
     private RectTransform gasStabilityFill;
     private Image[] gasStabilityRings;
     private RawImage gasButtonFace;
@@ -58,6 +56,18 @@ public sealed class PuzzlePanelSkin : MonoBehaviour
     {
         HideTemporaryGraphics(group);
         if (!BeginPanel(group, "PuzzleUI/CircuitPanelBase")) return;
+        // The original machine art has two baked English headings. A live
+        // label plate covers just that lettering in Chinese, not the controls.
+        if (StationLocalization.IsChinese)
+        {
+            GameObject plate = new GameObject("Localized Circuit Heading", typeof(RectTransform), typeof(Image));
+            plate.transform.SetParent(panel, false);
+            plate.GetComponent<Image>().color = new Color(.025f, .055f, .066f, 1f);
+            plate.GetComponent<Image>().raycastTarget = false;
+            Place(plate.transform as RectTransform, 470f, 165f, 505f, 81f);
+            AddGasText("Circuit Title", "CIRCUIT ROUTING", 470f, 151f, 470f, 36f, 30f);
+            AddGasText("Circuit Subtitle", "CONNECT TO REVEAL SEQUENCE", 470f, 187f, 470f, 27f, 21f);
+        }
 
         Texture2D leverTexture = LoadArtwork("PuzzleUI/PowerLeverUp");
         powerLevers = new RawImage[3];
@@ -133,7 +143,6 @@ public sealed class PuzzlePanelSkin : MonoBehaviour
         gasLamps = new RawImage[3];
         gasLampCores = new RawImage[3];
         gasStabilityRings = new Image[3];
-        gasChannelLabels = new TextMeshProUGUI[3];
         gasRingSprite = MakeGasRingSprite();
         for (int i = 0; i < 3; i++)
         {
@@ -144,8 +153,6 @@ public sealed class PuzzlePanelSkin : MonoBehaviour
                 GasLampX[i], 258f, 84f, 84f);
             gasLampCores[i].color = Color.clear;
             AddGasText("Channel " + (i + 1), "0" + (i + 1), GasLampX[i], 147f, 90f, 32f, 26f);
-            gasChannelLabels[i] = AddGasText("Channel State " + (i + 1), "WAIT",
-                GasLampX[i], 345f, 150f, 28f, 21f);
             GameObject ringObject = new GameObject("Active channel stability ring " + (i + 1),
                 typeof(RectTransform), typeof(Image));
             ringObject.transform.SetParent(panel, false);
@@ -162,11 +169,8 @@ public sealed class PuzzlePanelSkin : MonoBehaviour
             gasStabilityRings[i] = ring;
         }
 
-        AddGasText("Pressure title", "PRESSURE CONTROL", 835f, 372f, 430f, 34f, 26f);
-        TextMeshProUGUI safe = AddGasText("Safe pressure band", "SAFE", 835f, 414f, 180f, 25f, 19f);
-        safe.color = new Color(.57f, .82f, .61f, .95f);
-        gasStabilityLabel = AddGasText("Stability state", "ADJUST PRESSURE", 571f, 557f, 240f, 25f, 20f);
-        gasStabilityTime = AddGasText("Stability dwell time", "0.0 / 1.5 s", 1090f, 557f, 200f, 25f, 21f);
+        // Lamps, the safe band and the fill communicate state without captions.
+        // Keep only channel numbers and the actionable HOLD button label.
         GameObject progressTrack = new GameObject("Stability track", typeof(RectTransform), typeof(Image));
         progressTrack.transform.SetParent(panel, false);
         Place(progressTrack.transform as RectTransform, 835f, 557f, 300f, 10f);
@@ -211,7 +215,7 @@ public sealed class PuzzlePanelSkin : MonoBehaviour
         holdLabel.rectTransform.anchoredPosition = new Vector2(0f, -12f);
         holdLabel.rectTransform.sizeDelta = new Vector2(180f, 90f);
         holdLabel.font = StationTypography.UIAsset;
-        holdLabel.text = "HOLD";
+        StationLocalization.Set(holdLabel, "HOLD");
         holdLabel.fontSize = 30f;
         holdLabel.fontStyle = FontStyles.Bold;
         holdLabel.characterSpacing = 1f;
@@ -248,7 +252,7 @@ public sealed class PuzzlePanelSkin : MonoBehaviour
         obj.transform.SetParent(panel, false);
         TextMeshProUGUI text = obj.GetComponent<TextMeshProUGUI>();
         text.font = StationTypography.UIAsset;
-        text.text = content;
+        StationLocalization.Set(text, content);
         text.fontSize = size;
         text.fontStyle = FontStyles.Bold;
         text.characterSpacing = 1f;
@@ -271,10 +275,6 @@ public sealed class PuzzlePanelSkin : MonoBehaviour
     public void SetGasStability(float seconds, float required, bool safe)
     {
         gasStableFraction = Mathf.Clamp01(seconds / Mathf.Max(.1f, required));
-        if (gasStabilityLabel != null)
-            gasStabilityLabel.text = gasProgress >= 3 ? "PRESSURE STABLE"
-                : safe ? "STABILIZING" : "ADJUST PRESSURE";
-        if (gasStabilityTime != null) gasStabilityTime.text = $"{seconds:0.0} / {required:0.0} s";
         if (gasStabilityFill != null) gasStabilityFill.anchorMax = new Vector2(gasStableFraction, 1f);
     }
 
@@ -475,12 +475,6 @@ public sealed class PuzzlePanelSkin : MonoBehaviour
                     Mathf.Clamp01(Time.unscaledDeltaTime * 12f));
                 if (gasStabilityRings != null && gasStabilityRings[i] != null)
                     gasStabilityRings[i].fillAmount = active ? gasStableFraction : 0f;
-                if (gasChannelLabels != null && gasChannelLabels[i] != null)
-                {
-                    gasChannelLabels[i].text = done ? "OK" : active ? "ACTIVE" : "WAIT";
-                    gasChannelLabels[i].color = done ? new Color(.5f, .9f, .6f)
-                        : active ? new Color(1f, .72f, .3f) : new Color(.42f, .47f, .49f);
-                }
             }
         }
 

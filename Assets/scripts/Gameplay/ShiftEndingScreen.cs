@@ -56,21 +56,21 @@ public sealed class ShiftEndingScreen : MonoBehaviour
         switch (result)
         {
             case Result.DataTransfer:
-                categoryText.text = "FINAL REPORT  /  01";
-                titleText.text = "DATA TRANSMITTED";
-                descriptionText.text = "The truth got out. So might the anomaly.";
+                StationLocalization.Set(categoryText, "FINAL REPORT  /  01");
+                StationLocalization.Set(titleText, "DATA TRANSMITTED");
+                StationLocalization.Set(descriptionText, "The truth got out. So might the anomaly.");
                 accent = new Color(.32f, .77f, .91f);
                 break;
             case Result.Lockdown:
-                categoryText.text = "FINAL REPORT  /  02";
-                titleText.text = "FACILITY SEALED";
-                descriptionText.text = "Outside is safe. You're locked in with it.";
+                StationLocalization.Set(categoryText, "FINAL REPORT  /  02");
+                StationLocalization.Set(titleText, "FACILITY SEALED");
+                StationLocalization.Set(descriptionText, "Outside is safe. You're locked in with it.");
                 accent = new Color(.83f, .68f, .43f);
                 break;
             default:
-                categoryText.text = "SHIFT REPORT  /  FAILED";
-                titleText.text = "SHIFT FAILED";
-                descriptionText.text = "You didn't finish your shift.";
+                StationLocalization.Set(categoryText, "SHIFT REPORT  /  FAILED");
+                StationLocalization.Set(titleText, "SHIFT FAILED");
+                StationLocalization.Set(descriptionText, "You didn't finish your shift.");
                 accent = new Color(.85f, .42f, .42f);
                 break;
         }
@@ -272,7 +272,7 @@ public sealed class ShiftEndingScreen : MonoBehaviour
         button.targetGraphic = face;
         TextMeshProUGUI caption = NewText("Label", hit.transform, 22,
             Vector2.zero, new Vector2(290f, 52f));
-        caption.text = label;
+        StationLocalization.Set(caption, label);
         button.onClick.AddListener(action);
         return button;
     }

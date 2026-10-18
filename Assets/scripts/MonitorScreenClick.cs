@@ -159,8 +159,8 @@ public class MonitorScreenClick : MonoBehaviour
             && Time.timeScale > 0f && !ShiftAudioDirector.EndingActive;
         navigationRoot.SetActive(show);
         if (show)
-            navigationCaption.text = view.IsFocused
-                ? $"CAM {view.FocusedIndex + 1:00} / 03" : "SELECT A CAMERA";
+            StationLocalization.Set(navigationCaption, view.IsFocused
+                ? $"CAM {view.FocusedIndex + 1:00} / 03" : "SELECT A CAMERA");
     }
 
     private void ChangeFeed(int step)

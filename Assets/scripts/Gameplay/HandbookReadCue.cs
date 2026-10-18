@@ -81,7 +81,7 @@ public sealed class HandbookReadCue : MonoBehaviour
         rect.sizeDelta = new Vector2(150f, 32f);
         Text text = caption.GetComponent<Text>();
         text.font = StationTypography.UIFont;
-        text.text = "HANDBOOK";
+        StationLocalization.Set(text, "HANDBOOK");
         text.fontSize = 23;
         text.alignment = TextAnchor.MiddleCenter;
         text.color = new Color(.9f, .96f, 1f);
