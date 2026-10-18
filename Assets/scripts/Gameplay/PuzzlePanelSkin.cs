@@ -56,18 +56,13 @@ public sealed class PuzzlePanelSkin : MonoBehaviour
     {
         HideTemporaryGraphics(group);
         if (!BeginPanel(group, "PuzzleUI/CircuitPanelBase")) return;
-        // The original machine art has two baked English headings. A live
-        // label plate covers just that lettering in Chinese, not the controls.
-        if (StationLocalization.IsChinese)
-        {
-            GameObject plate = new GameObject("Localized Circuit Heading", typeof(RectTransform), typeof(Image));
-            plate.transform.SetParent(panel, false);
-            plate.GetComponent<Image>().color = new Color(.025f, .055f, .066f, 1f);
-            plate.GetComponent<Image>().raycastTarget = false;
-            Place(plate.transform as RectTransform, 470f, 165f, 505f, 81f);
-            AddGasText("Circuit Title", "CIRCUIT ROUTING", 470f, 151f, 470f, 36f, 30f);
-            AddGasText("Circuit Subtitle", "CONNECT TO REVEAL SEQUENCE", 470f, 187f, 470f, 27f, 21f);
-        }
+        // Cover only the two English headings baked into the machine art.
+        // Neither language adds replacement captions; controls stay untouched.
+        GameObject plate = new GameObject("Circuit Heading Cover", typeof(RectTransform), typeof(Image));
+        plate.transform.SetParent(panel, false);
+        plate.GetComponent<Image>().color = new Color(.025f, .055f, .066f, 1f);
+        plate.GetComponent<Image>().raycastTarget = false;
+        Place(plate.transform as RectTransform, 470f, 165f, 505f, 81f);
 
         Texture2D leverTexture = LoadArtwork("PuzzleUI/PowerLeverUp");
         powerLevers = new RawImage[3];
