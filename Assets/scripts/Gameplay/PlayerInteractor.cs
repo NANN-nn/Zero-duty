@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Resolves one contextual E-key action from the center view, nearby props and tools.
+/// Selection and feedback use the same target so a visible prompt matches the action.
+/// </summary>
 [DefaultExecutionOrder(-40)]
 [DisallowMultipleComponent]
 public class PlayerInteractor : MonoBehaviour
@@ -153,7 +157,7 @@ public class PlayerInteractor : MonoBehaviour
                 if (behaviour is IPlayerInteractable interactable && interactable.CanInteract(this))
                     return interactable;
 
-            // 实体墙面或家具挡住视线时，不能隔着它们交互。
+            // Solid walls and furniture block interaction through their surfaces.
             if (!hit.collider.isTrigger)
                 return FindCabinetDoorBehindFrame(ray, hit.distance);
         }

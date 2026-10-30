@@ -2,6 +2,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Owns the power repair session: route all rotary contacts, read the color sequence,
+/// then operate the corresponding levers. Pause preserves this session's progress.
+/// </summary>
 [DisallowMultipleComponent]
 public class SequencePuzzle : MonoBehaviour, IPlayerInteractable
 {

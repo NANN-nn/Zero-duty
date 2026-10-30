@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Separates detection from revelation and pickup eligibility for a specimen.
+/// Intact parts and the complete broken assembly switch together to avoid loose effects.
+/// </summary>
 [DisallowMultipleComponent]
 public class ScannableAnomaly : MonoBehaviour
 {

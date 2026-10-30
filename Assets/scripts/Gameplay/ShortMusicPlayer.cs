@@ -37,6 +37,8 @@ public class ShortMusicPlayer : MonoBehaviour, IPlayerInteractable
     private void EnsureCaseCollider()
     {
         if (GetComponent<BoxCollider>() != null) return;
+        // Transform all world-space bounds corners back to the case's local space.
+        // This keeps the hit box aligned with the complete rotated equipment case.
         bool hasBounds = false;
         Bounds bounds = default;
         foreach (Renderer part in GetComponentsInChildren<Renderer>(true))

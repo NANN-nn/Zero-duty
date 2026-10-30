@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Advances the serialized incident stages when all required semantic signals arrive.
+/// Scene objects describe presentation; signals describe completed player actions.
+/// </summary>
 [DefaultExecutionOrder(-100)]
 [DisallowMultipleComponent]
 public class GameFlowController : MonoBehaviour
@@ -52,6 +56,7 @@ public class GameFlowController : MonoBehaviour
     private void ReceiveSignal(string signalId)
     {
         if (Finished || CurrentStageIndex < 0 || advancing) return;
+        // A set makes repeated completion messages harmless within this stage.
         received.Add(signalId);
         if (HasAllSignals())
         {
@@ -79,6 +84,7 @@ public class GameFlowController : MonoBehaviour
 
     private void EnterStage(int index)
     {
+        // Evidence belongs to one stage; an earlier task must not auto-complete another.
         received.Clear();
         advancing = false;
         CurrentStageIndex = index;

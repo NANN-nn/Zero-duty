@@ -1,5 +1,9 @@
 # 人物、双开门与三屏监控：Inspector 挂载说明
 
+> Historical component setup notes. For the maintained controls, entry scene and
+> runtime contracts, use the root README and `Docs/PROJECT_GUIDE.md`.
+> Values and key bindings below describe the initial setup, not the current release.
+
 适用本项目 Unity 6000.4.10f1、Cinemachine 3.1.7、URP、新版 Input System。只提供脚本，不修改场景、动画控制器或现有 RenderTexture。脚本直接读取新版 Input System 的 Keyboard/Mouse，不需要额外配置 Input Actions，也不要再挂其他脚本重复处理同一套输入。
 
 ## 1. 脚本与挂载位置

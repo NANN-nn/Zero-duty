@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Requires a sustained, unobstructed view through the focused monitor before discovery.
+/// Renderer bounds provide the frustum test; raycasts reject visible scene occluders.
+/// </summary>
 [DisallowMultipleComponent]
 public class MonitorDiscoveryTarget : MonoBehaviour
 {

@@ -29,7 +29,6 @@ public sealed class StationObjectiveAndPauseUI : MonoBehaviour
     private GameObject pausePage, audioPage;
     private Texture2D leftArrowTexture, rightArrowTexture;
     private Sprite leftArrowSprite, rightArrowSprite;
-    private Sprite menuPanelSprite, menuButtonSprite;
     private TextMeshProUGUI volumeValueText;
     private MenuPage currentPage;
     private bool paused;
@@ -340,7 +339,6 @@ public sealed class StationObjectiveAndPauseUI : MonoBehaviour
 
     private void BuildPauseMenu()
     {
-        LoadMenuArt();
         Canvas canvas = NewCanvas("Pause Menu", 400, true);
         pausePanel = NewImage("Pause Backdrop", canvas.transform, new Color(0f, 0f, 0f, 0.58f));
         pausePanel.GetComponent<Image>().raycastTarget = true;
@@ -377,20 +375,12 @@ public sealed class StationObjectiveAndPauseUI : MonoBehaviour
 
     private GameObject NewMenuCard(string label, string title, float titleY = 96f)
     {
-        GameObject card = NewImage(label, pausePanel.transform, Color.white);
-        card.GetComponent<Image>().sprite = menuPanelSprite;
-        Place(card.GetComponent<RectTransform>(), Vector2.zero, new Vector2(824f, 502f));
+        GameObject card = NativeInterfaceParts.Plate(label,pausePanel.transform,Vector2.zero,new Vector2(824,410),
+            new Color(.025f,.041f,.053f),new Color(.29f,.40f,.45f)).gameObject;
+        NativeInterfaceParts.Chassis(card.transform,new Vector2(824,410));
         NewMenuText("Title", card.transform, title, 42, new Color(0.82f, 0.94f, 1f),
             TextAlignmentOptions.Center, new Vector2(0f, titleY), new Vector2(550f, 60f));
         return card;
-    }
-
-    private void LoadMenuArt()
-    {
-        menuPanelSprite = Resources.Load<Sprite>("PauseUI/MenuPanel");
-        menuButtonSprite = Resources.Load<Sprite>("PauseUI/MenuButton");
-        if (menuPanelSprite == null || menuButtonSprite == null)
-            Debug.LogError("Pause menu artwork failed to load from Resources/PauseUI.", this);
     }
 
     private void BuildVolumeSlider(Transform parent)
@@ -426,13 +416,13 @@ public sealed class StationObjectiveAndPauseUI : MonoBehaviour
         slider.minValue = 0f;
         slider.maxValue = 1f;
         slider.wholeNumbers = false;
-        AudioListener.volume = PlayerPrefs.GetFloat("ZeroDuty.MasterVolume", AudioListener.volume);
+        AudioListener.volume = PlayerPrefs.GetFloat("ZeroDuty.NativeUI.MasterVolume", AudioListener.volume);
         slider.SetValueWithoutNotify(AudioListener.volume);
         StationLocalization.Set(volumeValueText, Mathf.RoundToInt(AudioListener.volume * 100f) + "%");
         slider.onValueChanged.AddListener(value =>
         {
             AudioListener.volume = value;
-            PlayerPrefs.SetFloat("ZeroDuty.MasterVolume", value);
+            PlayerPrefs.SetFloat("ZeroDuty.NativeUI.MasterVolume", value);
             StationLocalization.Set(volumeValueText, Mathf.RoundToInt(value * 100f) + "%");
         });
     }
@@ -502,12 +492,7 @@ public sealed class StationObjectiveAndPauseUI : MonoBehaviour
         Place(go.GetComponent<RectTransform>(), new Vector2(0f, y),
             new Vector2(376f, 70f) * scale);
         go.GetComponent<Image>().raycastTarget = true;
-        GameObject art = NewImage("Button Art", go.transform,
-            label == "Resume" ? Color.white : new Color(0.67f, 0.77f, 0.84f));
-        Place(art.GetComponent<RectTransform>(), Vector2.zero,
-            new Vector2(404f, 136f) * scale);
-        Image image = art.GetComponent<Image>();
-        image.sprite = menuButtonSprite;
+        NativePanelGraphic image=NativeInterfaceParts.ButtonFace(go.transform,new Vector2(376,70)*scale,new Color(.38f,.67f,.73f));
         Button button = go.AddComponent<Button>();
         button.targetGraphic = image;
         ColorBlock colors = button.colors;
@@ -525,14 +510,12 @@ public sealed class StationObjectiveAndPauseUI : MonoBehaviour
     private Button NewChevronButton(string label, Transform parent, bool right,
         UnityEngine.Events.UnityAction action)
     {
-        Sprite sprite = GetChevronSprite(right);
-        GameObject go = NewImage(label, parent, Color.white);
+        GameObject go = NativeInterfaceParts.Plate(label,parent,Vector2.zero,new Vector2(60,100),
+            new Color(.045f,.07f,.085f),new Color(.26f,.37f,.41f)).gameObject;
         Place(go.GetComponent<RectTransform>(), new Vector2(right ? 420f : -420f, 0f),
             new Vector2(70f, 108f));
-        Image image = go.GetComponent<Image>();
-        image.sprite = sprite;
+        NativePanelGraphic image = go.GetComponent<NativePanelGraphic>();
         image.raycastTarget = true;
-        image.alphaHitTestMinimumThreshold = 0.1f;
         Button button = go.AddComponent<Button>();
         button.targetGraphic = image;
         ColorBlock colors = button.colors;

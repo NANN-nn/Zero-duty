@@ -13,8 +13,9 @@ public sealed class ShiftEndingScreen : MonoBehaviour
     private CanvasGroup group;
     private TextMeshProUGUI categoryText, titleText, descriptionText;
     private Image accentLine;
-    private Image failureCard;
     private RawImage endingImage;
+    private NativeEndingFilm film;
+    private CanvasGroup captionGroup;
     private RectTransform captionPanel;
     private RectTransform restartButtonRect, exitButtonRect;
     private bool showing;
@@ -76,16 +77,9 @@ public sealed class ShiftEndingScreen : MonoBehaviour
         }
 
         accentLine.color = accent;
-        string artPath = result == Result.DataTransfer ? "EndingArt/DataTransmitted"
-            : result == Result.Lockdown ? "EndingArt/FacilitySealed" : "EndingArt/ShiftFailed-v1";
-        Texture2D art = artPath != null ? Resources.Load<Texture2D>(artPath) : null;
-        if (artPath != null && art == null)
-            Debug.LogWarning($"Ending artwork not found at Resources/{artPath}.", this);
-        bool showArt = art != null;
-        endingImage.texture = art;
-        endingImage.gameObject.SetActive(showArt);
-        failureCard.gameObject.SetActive(!showArt);
-        PositionCaptions(showArt);
+        PositionCaptions(true);
+        captionGroup.alpha = 0f;
+        captionGroup.interactable = false;
         group.alpha = 0f;
         group.interactable = false;
         group.blocksRaycasts = true;
@@ -98,12 +92,17 @@ public sealed class ShiftEndingScreen : MonoBehaviour
             player.InputEnabled = false;
         foreach (FirstPersonCameraController look in FindObjectsByType<FirstPersonCameraController>(FindObjectsSortMode.None))
             look.InputEnabled = false;
+        film = new GameObject("Native Ending Film").AddComponent<NativeEndingFilm>();
+        film.transform.SetParent(transform, false);
+        film.Play((NativeEndingKind)result);
+        endingImage.texture = film.Texture;
+        endingImage.gameObject.SetActive(true);
         StartCoroutine(FadeIn());
     }
 
     private IEnumerator FadeIn()
     {
-        const float duration = 1.2f;
+        const float duration = .45f;
         float elapsed = 0f;
         while (elapsed < duration)
         {
@@ -112,6 +111,16 @@ public sealed class ShiftEndingScreen : MonoBehaviour
             yield return null;
         }
         group.alpha = 1f;
+        while (film != null && !film.Finished) yield return null;
+        elapsed = 0;
+        while (elapsed < .5f)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            captionGroup.alpha = Mathf.SmoothStep(0, 1, Mathf.Clamp01(elapsed / .5f));
+            yield return null;
+        }
+        captionGroup.alpha = 1f;
+        captionGroup.interactable = true;
         group.interactable = true;
         ready = true;
     }
@@ -165,10 +174,8 @@ public sealed class ShiftEndingScreen : MonoBehaviour
         group.interactable = false;
         group.blocksRaycasts = false;
 
-        // The art is 70% of the 1920x1080 reference frame in each dimension.
-        // It sits near the vertical center, leaving a compact caption strip below.
-        // RawImage accepts the PNGs as regular textures, without Sprite import settings.
-        var artwork = new GameObject("Ending Artwork", typeof(RectTransform), typeof(RawImage));
+        // A live 16:9 scene occupies 70% of the reference frame, with captions below.
+        var artwork = new GameObject("Ending Live Film", typeof(RectTransform), typeof(RawImage));
         artwork.transform.SetParent(backdrop.transform, false);
         endingImage = artwork.GetComponent<RawImage>();
         endingImage.raycastTarget = false;
@@ -178,15 +185,10 @@ public sealed class ShiftEndingScreen : MonoBehaviour
         endingImage.rectTransform.sizeDelta = new Vector2(1344f, 756f);
         artwork.SetActive(false);
 
-        failureCard = NewImage("Failure Report Card", backdrop.transform, Color.white);
-        failureCard.sprite = Resources.Load<Sprite>("PauseUI/MenuPanel");
-        if (failureCard.sprite == null) failureCard.color = new Color(.035f, .075f, .105f);
-        Place(failureCard.rectTransform, Vector2.zero, new Vector2(950f, 575f));
-        failureCard.gameObject.SetActive(false);
-
         var captions = new GameObject("Ending Captions", typeof(RectTransform));
         captions.transform.SetParent(backdrop.transform, false);
         captionPanel = captions.GetComponent<RectTransform>();
+        captionGroup = captions.AddComponent<CanvasGroup>();
         Place(captionPanel, Vector2.zero, new Vector2(1344f, 272f));
         accentLine = NewImage("Result Accent", captionPanel, Color.white);
         Place(accentLine.rectTransform, new Vector2(0f, 130f), new Vector2(410f, 2f));
@@ -198,11 +200,10 @@ public sealed class ShiftEndingScreen : MonoBehaviour
             new Vector2(0f, -3f), new Vector2(1040f, 72f));
         descriptionText.lineSpacing = 6f;
 
-        Sprite buttonArt = Resources.Load<Sprite>("PauseUI/MenuButton");
         restartButtonRect = NewButton("Restart Shift", captionPanel, "RESTART SHIFT",
-            new Vector2(-175f, -103f), buttonArt, RestartShift).GetComponent<RectTransform>();
+            new Vector2(-175f, -103f), RestartShift).GetComponent<RectTransform>();
         exitButtonRect = NewButton("Exit Game", captionPanel, "EXIT GAME",
-            new Vector2(175f, -103f), buttonArt, QuitGame).GetComponent<RectTransform>();
+            new Vector2(175f, -103f), QuitGame).GetComponent<RectTransform>();
         PositionCaptions(false);
     }
 
@@ -259,17 +260,24 @@ public sealed class ShiftEndingScreen : MonoBehaviour
     }
 
     private static Button NewButton(string name, Transform parent, string label,
-        Vector2 position, Sprite art, UnityEngine.Events.UnityAction action)
+        Vector2 position, UnityEngine.Events.UnityAction action)
     {
         Image hit = NewImage(name, parent, Color.clear);
         Place(hit.rectTransform, position, new Vector2(300f, 58f));
         hit.raycastTarget = true;
-        Image face = NewImage("Button Art", hit.transform, Color.white);
-        face.sprite = art;
-        face.color = art != null ? Color.white : new Color(.09f, .2f, .27f);
-        Place(face.rectTransform, Vector2.zero, new Vector2(314f, 86f));
+        var plate = new GameObject("Native button plate", typeof(RectTransform), typeof(NativePanelGraphic));
+        plate.transform.SetParent(hit.transform, false);
+        var face = plate.GetComponent<NativePanelGraphic>();
+        face.color = new Color(.065f, .12f, .15f);
+        face.border = new Color(.28f, .48f, .56f);
+        face.raycastTarget = false;
+        Place(face.rectTransform, Vector2.zero, new Vector2(300f, 58f));
         Button button = hit.gameObject.AddComponent<Button>();
         button.targetGraphic = face;
+        ColorBlock colors = button.colors;
+        colors.highlightedColor = new Color(1.35f, 1.55f, 1.65f);
+        colors.pressedColor = new Color(.6f, .75f, .85f);
+        button.colors = colors;
         TextMeshProUGUI caption = NewText("Label", hit.transform, 22,
             Vector2.zero, new Vector2(290f, 52f));
         StationLocalization.Set(caption, label);

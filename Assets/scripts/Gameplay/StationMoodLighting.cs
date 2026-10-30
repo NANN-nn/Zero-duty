@@ -81,6 +81,9 @@ public class StationMoodLighting : MonoBehaviour
             light.shadows = LightShadows.None;
             spawnedLights[i] = light;
         }
+        OverheadLampLighting fixtures = GetComponent<OverheadLampLighting>();
+        if (fixtures == null) fixtures = gameObject.AddComponent<OverheadLampLighting>();
+        fixtures.Initialize(mainLight, baselineMainIntensity);
     }
 
     private void LateUpdate()

@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Converts a held disposable item into its completion signal, then removes the item.
+/// Releasing ownership first prevents another input from acting on a destroyed prop.
+/// </summary>
 [DisallowMultipleComponent]
 public class DisposalUnit : MonoBehaviour, IPlayerInteractable
 {

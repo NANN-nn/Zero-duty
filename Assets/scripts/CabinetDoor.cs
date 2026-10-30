@@ -38,7 +38,7 @@ public class CabinetDoor : MonoBehaviour, IPlayerInteractable
     {
         EnsureDoorCollider();
 
-        // 保留另外两个方向，只替换所选本地轴的角度。
+        // Replace only the chosen local rotation axis; preserve the other two.
         Vector3 baseEuler = transform.localEulerAngles;
         Vector3 closedEuler = WithAxisAngle(baseEuler, closedAngle);
         Vector3 openEuler = WithAxisAngle(baseEuler, openAngle);
@@ -55,8 +55,8 @@ public class CabinetDoor : MonoBehaviour, IPlayerInteractable
 
     private void EnsureDoorCollider()
     {
-        // 柜门由多个网格组成。优先把碰撞体放在面积最大的玻璃门板上，
-        // 这样射线可以稳定识别整扇门，也不需要手动给每个零件加碰撞体。
+        // Prefer the glass panel, or the largest face of this multi-mesh door.
+        // One broad hit surface is more reliable than adding colliders to every trim.
         MeshFilter target = null;
         float largestArea = 0f;
 
@@ -91,7 +91,7 @@ public class CabinetDoor : MonoBehaviour, IPlayerInteractable
 
         interactionPanel = target.GetComponent<Renderer>();
 
-        // 其他零件已有碰撞体，不代表玻璃本身能被准星射线击中。
+        // Colliders on the trim do not make the glass itself raycastable.
         if (target.GetComponent<BoxCollider>() != null) return;
 
         BoxCollider box = target.gameObject.AddComponent<BoxCollider>();

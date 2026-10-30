@@ -59,6 +59,7 @@ public class CorridorPressureSequence : MonoBehaviour
     private GameObject monitorNoise;
     private GameObject shadowVisual;
     private bool renderedGhostActive;
+    private bool shadowDispelled;
     private Transform playerTransform;
     private Camera ghostViewer;
     private bool ghostApproachStarted;
@@ -339,6 +340,7 @@ public class CorridorPressureSequence : MonoBehaviour
 
     private void UpdateShadowPulse(float progress)
     {
+        if (shadowDispelled) return;
         if (shadowVisual == null) BuildShadowVisual();
         if (shadowVisual == null) return;
 
@@ -370,11 +372,26 @@ public class CorridorPressureSequence : MonoBehaviour
 
     private void ResetGhostApproach()
     {
+        shadowDispelled = false;
         ghostApproachStarted = false;
         ghostAvoidanceDirection = Vector3.zero;
         ghostUpdatedFrame = -1;
         if (shadowVisual != null && shadowAnchor != null)
+        {
             shadowVisual.transform.position = shadowAnchor.position + shadowOffset;
+            shadowVisual.GetComponentInChildren<RenderedGhostBillboard>(true)?.RandomizePose();
+        }
+    }
+
+    public bool DispelWarningGhost()
+    {
+        if (shadowDispelled || shadowVisual == null || !shadowVisual.activeInHierarchy)
+            return false;
+        shadowDispelled = true;
+        shadowVisual.SetActive(false);
+        // Deliberately do not change remaining, external pressure, lighting,
+        // completion signals or any of the anomaly task's failure clocks.
+        return true;
     }
 
     private void MoveShadowTowardPlayer(float progress)
@@ -644,10 +661,17 @@ public class CorridorPressureSequence : MonoBehaviour
         if (shadowAnchor == null) return;
         GameObject renderedRoot = new GameObject("Corridor Ghost (Rendered Runtime)");
         renderedRoot.transform.position = shadowAnchor.position + shadowOffset;
-        if (RenderedGhostBillboard.Create(renderedRoot.transform, 0f, 0.85f) != null)
+        RenderedGhostBillboard rendered = RenderedGhostBillboard.Create(renderedRoot.transform, 0f, 0.85f);
+        if (rendered != null)
         {
             shadowVisual = renderedRoot;
             renderedGhostActive = true;
+            renderedRoot.AddComponent<PressureGhostTarget>().Initialize(this);
+            BoxCollider hitbox = rendered.gameObject.AddComponent<BoxCollider>();
+            hitbox.size = new Vector3(1.3f, 2.2f, 0.45f);
+            // Bullets can disperse it, but it must never physically block the
+            // player or the route to the still-unresolved fault.
+            hitbox.isTrigger = true;
             shadowVisual.SetActive(false);
             return;
         }

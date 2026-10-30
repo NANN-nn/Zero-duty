@@ -1,555 +1,134 @@
-using System.IO;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-/// <summary>
-/// Builds the visual, independently clickable layers over the existing puzzle logic.
-/// Artwork lives in Resources/PuzzleUI; no room pixels are baked into these panels.
-/// </summary>
-[DisallowMultipleComponent]
+/// <summary>Industrial controls made entirely from live UI geometry and text.</summary>
 public sealed class PuzzlePanelSkin : MonoBehaviour
 {
-    private const float ArtWidth = 1672f;
-    private const float ArtHeight = 941f;
-
-    private static readonly float[] PowerX = { 460f, 835f, 1210f };
-    private static readonly float[] GasLampX = { 555f, 835f, 1115f };
-    private static readonly Color[] PowerColors =
-    {
-        new Color(1f, 0.65f, 0.23f, 0.92f),
-        new Color(0.43f, 0.94f, 0.94f, 0.92f),
-        new Color(0.79f, 0.52f, 1f, 0.92f)
-    };
-
-    private RectTransform panel;
-    private RectTransform dimmer;
-    private RawImage[] powerLevers;
-    private RawImage[] powerLamps;
-    private RawImage[] powerLampCores;
-    private RawImage[] gasLamps;
-    private RawImage[] gasLampCores;
-    private RawImage gasShuttle;
-    private Image gasButtonGraphic;
-    private RectTransform gasStabilityFill;
-    private Image[] gasStabilityRings;
-    private RawImage gasButtonFace;
-    private Sprite gasRingSprite;
-    private Texture2D gasRingTexture;
-    private float gasStableFraction;
-    private bool gasButtonHeld;
-    private bool gasButtonHovered;
-    private readonly bool[] powerPulled = new bool[3];
-    private readonly float[] powerWrongFlash = new float[3];
+    private const float W=1672f,H=941f;
+    private RectTransform panel, dimmer, shuttle, stability;
+    private RectTransform[] handles;
+    private NativePanelGraphic[] powerLamps, gasLamps;
+    private NativePanelGraphic buttonFace;
+    private readonly bool[] pulled=new bool[3];
+    private readonly float[] wrong=new float[3];
     private int gasProgress;
-    private float needlePosition;
-    private float pressFlash;
-    private int lastScreenWidth = -1;
-    private int lastScreenHeight = -1;
-
-    public Button GasButton { get; private set; }
+    private bool held;
+    private float stable;
+    private readonly Color[] colors={new Color(.9f,.58f,.21f),new Color(.3f,.77f,.8f),new Color(.66f,.43f,.84f)};
+    public Button GasButton {get;private set;}
+    public Button[] PowerButtons {get;private set;}
     public event System.Action<bool> GasHoldChanged;
-    public Button[] PowerButtons { get; private set; }
 
-    public void ConfigurePower(CanvasGroup group, Button[] buttons)
+    private void Begin(CanvasGroup group)
     {
-        HideTemporaryGraphics(group);
-        if (!BeginPanel(group, "PuzzleUI/CircuitPanelBase")) return;
-        // Cover only the two English headings baked into the machine art.
-        // Neither language adds replacement captions; controls stay untouched.
-        GameObject plate = new GameObject("Circuit Heading Cover", typeof(RectTransform), typeof(Image));
-        plate.transform.SetParent(panel, false);
-        plate.GetComponent<Image>().color = new Color(.025f, .055f, .066f, 1f);
-        plate.GetComponent<Image>().raycastTarget = false;
-        Place(plate.transform as RectTransform, 470f, 165f, 505f, 81f);
-
-        Texture2D leverTexture = LoadArtwork("PuzzleUI/PowerLeverUp");
-        powerLevers = new RawImage[3];
-        powerLamps = new RawImage[3];
-        powerLampCores = new RawImage[3];
-        Texture2D glow = MakeGlowTexture();
-
-        for (int i = 0; i < 3; i++)
+        foreach(Graphic g in group.GetComponentsInChildren<Graphic>(true)) g.enabled=false;
+        panel=group.transform as RectTransform;
+        panel.anchorMin=panel.anchorMax=panel.pivot=new Vector2(.5f,.5f);
+        panel.anchoredPosition=Vector2.zero;panel.sizeDelta=new Vector2(W,H);
+        dimmer=Rect("Scene shade",panel,835,470,2600,1600);
+        var shade=dimmer.gameObject.AddComponent<Image>();shade.color=new Color(0,0,0,.58f);shade.raycastTarget=true;
+        Plate("Outer chassis",panel,835,470,1532,825,new Color(.025f,.035f,.043f));
+        Plate("Inset face",panel,835,470,1488,781,new Color(.065f,.078f,.086f));
+        foreach(float x in new[]{115f,1555f}) foreach(float y in new[]{105f,835f})
         {
-            float x = PowerX[i];
-            powerLevers[i] = AddRaw("Moving breaker " + (i + 1), leverTexture,
-                x, 715f, 135f, 160f);
-            powerLevers[i].color = new Color(0.8f, 0.82f, 0.85f, 1f);
-            powerLamps[i] = AddRaw("Breaker lamp glow " + (i + 1), glow,
-                x, 548f, 170f, 170f);
-            powerLamps[i].color = Color.clear;
-            powerLampCores[i] = AddRaw("Breaker lamp lit core " + (i + 1), glow,
-                x, 548f, 86f, 86f);
-            powerLampCores[i].color = Color.clear;
-
-            if (buttons != null && i < buttons.Length && buttons[i] != null)
-            {
-                Button button = buttons[i];
-                button.interactable = false;
-                Image target = button.GetComponent<Image>();
-                if (target != null)
-                {
-                    target.enabled = false;
-                    target.raycastTarget = false;
-                }
-
-                foreach (TMP_Text label in button.GetComponentsInChildren<TMP_Text>(true))
-                    label.enabled = false;
-                foreach (Text label in button.GetComponentsInChildren<Text>(true))
-                    label.enabled = false;
-
-            }
+            Plate("Recessed fastener",panel,x,y,22,22,new Color(.1f,.12f,.13f),true);
+            Bar("Fastener slot",panel,x,y,11,2,new Color(.015f,.02f,.025f));
         }
-
-        // Create hit areas as direct children of the art panel. The scene's old
-        // ButtonA/B/C rectangles can be elsewhere in the hierarchy and must not
-        // be relied on for the visible lever positions.
-        PowerButtons = new Button[3];
-        for (int i = 0; i < PowerButtons.Length; i++)
+        Bar("Upper brushed edge",panel,835,119,1340,2,new Color(.3f,.34f,.35f));
+        Bar("Lower brushed edge",panel,835,814,1340,2,new Color(.16f,.2f,.22f));
+    }
+    public void ConfigurePower(CanvasGroup group,Button[] oldButtons)
+    {
+        Begin(group);
+        if(oldButtons!=null) foreach(Button b in oldButtons) if(b!=null)b.interactable=false;
+        // Rotary contacts and their buttons are added by the existing routing game.
+        Plate("Rotary circuit recess",panel,835,294,1140,245,new Color(.025f,.038f,.044f));
+        Bar("Contact bus",panel,835,294,1010,7,new Color(.31f,.39f,.42f));
+        for(int i=0;i<2;i++) Plate("Socket endpoint",panel,320+i*1030,294,24,24,new Color(.47f,.6f,.62f),true);
+        Text("Replay icon","<",panel,1430,161,65,65,36);
+        handles=new RectTransform[3];powerLamps=new NativePanelGraphic[3];PowerButtons=new Button[3];
+        for(int i=0;i<3;i++)
         {
-            GameObject hit = new GameObject("Breaker lever hit area " + (i + 1),
-                typeof(RectTransform), typeof(Image), typeof(Button));
-            hit.transform.SetParent(panel, false);
-            Place(hit.transform as RectTransform, PowerX[i], 665f, 280f, 340f);
-            Image image = hit.GetComponent<Image>();
-            image.color = new Color(1f, 1f, 1f, 0.001f);
-            image.raycastTarget = true;
-            Button button = hit.GetComponent<Button>();
-            button.targetGraphic = image;
-            button.transition = Selectable.Transition.None;
-            button.navigation = new Navigation { mode = Navigation.Mode.None };
-            PowerButtons[i] = button;
-        }
-
-        ResetPowerLevers();
-    }
-
-    public void ConfigureGas(CanvasGroup group, Slider oldSlider)
-    {
-        HideTemporaryGraphics(group);
-        if (!BeginPanel(group, "PuzzleUI/GasPanel")) return;
-
-        // The scene's temporary slider remains referenced by the puzzle but its
-        // white Unity graphics are replaced by the separate moving art sprite.
-        if (oldSlider != null) oldSlider.gameObject.SetActive(false);
-
-        Texture2D glow = MakeGlowTexture();
-        gasLamps = new RawImage[3];
-        gasLampCores = new RawImage[3];
-        gasStabilityRings = new Image[3];
-        gasRingSprite = MakeGasRingSprite();
-        for (int i = 0; i < 3; i++)
-        {
-            gasLamps[i] = AddRaw("Pressure success lamp " + (i + 1), glow,
-                GasLampX[i], 258f, 164f, 164f);
-            gasLamps[i].color = Color.clear;
-            gasLampCores[i] = AddRaw("Pressure success lit core " + (i + 1), glow,
-                GasLampX[i], 258f, 84f, 84f);
-            gasLampCores[i].color = Color.clear;
-            AddGasText("Channel " + (i + 1), "0" + (i + 1), GasLampX[i], 147f, 90f, 32f, 26f);
-            GameObject ringObject = new GameObject("Active channel stability ring " + (i + 1),
-                typeof(RectTransform), typeof(Image));
-            ringObject.transform.SetParent(panel, false);
-            Image ring = ringObject.GetComponent<Image>();
-            ring.sprite = gasRingSprite;
-            ring.type = Image.Type.Filled;
-            ring.fillMethod = Image.FillMethod.Radial360;
-            ring.fillOrigin = (int)Image.Origin360.Top;
-            ring.fillClockwise = true;
-            ring.fillAmount = 0f;
-            ring.color = new Color(1f, .68f, .25f, .85f);
-            ring.raycastTarget = false;
-            Place(ring.rectTransform, GasLampX[i], 258f, 138f, 138f);
-            gasStabilityRings[i] = ring;
-        }
-
-        // Lamps, the safe band and the fill communicate state without captions.
-        // Keep only channel numbers and the actionable HOLD button label.
-        GameObject progressTrack = new GameObject("Stability track", typeof(RectTransform), typeof(Image));
-        progressTrack.transform.SetParent(panel, false);
-        Place(progressTrack.transform as RectTransform, 835f, 557f, 300f, 10f);
-        Image trackImage = progressTrack.GetComponent<Image>();
-        trackImage.color = new Color(.03f, .05f, .06f, .95f);
-        trackImage.raycastTarget = false;
-        GameObject progressFill = new GameObject("Stability fill", typeof(RectTransform), typeof(Image));
-        progressFill.transform.SetParent(progressTrack.transform, false);
-        gasStabilityFill = progressFill.transform as RectTransform;
-        gasStabilityFill.anchorMin = Vector2.zero;
-        gasStabilityFill.anchorMax = new Vector2(0f, 1f);
-        gasStabilityFill.offsetMin = gasStabilityFill.offsetMax = Vector2.zero;
-        Image fillImage = progressFill.GetComponent<Image>();
-        fillImage.color = new Color(.91f, .65f, .28f, .94f);
-        fillImage.raycastTarget = false;
-
-        gasShuttle = AddRaw("Moving pressure shuttle",
-            LoadArtwork("PuzzleUI/GasShuttle"),
-            340f, 452f, 86f, 120f);
-        gasShuttle.color = new Color(0.82f, 0.84f, 0.87f, 1f);
-
-        gasButtonFace = AddRaw("Moving metal button face", LoadArtwork("PuzzleUI/GasPanel"),
-            835f, 665f, 185f, 130f);
-        gasButtonFace.uvRect = new Rect(744f / ArtWidth, (ArtHeight - 730f) / ArtHeight,
-            185f / ArtWidth, 130f / ArtHeight);
-
-        GameObject buttonObject = new GameObject("Pressure timing press area",
-            typeof(RectTransform), typeof(Image), typeof(Button));
-        buttonObject.transform.SetParent(panel, false);
-        Place(buttonObject.transform as RectTransform, 835f, 652f, 260f, 175f);
-        gasButtonGraphic = buttonObject.GetComponent<Image>();
-        gasButtonGraphic.color = new Color(1f, 1f, 1f, 0.001f);
-        gasButtonGraphic.raycastTarget = true;
-        GasButton = buttonObject.GetComponent<Button>();
-        GasButton.transition = Selectable.Transition.None;
-        GasButton.navigation = new Navigation { mode = Navigation.Mode.None };
-        GasButton.targetGraphic = gasButtonGraphic;
-
-        TextMeshProUGUI holdLabel = new GameObject("HOLD label", typeof(RectTransform),
-            typeof(TextMeshProUGUI)).GetComponent<TextMeshProUGUI>();
-        holdLabel.transform.SetParent(buttonObject.transform, false);
-        holdLabel.rectTransform.anchoredPosition = new Vector2(0f, -12f);
-        holdLabel.rectTransform.sizeDelta = new Vector2(180f, 90f);
-        holdLabel.font = StationTypography.UIAsset;
-        StationLocalization.Set(holdLabel, "HOLD");
-        holdLabel.fontSize = 30f;
-        holdLabel.fontStyle = FontStyles.Bold;
-        holdLabel.characterSpacing = 1f;
-        holdLabel.alignment = TextAlignmentOptions.Center;
-        holdLabel.color = new Color(.06f, .08f, .09f, 1f);
-        holdLabel.raycastTarget = false;
-
-        EventTrigger hover = buttonObject.AddComponent<EventTrigger>();
-        EventTrigger.Entry enter = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
-        enter.callback.AddListener(_ => gasButtonHovered = true);
-        hover.triggers.Add(enter);
-        EventTrigger.Entry exit = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
-        exit.callback.AddListener(_ => { gasButtonHovered = false; ReleaseGasButton(); });
-        hover.triggers.Add(exit);
-        EventTrigger.Entry down = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
-        down.callback.AddListener(data =>
-        {
-            if (data is PointerEventData pointer && pointer.button == PointerEventData.InputButton.Left
-                && GasButton.IsInteractable()) SetGasHeld(true);
-        });
-        hover.triggers.Add(down);
-        EventTrigger.Entry up = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };
-        up.callback.AddListener(_ => ReleaseGasButton());
-        hover.triggers.Add(up);
-
-        SetGasProgress(0);
-        SetGasNeedlePosition(0f);
-    }
-
-    private TextMeshProUGUI AddGasText(string objectName, string content,
-        float x, float y, float width, float height, float size)
-    {
-        GameObject obj = new GameObject(objectName, typeof(RectTransform), typeof(TextMeshProUGUI));
-        obj.transform.SetParent(panel, false);
-        TextMeshProUGUI text = obj.GetComponent<TextMeshProUGUI>();
-        text.font = StationTypography.UIAsset;
-        StationLocalization.Set(text, content);
-        text.fontSize = size;
-        text.fontStyle = FontStyles.Bold;
-        text.characterSpacing = 1f;
-        text.alignment = TextAlignmentOptions.Center;
-        text.color = new Color(.72f, .79f, .82f, .95f);
-        text.raycastTarget = false;
-        Place(text.rectTransform, x, y, width, height);
-        return text;
-    }
-
-    private void SetGasHeld(bool held)
-    {
-        if (gasButtonHeld == held) return;
-        gasButtonHeld = held;
-        GasHoldChanged?.Invoke(held);
-    }
-
-    public void ReleaseGasButton() => SetGasHeld(false);
-
-    public void SetGasStability(float seconds, float required, bool safe)
-    {
-        gasStableFraction = Mathf.Clamp01(seconds / Mathf.Max(.1f, required));
-        if (gasStabilityFill != null) gasStabilityFill.anchorMax = new Vector2(gasStableFraction, 1f);
-    }
-
-    public void ResetPowerLevers()
-    {
-        for (int i = 0; i < powerPulled.Length; i++)
-        {
-            powerPulled[i] = false;
-            powerWrongFlash[i] = 0f;
+            float x=460+i*375;
+            Plate("Breaker housing",panel,x,650,300,365,new Color(.035f,.047f,.055f));
+            Plate("Lamp bezel",panel,x,535,70,70,new Color(.025f,.03f,.035f),true);
+            powerLamps[i]=Plate("Breaker lamp",panel,x,535,48,48,Tint(colors[i],.24f),true);
+            Plate("Lever track",panel,x,695,44,170,new Color(.012f,.017f,.02f));
+            for(int t=0;t<5;t++) Bar("Lever scale",panel,x+48,630+t*30,12,2,new Color(.3f,.34f,.35f));
+            handles[i]=Rect("Moving lever",panel,x,745,155,64);
+            Plate("Handle shadow",handles[i],835,475,153,62,new Color(.014f,.02f,.024f));
+            Plate("Grip",handles[i],835,466,145,54,new Color(.29f,.33f,.35f));
+            for(int t=-2;t<=2;t++) Bar("Grip groove",handles[i],835+t*20,466,2,28,new Color(.15f,.18f,.2f));
+            RectTransform area=Rect("Lever hit area "+i,panel,x,663,280,340);
+            Image hit=area.gameObject.AddComponent<Image>();hit.color=Color.clear;
+            PowerButtons[i]=area.gameObject.AddComponent<Button>();PowerButtons[i].targetGraphic=hit;
+            PowerButtons[i].transition=Selectable.Transition.None;PowerButtons[i].navigation=new Navigation{mode=Navigation.Mode.None};
         }
     }
-
-    public void SetPowerLeverState(int index, bool pulled)
+    public void ConfigureGas(CanvasGroup group,Slider oldSlider)
     {
-        if (index >= 0 && index < powerPulled.Length) powerPulled[index] = pulled;
-    }
-
-    public void PulseWrongLever(int index)
-    {
-        if (index >= 0 && index < powerWrongFlash.Length)
-            powerWrongFlash[index] = 1f;
-    }
-
-    public void SetGasProgress(int count)
-    {
-        gasProgress = Mathf.Clamp(count, 0, 3);
-    }
-
-    public void SetGasNeedlePosition(float position)
-    {
-        needlePosition = Mathf.Clamp01(position);
-        if (gasShuttle != null)
-            Place(gasShuttle.rectTransform,
-                Mathf.Lerp(340f, 1330f, needlePosition), 452f, 86f, 120f);
-    }
-
-    public void PulseGasButton()
-    {
-        pressFlash = 1f;
-    }
-
-    private bool BeginPanel(CanvasGroup group, string texturePath)
-    {
-        if (group == null) return false;
-        Texture2D texture = LoadArtwork(texturePath);
-        if (texture == null)
+        Begin(group);if(oldSlider!=null)oldSlider.gameObject.SetActive(false);
+        gasLamps=new NativePanelGraphic[3];
+        for(int i=0;i<3;i++)
         {
-            Debug.LogWarning("Missing puzzle UI art: " + texturePath, this);
-            return false;
+            float x=555+i*280;
+            Plate("Channel socket",panel,x,258,124,124,new Color(.025f,.033f,.038f),true);
+            gasLamps[i]=Plate("Channel lamp",panel,x,258,92,92,new Color(.055f,.072f,.077f),true);
+            Text("Channel number","0"+(i+1),panel,x,161,90,38,24);
         }
-
-        panel = group.transform as RectTransform;
-        panel.anchorMin = panel.anchorMax = panel.pivot = new Vector2(0.5f, 0.5f);
-        panel.anchoredPosition = Vector2.zero;
-        panel.sizeDelta = new Vector2(ArtWidth, ArtHeight);
-
-        Image oldBackground = group.GetComponent<Image>();
-        if (oldBackground != null)
-        {
-            oldBackground.color = Color.clear;
-            oldBackground.raycastTarget = false;
-        }
-
-        GameObject veil = new GameObject("Scene dimmer", typeof(RectTransform), typeof(Image));
-        veil.transform.SetParent(panel, false);
-        veil.transform.SetAsFirstSibling();
-        dimmer = veil.transform as RectTransform;
-        Image veilImage = veil.GetComponent<Image>();
-        veilImage.color = new Color(0f, 0.015f, 0.035f, 0.34f);
-        veilImage.raycastTarget = true;
-
-        RawImage artwork = AddRaw("Machine panel artwork", texture,
-            ArtWidth * 0.5f, ArtHeight * 0.5f, ArtWidth, ArtHeight);
-        artwork.transform.SetSiblingIndex(1);
-        LayoutForScreen();
-        return true;
+        Plate("Pressure gauge recess",panel,835,452,1130,155,new Color(.018f,.027f,.03f));
+        Bar("Safe pressure band",panel,835,452,990*.28f,123,new Color(.11f,.24f,.17f));
+        for(int i=0;i<=50;i++) Bar("Gauge tick",panel,340+i*19.8f,452,2,i%5==0?62:24,new Color(.49f,.55f,.55f));
+        shuttle=Rect("Moving pressure shuttle",panel,340,452,18,122);
+        Plate("Needle grip",shuttle,835,470,16,120,new Color(.62f,.68f,.68f));
+        Bar("Needle center",shuttle,835,470,3,112,new Color(.94f,.83f,.52f));
+        Bar("Stability bed",panel,835,557,320,10,new Color(.018f,.027f,.03f));
+        stability=Bar("Stability fill",panel,675,557,0,10,colors[0]).rectTransform;
+        stability.pivot=new Vector2(0,.5f);
+        Plate("Button recess",panel,835,674,310,190,new Color(.018f,.026f,.03f));
+        buttonFace=Plate("Pressure button",panel,835,663,250,135,new Color(.27f,.31f,.33f));
+        GasButton=buttonFace.gameObject.AddComponent<Button>();GasButton.targetGraphic=buttonFace;
+        GasButton.transition=Selectable.Transition.None;GasButton.navigation=new Navigation{mode=Navigation.Mode.None};
+        buttonFace.raycastTarget=true;
+        Text("Hold label","HOLD",buttonFace.transform,835,470,215,80,32);
+        EventTrigger events=buttonFace.gameObject.AddComponent<EventTrigger>();
+        AddEvent(events,EventTriggerType.PointerDown,d=>{if(d is PointerEventData e && e.button==PointerEventData.InputButton.Left && GasButton.IsInteractable())SetHeld(true);});
+        AddEvent(events,EventTriggerType.PointerUp,_=>ReleaseGasButton());
+        AddEvent(events,EventTriggerType.PointerExit,_=>ReleaseGasButton());
     }
-
-    private static void HideTemporaryGraphics(CanvasGroup group)
-    {
-        if (group == null) return;
-        foreach (Graphic graphic in group.GetComponentsInChildren<Graphic>(true))
-            if (graphic.gameObject != group.gameObject) graphic.enabled = false;
-    }
-
-    private static Texture2D LoadArtwork(string resourcePath)
-    {
-        Texture2D texture = Resources.Load<Texture2D>(resourcePath);
-        if (texture != null) return texture;
-        Sprite sprite = Resources.Load<Sprite>(resourcePath);
-        if (sprite != null) return sprite.texture;
-
-        // The Editor can enter Play before newly imported Resources are added to
-        // its runtime lookup. The direct asset path keeps this Play test usable.
-#if UNITY_EDITOR
-        texture = UnityEditor.AssetDatabase.LoadAssetAtPath<Texture2D>(
-            "Assets/Resources/" + resourcePath + ".png");
-        if (texture == null)
-        {
-            sprite = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(
-                "Assets/Resources/" + resourcePath + ".png");
-            if (sprite != null) texture = sprite.texture;
-        }
-        if (texture != null) return texture;
-#endif
-        string file = Path.Combine(Application.streamingAssetsPath,
-            resourcePath + ".png");
-#if UNITY_EDITOR
-        if (!File.Exists(file))
-            file = Path.Combine(Application.dataPath, "Resources", resourcePath + ".png");
-#endif
-        if (File.Exists(file))
-        {
-            texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-            if (texture.LoadImage(File.ReadAllBytes(file), true))
-            {
-                texture.name = Path.GetFileNameWithoutExtension(file);
-                Debug.Log("Puzzle UI art loaded: " + resourcePath);
-                return texture;
-            }
-            Destroy(texture);
-            texture = null;
-        }
-        else
-            Debug.LogWarning("Puzzle UI file not found: " + file);
-        return texture;
-    }
-
-    private RawImage AddRaw(string objectName, Texture2D texture,
-        float imageX, float imageY, float width, float height)
-    {
-        GameObject child = new GameObject(objectName, typeof(RectTransform), typeof(RawImage));
-        child.transform.SetParent(panel, false);
-        RawImage image = child.GetComponent<RawImage>();
-        image.texture = texture;
-        image.raycastTarget = false;
-        Place(image.rectTransform, imageX, imageY, width, height);
-        return image;
-    }
-
-    private static void Place(RectTransform rect,
-        float imageX, float imageY, float width, float height)
-    {
-        if (rect == null) return;
-        rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0.5f, 0.5f);
-        rect.anchoredPosition = new Vector2(imageX - ArtWidth * 0.5f,
-            ArtHeight * 0.5f - imageY);
-        rect.sizeDelta = new Vector2(width, height);
-    }
-
+    private void SetHeld(bool value){if(held==value)return;held=value;GasHoldChanged?.Invoke(value);}
+    public void ReleaseGasButton()=>SetHeld(false);
+    public void SetGasStability(float seconds,float required,bool safe){stable=Mathf.Clamp01(seconds/Mathf.Max(.1f,required));if(stability!=null)stability.sizeDelta=new Vector2(320*stable,10);}
+    public void ResetPowerLevers(){for(int i=0;i<3;i++){pulled[i]=false;wrong[i]=0;}}
+    public void SetPowerLeverState(int index,bool value){if(index>=0&&index<3)pulled[index]=value;}
+    public void PulseWrongLever(int index){if(index>=0&&index<3)wrong[index]=1;}
+    public void SetGasProgress(int count)=>gasProgress=Mathf.Clamp(count,0,3);
+    public void SetGasNeedlePosition(float value){if(shuttle!=null)shuttle.anchoredPosition=new Vector2(Mathf.Lerp(340,1330,Mathf.Clamp01(value))-W/2,H/2-452);}
+    public void PulseGasButton(){}
     private void LateUpdate()
     {
-        if (panel == null) return;
-        if (lastScreenWidth != Screen.width || lastScreenHeight != Screen.height)
-            LayoutForScreen();
-
-        if (powerLevers != null)
+        if(panel==null)return;
+        Canvas canvas=panel.GetComponentInParent<Canvas>();
+        RectTransform view=canvas!=null?canvas.transform as RectTransform:null;
+        Vector2 size=view!=null?view.rect.size:new Vector2(Screen.width,Screen.height);
+        float scale=Mathf.Min(size.x*.87f/W,size.y*.87f/H);panel.localScale=Vector3.one*scale;
+        dimmer.sizeDelta=size/Mathf.Max(.01f,scale);
+        if(handles!=null)for(int i=0;i<3;i++)
         {
-            for (int i = 0; i < powerLevers.Length; i++)
-            {
-                if (powerLevers[i] == null) continue;
-                powerWrongFlash[i] = Mathf.MoveTowards(powerWrongFlash[i], 0f,
-                    Time.unscaledDeltaTime * 2.8f);
-                float target = powerPulled[i] ? 1f : powerWrongFlash[i] * 0.34f;
-                float current = powerLevers[i].rectTransform.localPosition.y;
-                float desired = Mathf.Lerp(-244.5f, -164.5f, target);
-                Vector3 p = powerLevers[i].rectTransform.localPosition;
-                p.y = Mathf.MoveTowards(current, desired, Time.unscaledDeltaTime * 520f);
-                powerLevers[i].rectTransform.localPosition = p;
-
-                Color lampColor = PowerColors[i];
-                if (powerWrongFlash[i] > 0f)
-                    lampColor = new Color(1f, 0.18f, 0.12f, powerWrongFlash[i] * 0.58f);
-                else
-                    lampColor.a = powerPulled[i] ? 0.58f : 0f;
-                powerLamps[i].color = Color.Lerp(powerLamps[i].color, lampColor,
-                    Mathf.Clamp01(Time.unscaledDeltaTime * 12f));
-                lampColor.a = powerWrongFlash[i] > 0f
-                    ? powerWrongFlash[i] * 0.92f : powerPulled[i] ? 0.92f : 0f;
-                powerLampCores[i].color = Color.Lerp(powerLampCores[i].color, lampColor,
-                    Mathf.Clamp01(Time.unscaledDeltaTime * 12f));
-            }
+            wrong[i]=Mathf.MoveTowards(wrong[i],0,Time.unscaledDeltaTime*3);
+            Vector2 pos=handles[i].anchoredPosition;pos.y=Mathf.Lerp(pos.y,H/2-(pulled[i]?650:745),1-Mathf.Exp(-Time.unscaledDeltaTime*16));handles[i].anchoredPosition=pos;
+            powerLamps[i].color=wrong[i]>.01f?new Color(.7f,.12f,.08f):Tint(colors[i],pulled[i]?1f:.24f);powerLamps[i].SetVerticesDirty();
         }
-
-        if (gasLamps != null)
-        {
-            for (int i = 0; i < gasLamps.Length; i++)
-            {
-                bool done = i < gasProgress;
-                bool active = i == gasProgress;
-                Color target = done ? new Color(.35f, .89f, .46f, .7f)
-                    : active ? new Color(1f, .67f, .23f, .62f) : Color.clear;
-                gasLamps[i].color = Color.Lerp(gasLamps[i].color, target,
-                    Mathf.Clamp01(Time.unscaledDeltaTime * 12f));
-                Color core = done ? new Color(.55f, 1f, .66f, .94f)
-                    : active ? new Color(1f, .78f, .40f, .92f) : Color.clear;
-                gasLampCores[i].color = Color.Lerp(gasLampCores[i].color, core,
-                    Mathf.Clamp01(Time.unscaledDeltaTime * 12f));
-                if (gasStabilityRings != null && gasStabilityRings[i] != null)
-                    gasStabilityRings[i].fillAmount = active ? gasStableFraction : 0f;
-            }
-        }
-
-        if (gasButtonGraphic != null)
-        {
-            pressFlash = Mathf.MoveTowards(pressFlash, 0f, Time.unscaledDeltaTime * 5f);
-            gasButtonGraphic.color = new Color(0.54f, 0.85f, 0.95f,
-                0.001f + (gasButtonHovered ? 0.04f : 0f) + (gasButtonHeld ? .1f : 0f) + pressFlash * 0.08f);
-            if (gasButtonFace != null)
-            {
-                Place(gasButtonFace.rectTransform, 835f, gasButtonHeld ? 670f : 665f, 185f, 130f);
-                gasButtonFace.color = gasButtonHeld ? new Color(.77f, .79f, .8f) : Color.white;
-            }
-        }
+        if(gasLamps!=null)for(int i=0;i<3;i++){gasLamps[i].color=i<gasProgress?new Color(.35f,.75f,.53f):i==gasProgress?colors[0]*.65f:new Color(.055f,.072f,.077f);gasLamps[i].SetVerticesDirty();}
+        if(buttonFace!=null){buttonFace.color=held?new Color(.15f,.2f,.22f):new Color(.27f,.31f,.33f);buttonFace.rectTransform.anchoredPosition=new Vector2(0,H/2-(held?669:663));buttonFace.SetVerticesDirty();}
     }
-
-    private void LayoutForScreen()
-    {
-        if (panel == null) return;
-        lastScreenWidth = Mathf.Max(1, Screen.width);
-        lastScreenHeight = Mathf.Max(1, Screen.height);
-        float scale = Mathf.Min(lastScreenWidth * 0.84f / ArtWidth,
-            lastScreenHeight * 0.84f / ArtHeight);
-        panel.localScale = Vector3.one * scale;
-        if (dimmer != null)
-        {
-            dimmer.anchorMin = dimmer.anchorMax = dimmer.pivot = new Vector2(0.5f, 0.5f);
-            dimmer.anchoredPosition = Vector2.zero;
-            dimmer.sizeDelta = new Vector2(lastScreenWidth / scale,
-                lastScreenHeight / scale);
-        }
-    }
-
-    private static Texture2D MakeGlowTexture()
-    {
-        const int size = 64;
-        Texture2D texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
-        texture.name = "Puzzle UI soft lamp glow";
-        Color32[] pixels = new Color32[size * size];
-        for (int y = 0; y < size; y++)
-        for (int x = 0; x < size; x++)
-        {
-            float dx = (x + 0.5f - size * 0.5f) / (size * 0.5f);
-            float dy = (y + 0.5f - size * 0.5f) / (size * 0.5f);
-            float fade = Mathf.Pow(1f - Mathf.Clamp01(Mathf.Sqrt(dx * dx + dy * dy)), 2f);
-            pixels[y * size + x] = new Color32(255, 255, 255, (byte)(fade * 255f));
-        }
-        texture.SetPixels32(pixels);
-        texture.Apply(false, true);
-        texture.wrapMode = TextureWrapMode.Clamp;
-        texture.filterMode = FilterMode.Bilinear;
-        return texture;
-    }
-
-    private Sprite MakeGasRingSprite()
-    {
-        const int size = 128;
-        gasRingTexture = new Texture2D(size, size, TextureFormat.RGBA32, false);
-        Color32[] pixels = new Color32[size * size];
-        for (int y = 0; y < size; y++)
-        for (int x = 0; x < size; x++)
-        {
-            float r = new Vector2(x + .5f - size / 2f, y + .5f - size / 2f).magnitude;
-            float alpha = Mathf.Clamp01(1f - Mathf.Abs(r - 58f) / 2.5f);
-            pixels[y * size + x] = new Color32(255, 255, 255, (byte)(alpha * 255f));
-        }
-        gasRingTexture.SetPixels32(pixels);
-        gasRingTexture.Apply(false, true);
-        return Sprite.Create(gasRingTexture, new Rect(0f, 0f, size, size), new Vector2(.5f, .5f));
-    }
-
-    private void OnDisable()
-    {
-        ReleaseGasButton();
-        gasButtonHovered = false;
-    }
-
-    private void OnDestroy()
-    {
-        if (gasRingSprite != null) Destroy(gasRingSprite);
-        if (gasRingTexture != null) Destroy(gasRingTexture);
-    }
+    private void OnDisable()=>ReleaseGasButton();
+    private static Color Tint(Color c,float level)=>new Color(c.r*level,c.g*level,c.b*level,1f);
+    private static void AddEvent(EventTrigger t,EventTriggerType type,UnityEngine.Events.UnityAction<BaseEventData> callback){var e=new EventTrigger.Entry{eventID=type};e.callback.AddListener(callback);t.triggers.Add(e);}
+    private static RectTransform Rect(string name,Transform parent,float x,float y,float w,float h){var r=new GameObject(name,typeof(RectTransform)).GetComponent<RectTransform>();r.SetParent(parent,false);r.anchorMin=r.anchorMax=r.pivot=new Vector2(.5f,.5f);r.anchoredPosition=new Vector2(x-W/2,H/2-y);r.sizeDelta=new Vector2(w,h);return r;}
+    private static NativePanelGraphic Plate(string name,Transform p,float x,float y,float w,float h,Color c,bool round=false){var g=Rect(name,p,x,y,w,h).gameObject.AddComponent<NativePanelGraphic>();g.color=c;g.round=round;g.raycastTarget=false;return g;}
+    private static Image Bar(string name,Transform p,float x,float y,float w,float h,Color c){var g=Rect(name,p,x,y,w,h).gameObject.AddComponent<Image>();g.color=c;g.raycastTarget=false;return g;}
+    private static void Text(string name,string content,Transform p,float x,float y,float w,float h,float size){var t=Rect(name,p,x,y,w,h).gameObject.AddComponent<TextMeshProUGUI>();t.font=StationTypography.UIAsset;StationLocalization.Set(t,content);t.fontSize=size;t.alignment=TextAlignmentOptions.Center;t.raycastTarget=false;t.color=new Color(.78f,.83f,.83f);}
 }

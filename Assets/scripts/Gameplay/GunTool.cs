@@ -257,13 +257,16 @@ public class GunTool : MonoBehaviour
         if (camera == null) return;
         Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
         Vector3 endPoint = ray.GetPoint(range);
-        RaycastHit[] hits = Physics.RaycastAll(ray, range, hitLayers, QueryTriggerInteraction.Ignore);
+        RaycastHit[] hits = Physics.RaycastAll(ray, range, hitLayers, QueryTriggerInteraction.Collide);
         System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
         foreach (RaycastHit hit in hits)
         {
             if (hit.collider.transform.IsChildOf(item.Owner.transform.root)) continue;
+            IGunHitTarget target = hit.collider.GetComponentInParent<IGunHitTarget>();
+            // Only a warning ghost's trigger receives bullets. Other trigger
+            // volumes remain transparent to shots, just as before.
+            if (hit.collider.isTrigger && !(target is PressureGhostTarget)) continue;
             endPoint = hit.point;
-            ShootableTarget target = hit.collider.GetComponentInParent<ShootableTarget>();
             if (target != null) target.Hit();
             break;
         }

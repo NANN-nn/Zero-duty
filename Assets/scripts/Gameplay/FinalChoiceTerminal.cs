@@ -224,48 +224,13 @@ public class FinalChoiceTerminal : MonoBehaviour, IPlayerInteractable
         tint.color = new Color(0.015f, 0.025f, 0.04f, 0.55f);
         screen = backdrop.gameObject.AddComponent<CanvasGroup>();
 
-        Texture2D panelArt = Resources.Load<Texture2D>("FinalChoiceUI/FinalProtocolPanel-Clean-v1");
-        if (panelArt != null)
-        {
-            // Leave room below the controller for one short inner thought.
-            RectTransform panelBounds = NewRect("Controller Bounds", backdrop);
-            panelBounds.anchorMin = new Vector2(0.06f, 0.16f);
-            panelBounds.anchorMax = new Vector2(0.94f, 0.96f);
-            panelBounds.offsetMin = panelBounds.offsetMax = Vector2.zero;
-            RectTransform panel = NewRect("Final Protocol Panel", panelBounds);
-            Stretch(panel);
-            RawImage artwork = panel.gameObject.AddComponent<RawImage>();
-            artwork.texture = panelArt;
-            artwork.raycastTarget = false;
-            AspectRatioFitter aspect = panel.gameObject.AddComponent<AspectRatioFitter>();
-            aspect.aspectMode = AspectRatioFitter.AspectMode.FitInParent;
-            aspect.aspectRatio = (float)panelArt.width / panelArt.height;
-
-            // The mechanical art is text-free. Live labels use the same font as
-            // the rest of the game, independent of the two existing ending actions.
-            title = NewPanelText("Title", panel, "FINAL PROTOCOL",
-                new Vector2(.5f, .762f), new Vector2(.56f, .085f), 54f);
-            transferButton = NewArtButton("Data Transfer", panel,
-                new Vector2(0.17f, 0.25f), new Vector2(0.49f, 0.68f),
-                new Color(0.35f, 0.8f, 1f));
-            lockdownButton = NewArtButton("Facility Lockdown", panel,
-                new Vector2(0.51f, 0.25f), new Vector2(0.83f, 0.68f),
-                new Color(1f, 0.54f, 0.42f));
-            NewPanelText("Send Records Label", panel, "SEND RECORDS",
-                new Vector2(.33f, .605f), new Vector2(.195f, .052f), 30f);
-            NewPanelText("Seal Facility Label", panel, "SEAL THE FACILITY",
-                new Vector2(.673f, .605f), new Vector2(.195f, .052f), 30f);
-        }
-        else
-        {
-            Debug.LogWarning("Final Protocol panel art is missing; using plain buttons.", this);
-            title = NewText("Title", backdrop, new Vector2(1000f, 100f),
-                new Vector2(0f, 150f), 42, TextAlignmentOptions.Center);
-            description = NewText("Description", backdrop, new Vector2(1100f, 160f),
-                new Vector2(0f, 20f), 27, TextAlignmentOptions.Center);
-            transferButton = NewButton("SEND RECORDS", backdrop, new Vector2(-205f, -180f));
-            lockdownButton = NewButton("SEAL THE FACILITY", backdrop, new Vector2(205f, -180f));
-        }
+        var panel=NativeInterfaceParts.Plate("Native Final Protocol Panel",backdrop,new Vector2(0,20),new Vector2(1240,660),
+            new Color(.025f,.041f,.053f),new Color(.29f,.40f,.45f));
+        NativeInterfaceParts.Chassis(panel.transform,new Vector2(1240,660));
+        title=NewText("Title",panel.transform,new Vector2(1000,65),new Vector2(0,225),48,TextAlignmentOptions.Center);
+        StationLocalization.Set(title,"FINAL PROTOCOL");
+        transferButton=NativeChoiceButton(panel.transform,"Data Transfer","SEND RECORDS",-280,new Color(.32f,.66f,.74f),false);
+        lockdownButton=NativeChoiceButton(panel.transform,"Facility Lockdown","SEAL THE FACILITY",280,new Color(.77f,.48f,.30f),true);
         transferButton.onClick.AddListener(ChooseDataTransfer);
         lockdownButton.onClick.AddListener(ChooseLockdown);
 
@@ -278,6 +243,40 @@ public class FinalChoiceTerminal : MonoBehaviour, IPlayerInteractable
 
         if (EventSystem.current == null)
             Debug.LogWarning("Final choice needs an EventSystem for mouse clicks.", this);
+    }
+
+    private static Button NativeChoiceButton(Transform parent,string name,string caption,float x,Color accent,bool lockdown)
+    {
+        var rect=NativeInterfaceParts.Rect(name,parent,new Vector2(x,-35),new Vector2(500,330));
+        var hit=rect.gameObject.AddComponent<Image>();hit.color=Color.clear;hit.raycastTarget=true;
+        var face=NativeInterfaceParts.ButtonFace(rect,new Vector2(500,330),accent);
+        var button=rect.gameObject.AddComponent<Button>();button.targetGraphic=face;
+        button.navigation=new Navigation{mode=Navigation.Mode.None};
+        var colors=button.colors;colors.highlightedColor=new Color(1.45f,1.6f,1.7f);colors.selectedColor=Color.white;button.colors=colors;
+        var lamp=NativeInterfaceParts.Plate("Choice indicator",rect,new Vector2(0,115),new Vector2(15,15),accent,new Color(.19f,.26f,.28f));lamp.round=true;
+        var icon=NativeInterfaceParts.Rect("Choice symbol",rect,new Vector2(0,25),new Vector2(180,130));
+        Color metal=new Color(.42f,.52f,.55f);
+        if(lockdown)
+        {
+            NativeInterfaceParts.Plate("Lock body",icon,new Vector2(0,-17),new Vector2(100,65),new Color(.09f,.13f,.15f),metal);
+            NativeInterfaceParts.Bar("Lock left",icon,new Vector2(-31,35),new Vector2(9,50),metal);
+            NativeInterfaceParts.Bar("Lock right",icon,new Vector2(31,35),new Vector2(9,50),metal);
+            NativeInterfaceParts.Bar("Lock top",icon,new Vector2(0,57),new Vector2(70,9),metal);
+            NativeInterfaceParts.Bar("Lock key",icon,new Vector2(0,-17),new Vector2(7,22),accent);
+        }
+        else
+        {
+            NativeInterfaceParts.Bar("Data stem",icon,new Vector2(0,18),new Vector2(9,73),metal);
+            for(int side=-1;side<=1;side+=2)
+            {
+                var stroke=NativeInterfaceParts.Bar("Data arrow",icon,new Vector2(side*20,43),new Vector2(55,9),metal);
+                stroke.transform.localRotation=Quaternion.Euler(0,0,-side*43);
+            }
+            NativeInterfaceParts.Bar("Data tray",icon,new Vector2(0,-40),new Vector2(110,8),metal);
+            for(int side=-1;side<=1;side+=2)NativeInterfaceParts.Bar("Tray side",icon,new Vector2(side*51,-29),new Vector2(8,28),metal);
+        }
+        var label=NewText("Label",rect,new Vector2(420,68),new Vector2(0,-100),34,TextAlignmentOptions.Center);
+        StationLocalization.Set(label,caption);return button;
     }
 
     private static RectTransform NewRect(string objectName, Transform parent)

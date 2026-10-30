@@ -98,7 +98,7 @@ public class PickupItem : MonoBehaviour, IPlayerInteractable
             else homeBounds.Encapsulate(itemRenderer.bounds);
         }
         HomeAimPosition = hasHomeBounds ? homeBounds.center : transform.position;
-        // 墙上画像和架上道具在拿起前应停留在摆放位置。
+        // Keep wall pictures and docked props fixed until the player picks them up.
         body.isKinematic = true;
         body.useGravity = false;
     }

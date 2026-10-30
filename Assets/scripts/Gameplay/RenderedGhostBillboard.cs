@@ -1,15 +1,17 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /// <summary>
-/// Displays the Blender-rendered ghost frames in the 3D scene without trying to
-/// translate its Blender shader into a different Unity shader.
+/// Displays a randomly chosen shadow illustration, upright and camera-facing.
+/// A pose stays still between reappearances instead of cycling every frame.
 /// </summary>
+[DefaultExecutionOrder(10000)]
 public sealed class RenderedGhostBillboard : MonoBehaviour
 {
-    private const int FrameCount = 6;
-    private const float PixelsPerUnit = 400f;
-    private static Sprite[] frames;
+    private const int PoseCount = 3;
+    private const float ArtworkHeight = 2.56f;
+    private static Sprite[] poses;
 
     private Transform follow;
     private Vector3 worldOffset;
@@ -18,20 +20,24 @@ public sealed class RenderedGhostBillboard : MonoBehaviour
     private float phase;
 
     public SpriteRenderer SpriteRenderer => spriteRenderer;
+    public int PoseIndex { get; private set; } = -1;
 
     public static RenderedGhostBillboard Create(Transform parent, float centerHeight,
         float opacity = 0.9f)
     {
-        if (parent == null || !LoadFrames()) return null;
+        if (parent == null || !LoadPoses()) return null;
 
-        GameObject visual = new GameObject("Rendered Ghost (Blender Frames)");
+        GameObject visual = new GameObject("Shadow Ghost (Random Illustration)");
+        visual.layer = parent.gameObject.layer;
         visual.transform.SetParent(parent, false);
         RenderedGhostBillboard billboard = visual.AddComponent<RenderedGhostBillboard>();
         billboard.follow = parent;
         billboard.worldOffset = Vector3.up * centerHeight;
-        billboard.phase = Random.Range(0f, FrameCount);
+        billboard.phase = Random.Range(0f, Mathf.PI * 2f);
         billboard.spriteRenderer = visual.AddComponent<SpriteRenderer>();
-        billboard.spriteRenderer.sprite = frames[0];
+        Material material = Resources.Load<Material>("GhostShadow/ShadowGhost");
+        if (material != null) billboard.spriteRenderer.sharedMaterial = material;
+        billboard.RandomizePose();
         billboard.spriteRenderer.color = new Color(1f, 1f, 1f, opacity);
         billboard.spriteRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         billboard.spriteRenderer.receiveShadows = false;
@@ -39,33 +45,84 @@ public sealed class RenderedGhostBillboard : MonoBehaviour
         return billboard;
     }
 
-    private static bool LoadFrames()
+    private static bool LoadPoses()
     {
-        if (frames != null) return true;
-        Sprite[] loaded = new Sprite[FrameCount];
-        for (int i = 0; i < FrameCount; i++)
+        if (poses != null && poses[0] != null) return true;
+        Sprite[] loaded = new Sprite[PoseCount];
+        for (int i = 0; i < PoseCount; i++)
         {
-            Texture2D texture = Resources.Load<Texture2D>($"GhostSpirit/Frame_{i:00}");
+            Texture2D texture = Resources.Load<Texture2D>($"GhostShadow/Pose_{i:00}");
             if (texture == null)
             {
-                Debug.LogWarning($"Rendered ghost frame {i:00} is missing; using the old visual.");
+                foreach (Sprite sprite in loaded)
+                    if (sprite != null) Destroy(sprite);
+                Debug.LogWarning($"Shadow ghost pose {i:00} is missing; using the old visual.");
                 return false;
             }
             loaded[i] = Sprite.Create(texture,
                 new Rect(0f, 0f, texture.width, texture.height),
-                new Vector2(0.5f, 0.5f), PixelsPerUnit, 0,
+                new Vector2(0.5f, 0.5f), texture.height / ArtworkHeight, 0,
                 SpriteMeshType.FullRect);
+            loaded[i].name = $"Shadow Ghost Pose {i + 1}";
         }
-        frames = loaded;
+        poses = loaded;
         return true;
+    }
+
+    public void RandomizePose()
+    {
+        if (spriteRenderer == null || !LoadPoses()) return;
+        // Do not repeat the previous pose at consecutive teleports/reappearances.
+        int next = PoseIndex < 0 ? Random.Range(0, poses.Length)
+            : Random.Range(0, poses.Length - 1);
+        if (PoseIndex >= 0 && next >= PoseIndex) next++;
+        PoseIndex = next;
+        spriteRenderer.sprite = poses[next];
+    }
+
+    private void OnEnable()
+    {
+        RenderPipelineManager.beginCameraRendering += FaceRenderCamera;
+        RenderPipelineManager.endCameraRendering += RestorePlayerFacing;
+        if (spriteRenderer != null)
+        {
+            RandomizePose();
+            UpdatePose();
+        }
+    }
+
+    private void OnDisable()
+    {
+        RenderPipelineManager.beginCameraRendering -= FaceRenderCamera;
+        RenderPipelineManager.endCameraRendering -= RestorePlayerFacing;
     }
 
     private void LateUpdate()
     {
-        if (follow == null || spriteRenderer == null || frames == null) return;
-        int index = Mathf.FloorToInt(Time.time * 7f + phase) % frames.Length;
-        spriteRenderer.sprite = frames[index];
+        if (follow == null || spriteRenderer == null) return;
         UpdatePose();
+    }
+
+    private void FaceRenderCamera(ScriptableRenderContext context, Camera camera)
+    {
+        // Monitor feeds have their own viewpoints. Face each feed for its draw,
+        // then restore the player's orientation so the hitbox stays player-facing.
+        if (camera != null && camera.cameraType == CameraType.Game)
+            FaceCamera(camera);
+    }
+
+    private void RestorePlayerFacing(ScriptableRenderContext context, Camera camera)
+    {
+        if (viewer != null) FaceCamera(viewer);
+    }
+
+    private void FaceCamera(Camera camera)
+    {
+        if (follow == null || camera == null) return;
+        Vector3 towardViewer = camera.transform.position - transform.position;
+        towardViewer.y = 0f;
+        if (towardViewer.sqrMagnitude > 0.0001f)
+            transform.rotation = Quaternion.LookRotation(towardViewer, Vector3.up);
     }
 
     private void UpdatePose()
@@ -76,7 +133,8 @@ public sealed class RenderedGhostBillboard : MonoBehaviour
 
         if (viewer == null)
         {
-            viewer = Camera.main;
+            PlayerInteractor player = FindFirstObjectByType<PlayerInteractor>();
+            viewer = player != null ? player.InteractionCamera : Camera.main;
             if (viewer == null)
             {
                 CinemachineBrain brain = FindFirstObjectByType<CinemachineBrain>();
@@ -85,10 +143,7 @@ public sealed class RenderedGhostBillboard : MonoBehaviour
         }
         if (viewer != null)
         {
-            Vector3 towardViewer = viewer.transform.position - transform.position;
-            towardViewer.y = 0f;
-            if (towardViewer.sqrMagnitude > 0.01f)
-                transform.rotation = Quaternion.LookRotation(towardViewer);
+            FaceCamera(viewer);
         }
         else
         {

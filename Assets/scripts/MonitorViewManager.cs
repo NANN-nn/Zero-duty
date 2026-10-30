@@ -2,6 +2,10 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Coordinates standing, seated overview and focused-feed views without moving the player.
+/// A session captures and restores input, cursor, held equipment and camera priority.
+/// </summary>
 [DefaultExecutionOrder(-50)]
 [DisallowMultipleComponent]
 [RequireComponent(typeof(MonitorCameraController))]
@@ -15,6 +19,7 @@ public class MonitorViewManager : MonoBehaviour
     public bool IsSeated => Mode != ViewMode.Standing;
     public bool IsFocused => Mode == ViewMode.Focused;
     public int FocusedIndex { get; private set; } = -1;
+    public Transform OverviewPose => overviewPose;
 
     [Header("Cinemachine 摄像机（不是三个监控 Camera）")]
     [SerializeField] private CinemachineCamera playerCamera;

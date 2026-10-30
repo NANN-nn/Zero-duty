@@ -1,5 +1,4 @@
 using System.Collections;
-using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -25,10 +24,9 @@ public class OptionalPropActivities : MonoBehaviour
     private RobotDeskCollection robotDisplay;
     private Text toast, noteTitle, noteBody, noteRightBody;
     private GameObject notePanel;
-    private RawImage noteArtwork;
+    private NativePaperGraphic noteArtwork;
     private RectTransform noteCloseRect;
     private Text handbookRightTitle;
-    private Texture2D bookPaper, stickyPaper, recordPaper;
     private Font font, neatHandFont, quickHandFont;
     private float toastUntil;
     private PlayerInteractor activeInteractor;
@@ -79,12 +77,9 @@ public class OptionalPropActivities : MonoBehaviour
         toast.enabled = false;
         notePanel = Panel("Note Reader", root.transform, new Color(.01f, .02f, .03f, .8f));
         Stretch(notePanel.GetComponent<RectTransform>());
-        bookPaper = LoadNotePaper("Book");
-        stickyPaper = LoadNotePaper("Sticky");
-        recordPaper = LoadNotePaper("Record");
-        var page = new GameObject("Paper Artwork", typeof(RectTransform), typeof(RawImage));
+        var page = new GameObject("Native Paper", typeof(RectTransform), typeof(NativePaperGraphic));
         page.transform.SetParent(notePanel.transform, false);
-        noteArtwork = page.GetComponent<RawImage>();
+        noteArtwork = page.GetComponent<NativePaperGraphic>();
         noteArtwork.raycastTarget = false;
         noteTitle = MakeText("Title", notePanel.transform, 34, new Color(.07f, .10f, .12f));
         noteTitle.fontStyle = FontStyle.Bold;
@@ -108,25 +103,6 @@ public class OptionalPropActivities : MonoBehaviour
         notePanel.SetActive(false);
     }
 
-    private static Texture2D LoadNotePaper(string paperName)
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "NoteUI", paperName + ".png");
-        if (!File.Exists(path))
-        {
-            Debug.LogWarning("Note UI paper not found: " + path);
-            return null;
-        }
-        var texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-        if (texture.LoadImage(File.ReadAllBytes(path), true))
-        {
-            texture.name = "Note " + paperName;
-            return texture;
-        }
-        Destroy(texture);
-        Debug.LogWarning("Note UI paper could not be decoded: " + path);
-        return null;
-    }
-
     private static void Place(RectTransform rect, Vector2 position, Vector2 size)
     {
         rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(.5f, .5f);
@@ -148,7 +124,7 @@ public class OptionalPropActivities : MonoBehaviour
             ? quickHandFont : noteTitle.font;
         noteRightBody.enabled = style == OptionalPropInteraction.NotePaperStyle.Book;
         noteArtwork.color = Color.white;
-        noteArtwork.uvRect = new Rect(0f, 0f, 1f, 1f);
+        noteArtwork.SetStyle(style);
         noteTitle.alignment = TextAnchor.UpperCenter;
         noteBody.alignment = TextAnchor.UpperCenter;
         noteRightBody.alignment = TextAnchor.UpperCenter;
@@ -157,7 +133,6 @@ public class OptionalPropActivities : MonoBehaviour
         noteRightBody.lineSpacing = 1.2f;
         if (style == OptionalPropInteraction.NotePaperStyle.Book)
         {
-            noteArtwork.texture = bookPaper;
             Place(noteArtwork.rectTransform, Vector2.zero, new Vector2(1600, 900));
             Place(noteTitle.rectTransform, new Vector2(-315, 317), new Vector2(495, 62));
             Place(noteBody.rectTransform, new Vector2(-315, -25), new Vector2(495, 620));
@@ -167,19 +142,15 @@ public class OptionalPropActivities : MonoBehaviour
         }
         else if (style == OptionalPropInteraction.NotePaperStyle.Sticky)
         {
-            noteArtwork.texture = stickyPaper;
             Place(noteArtwork.rectTransform, Vector2.zero, new Vector2(940, 856));
             Place(noteTitle.rectTransform, new Vector2(0, 270), new Vector2(590, 68));
-            Place(noteBody.rectTransform, new Vector2(0, -28), new Vector2(590, 505));
+            Place(noteBody.rectTransform, new Vector2(0, -45), new Vector2(650, 530));
             noteTitle.fontSize = 38; noteBody.fontSize = 35;
             Place(noteCloseRect, new Vector2(0, -470), new Vector2(150, 56));
         }
         else
         {
-            noteArtwork.texture = recordPaper;
-            Place(noteArtwork.rectTransform, new Vector2(45, 0), new Vector2(1500, 844));
-            // The visible sheet is a narrow central part of Record.png.
-            // Keep the text inside that sheet, with equal side margins.
+            Place(noteArtwork.rectTransform, new Vector2(45, 0), new Vector2(720, 850));
             Place(noteTitle.rectTransform, new Vector2(45, 315), new Vector2(500, 65));
             Place(noteBody.rectTransform, new Vector2(45, -25), new Vector2(500, 600));
             noteTitle.fontSize = 36; noteBody.fontSize = 34;
@@ -260,10 +231,10 @@ public class OptionalPropActivities : MonoBehaviour
         StationLocalization.Set(noteRightBody, bookPages != null && bookPages.Length > 1 ? bookPages[1] : string.Empty);
         notePanel.SetActive(true);
         if (note.name == "ShiftLog_Open1") ConfigureHandbookPages();
-        else if (StationLocalization.IsChinese)
+        else
         {
-            FitChineseNote(noteBody);
-            if (bookPages != null) FitChineseNote(noteRightBody);
+            FitNoteText(noteBody);
+            if (bookPages != null) FitNoteText(noteRightBody);
         }
         Cursor.lockState = CursorLockMode.None; Cursor.visible = true;
     }
@@ -273,7 +244,6 @@ public class OptionalPropActivities : MonoBehaviour
         // Both authored pages belong to the same open-book spread. Each text
         // block stays centered on its own sheet and clear of the spine.
         string[] pages = currentNote.NoteBody.Split('\f');
-        noteArtwork.uvRect = new Rect(0f, 0f, 1f, 1f);
         Place(noteArtwork.rectTransform, Vector2.zero, new Vector2(1760f, 990f));
         Place(noteTitle.rectTransform, new Vector2(-330f, 398f), new Vector2(590f, 58f));
         Place(noteBody.rectTransform, new Vector2(-330f, -10f), new Vector2(590f, 750f));
@@ -329,7 +299,7 @@ public class OptionalPropActivities : MonoBehaviour
         }
     }
 
-    private void FitChineseNote(Text body)
+    private void FitNoteText(Text body)
     {
         for (int size = body.fontSize; size >= 24; size--)
         {
@@ -435,9 +405,6 @@ public class OptionalPropActivities : MonoBehaviour
     private void OnDisable() { StopAllCoroutines(); Restore(); }
     private void OnDestroy()
     {
-        if (bookPaper != null) Destroy(bookPaper);
-        if (stickyPaper != null) Destroy(stickyPaper);
-        if (recordPaper != null) Destroy(recordPaper);
         if (instance == this) instance = null;
     }
 }

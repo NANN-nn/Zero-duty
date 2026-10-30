@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Scene-local event bus and completion history shared by incidents and presentation.
+/// Late subscribers query HasRaised instead of replaying an action or changing its state.
+/// </summary>
 [DefaultExecutionOrder(-200)]
 [DisallowMultipleComponent]
 public class GameplaySignals : MonoBehaviour
@@ -26,6 +30,7 @@ public class GameplaySignals : MonoBehaviour
     public void Raise(string signalId)
     {
         if (string.IsNullOrWhiteSpace(signalId)) return;
+        // History is idempotent; listeners still receive each deliberate notification.
         history.Add(signalId);
         SignalRaised?.Invoke(signalId);
         Debug.Log($"[玩法信号] {signalId}", this);

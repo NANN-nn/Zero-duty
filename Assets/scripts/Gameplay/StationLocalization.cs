@@ -16,6 +16,8 @@ public static class StationLocalization
     private static TMP_FontAsset chineseAsset;
     private sealed class Binding
     {
+        // Preserve the source string and English typeface when switching languages.
+        // Translating an already translated label would otherwise lose that source.
         public Graphic target;
         public string source;
         public Font font;

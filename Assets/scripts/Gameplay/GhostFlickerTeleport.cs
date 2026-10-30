@@ -15,6 +15,7 @@ public class GhostFlickerTeleport : MonoBehaviour
 
     private Renderer[] ghostRenderers;
     private Collider[] ghostColliders;
+    private RenderedGhostBillboard renderedGhost;
     private int lastPointIndex = -1;
 
     private void Start()
@@ -22,12 +23,19 @@ public class GhostFlickerTeleport : MonoBehaviour
         // Start runs after ShootableTarget.Awake has added a collider if needed.
         ghostRenderers = GetComponentsInChildren<Renderer>(true);
         ghostColliders = GetComponentsInChildren<Collider>(true);
-        RenderedGhostBillboard rendered = RenderedGhostBillboard.Create(transform, 1f);
-        if (rendered != null)
+        renderedGhost = RenderedGhostBillboard.Create(transform, 1f);
+        if (renderedGhost != null)
         {
             foreach (Renderer oldRenderer in ghostRenderers)
                 if (oldRenderer != null) oldRenderer.enabled = false;
-            ghostRenderers = new Renderer[] { rendered.SpriteRenderer };
+            ghostRenderers = new Renderer[] { renderedGhost.SpriteRenderer };
+            // The model's collider inherits a -90 degree rotation. Replace it
+            // with an upright hit volume following the new illustration instead.
+            foreach (Collider oldCollider in ghostColliders)
+                if (oldCollider != null) oldCollider.enabled = false;
+            BoxCollider hitbox = renderedGhost.gameObject.AddComponent<BoxCollider>();
+            hitbox.size = new Vector3(1.3f, 2.2f, 0.45f);
+            ghostColliders = new Collider[] { hitbox };
             GetComponent<MonitorDiscoveryTarget>()?.RefreshRenderers();
         }
         StartCoroutine(FlickerAndTeleport());
@@ -100,5 +108,6 @@ public class GhostFlickerTeleport : MonoBehaviour
         if (next < 0) return;
         transform.position = teleportPoints[next].position;
         lastPointIndex = next;
+        renderedGhost?.RandomizePose();
     }
 }

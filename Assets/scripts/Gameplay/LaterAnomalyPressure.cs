@@ -92,6 +92,7 @@ public class LaterAnomalyPressure : MonoBehaviour
 
     private void BeginStage(int index)
     {
+        // Only the active stage owns a deadline; duplicate signals cannot restart it.
         if (activeStage >= 0 || index < 0 || index >= StartSignals.Length ||
             signals.HasRaised(CompletionSignals[index])) return;
         activeStage = index;

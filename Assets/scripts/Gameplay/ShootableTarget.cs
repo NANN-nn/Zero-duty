@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class ShootableTarget : MonoBehaviour
+public class ShootableTarget : MonoBehaviour, IGunHitTarget
 {
     [SerializeField, Min(1)] private int hitPoints = 1;
     [SerializeField] private string destroyedSignal = "ghost_destroyed";
